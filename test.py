@@ -1,5 +1,7 @@
 ###TESTS FOR QGOL
 from qgol import *
+from obj.base import *
+from obj import *
 
 ## Cube tests
 print("Cube created : ")
