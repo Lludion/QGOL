@@ -1,5 +1,6 @@
 from obj import Cube, QGOL_U
 from collections import defaultdict
+from log.log import logd,debg
 
 def unitarycube():
 	c = Cube()
@@ -18,15 +19,15 @@ class Cubes:
 		x,y,z = poscel
 		xc,yc,zc = self.pos(poscel,par)
 		self.li[xc,yc,zc][x-xc,y-yc,z-zc].activate()
-		# print(x-xc,y-yc,z-zc,xc,yc,zc)
-		# print(self.li[xc,yc,zc])
+		debg((x-xc,y-yc,z-zc,xc,yc,zc))
+		debg(self.li[xc,yc,zc])
 
 	def pos(self,poscel,par):
 		ipar = 1 - int(par)
 		x = poscel[0] - 1 * abs(poscel[0] % 2 - ipar)
 		y = poscel[1] - 1 * abs(poscel[1] % 2 - ipar)
 		z = poscel[2] - 1 * abs(poscel[2] % 2 - ipar)
-		# print(x,y,z)
+		debg(x,y,z)
 		return x,y,z
 
 	def __repr__(self):
