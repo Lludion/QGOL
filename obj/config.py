@@ -7,14 +7,14 @@ class Config:
 		""" A Configuration of Cells.
 		This is not a Quantum object."""
 		self.q = Cell()
-		self.c = defaultdict(self.quiescent)
+		self._c = defaultdict(self.quiescent)
 
 	def tuple(self):
 		""" returns a tuple of the activated locations """
-		return tuple([k for k,v in self.c.items() if v])
+		return tuple([k for k,v in self._c.items() if v])
 
 	def conf(i1,i2,i3):
-		return self.c[i1,i2,i3]
+		return self._c[i1,i2,i3]
 
 	def quiescent(self,*args,**kwargs):
 		return self.q
@@ -32,14 +32,71 @@ class Config:
 
 	def __getitem__(self, item):
 		''' Returning the corresponding Cell '''
-		return self.c[item]
+		return self._c[item]
 
 	def __setitem__(self, key, item):
 		""" Setting the corresponding Cell """
 		if item.__class__ != Cell:
 			item = Cell(item)
-		self.c[key] = item
+		item.p = key
+		self._c[key] = item
 	
 	def __repr__(self):
 		return str(self.tuple())
+	
+	def copy(self):
+		""" shallow copy """
+		nc = self.__class__()
+		nc.q = self.q
+		for k,v in self._c.items():
+			nc[k] = v
+		return nc
+
+from obj.cubes import Cubes
+
+class Econfig(Config):
+	def __init__(self):
+		""" A Configuration of Cells that may evolve
+		This is not a Quantum object."""
+		super().__init__()
+		
+	def evolution(self,par,alpha):
+		licube = Cubes()
+		for pos,cell in self._c.items():
+			if cell.v:
+				licube.add(pos,par)
+			else:
+				del self._c[pos]
+		#print("Initial cubes",licube)
+		# here all the cubes have been created and cells have been activated
+		qbsli = []
+		for pos,ac in licube.li.items():
+			qbsli.append((pos,ac.f()))
+		print("QBS",qbsli)
+		# QBSLI =  liste des qcubes (cubes modifiés) et de leur positions
+		return create_li(qbsli,0,[(alpha,Econfig())])
+
+def create_li(qbsli,i,newsuper):
+	""" all qcubes < i have been dealt with """
+	# newsuper is a list of amplitude,conf
+	if i >= len(qbsli):
+		return newsuper
+	litot = []
+	pos,qcubes = qbsli[i]
+	for qcube in qcubes.cubes:
+		nl = []
+		alpha = qcube.alpha
+		cube = qcube.cube
+		x,y,z = pos
+		act = [pos.xyz() for pos in cube.positions()]
+		act = [(a+x,b+y,c+z) for (a,b,c) in act]
+		for a,conf in newsuper:
+			nc = conf.copy()
+			for pos in act:
+				nc[pos].activate()
+			nl.append((a*alpha,nc))
+		litot += create_li(qbsli,i+1,nl)
+	return litot		
+
+
 

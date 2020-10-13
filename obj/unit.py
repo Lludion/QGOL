@@ -8,7 +8,6 @@ class QGOL_U(Unitary):
 	def __init_(self):
 		""" Unitary of the Quantum Game of Life, by Arrighi & Grattage"""
 		super().__init__()
-		self.sq2 = 1/np.sqrt(2)
 	
 	def apply(self,cube):
 		""" Returns the obtained cubes, included in a QCubes object """
@@ -17,6 +16,11 @@ class QGOL_U(Unitary):
 			qbs.addc(cube.reversed(),1)
 		elif len(cube) == 2:
 			qbs.addc(cube.reversed(),int(bool(cube.cross()))*(1+1j)*self.sq2)
+		else:
+			# if no special configuration is met, 
+			#it's as if they were alone
+			qbs.addc(cube.reversed(),1)
+		"""
 		elif len(cube) == 3:
 			return qbs ## TODO
 			pos = cube.positions()
@@ -37,13 +41,9 @@ class QGOL_U(Unitary):
 			else:
 				pass
 				#I am not sure to understand the rules....
-			
-					
-				
-		else:
-			pass
+		"""
 		return qbs
-	
+
 	def difx_uy(self,a,b,c,qbs):
 		""" Adds the right QCubes to qbs if 
 		a.x != b.x anb b.x == c.x

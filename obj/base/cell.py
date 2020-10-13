@@ -9,6 +9,7 @@ class Cell:
 		
 		The value is accessed via the .v method"""
 		self.v = v
+		self.p = None # position
 	
 	def activate(self):
 		self.v = True

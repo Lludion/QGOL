@@ -14,15 +14,27 @@ c.activation(0,0,1)
 print(c)
 print("Making one step on the cube:")
 c.op = QGOL_U()
-c.f()
+print(c.f())
 print(c)
+
+
 ## subscript tests
 
 c[0,0,0] = Cell(True)
 print(c)
 
 ## qGOL tests
+import numpy as np
 
 qg = QGOL()
+qg.bc[0,0,0] = Cell(True)
+qg.bc[3,3,0] = Cell(True)
 
 print(qg.s.cs)
+print(qg.next())
+print(qg.s.cs)
+print(qg.next())
+print(qg.s.cs)
+print(qg.next())
+print(qg.s.cs)
+print(qg.s.normc())

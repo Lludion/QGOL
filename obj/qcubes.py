@@ -3,7 +3,9 @@ from obj.cube import Cube
 
 class QCubes:
 	
-	def __init__(self,cubes=[]):
+	def __init__(self,cubes=None):
+		if cubes is None:
+			cubes = []
 		self.cubes = cubes
 
 	def add(self,qcube):
@@ -17,3 +19,19 @@ class QCubes:
 	def addp(self,poslist,alpha):
 		""" Creates and Adds a QCube from a position list or tuple"""
 		self.cubes.append(QCube(Cube().from_pos(poslist),alpha))
+
+	def __getitem__(self, item):
+		''' returning the corresponding cell
+		'''
+		return self.cubes[item]
+
+	def __setitem__(self, key, item):
+		""" Setting the corresponding Cell """
+		self.cubes[key] = item
+
+	def __len__(self):
+		""" returns the number of QCube s in .cubes """
+		return len(self.cubes)
+	
+	def __repr__(self):
+		return str(self.cubes)

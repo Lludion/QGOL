@@ -10,6 +10,7 @@ class Cube:
 		else:
 			self.cube = [[[celltype() for _ in range(2)] for _ in range(2)] for _ in range(2)]
 		self.op = op
+		self.p = None # position (unused)
 
 	def activation(self,*args):
 		""" Activates the specified Cell. """
@@ -59,28 +60,28 @@ class Cube:
 
 	def cross(self):
 		""" Crossing cells. We probably, like .bump, do NOT need the cells, only their number."""
-		return [(i,j,k,ip,jp,kp) for i in range(2) for k in range(2) for j in range(2) for ip in range(2) for jp in range(2) for kp in range(2) if (i,j,k) != (ip,jp,kp) and not (ip,jp,kp) not in adj(i,j,k) and self[i,j,k].v and self[ip,jp,kp]]
+		return [(i,j,k,ip,jp,kp) for i in range(2) for k in range(2) for j in range(2) for ip in range(2) for jp in range(2) for kp in range(2) if (i,j,k) != (ip,jp,kp) and not (ip,jp,kp) not in self.adj(i,j,k) and self[i,j,k].v and self[ip,jp,kp]]
 
 	def f(self):
 		""" Applies the Unitary associated with this Cube."""
 		if self.op is None:
 			raise Exception("No operator provided.\nPlease provide a valid Unitary object to Transform this Cube.")
 		else:
-			self.op.apply(self)
-	
+			return self.op.apply(self)
+
 	def positions(self):
 		""" Returns the list of positions of the activated cells in the Cube """
-		return [Position(i,j,k) for i in range(2) for k in range(2) for j in range(2) if cube[i,j,k].v]
-		
+		return [Position(i,j,k) for i in range(2) for k in range(2) for j in range(2) if self[i,j,k]]
+
 	def activate(self):
 		""" activates all the Cells of a given Cube """
 		for c in self.flatcube():
 			c.activate()
-				
+
 	def flatcube(self):
 		""" returns a list of all Cells in the Cube """
 		return [c for l in self.cube for k in l for c in k]
-	
+
 	def cclass(self):
 		"""returns the class of the first cell"""
 		return self[0,0,0].__class__
@@ -116,7 +117,7 @@ class Cube:
 		if item.__class__ != Cell:
 			item = Cell(item)
 		self.cube[key[0]][key[1]][key[2]]= item
-	
+
 	def __repr__(self):
 		return "CUBE{" + str(id(self)) + "}:\n" + str(self.cube)
 

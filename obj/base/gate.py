@@ -1,4 +1,5 @@
 """ A file where Gate Classes are implemented. """
+from numpy import sqrt
 
 class Gate:
 
@@ -6,6 +7,7 @@ class Gate:
 		self.x = 0 # dim x
 		self.y = 0 # dim y
 		self.fun = lambda x : [self.coord(x,j) for j in range(self.y)]
+		self.sq2 = 1/sqrt(2)
 
 	def coord(self,i,j):
 		if i == j:
