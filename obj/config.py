@@ -1,5 +1,6 @@
 from obj.base import Cell
 from collections import defaultdict
+from log.log import logd,warn,debg
 
 class Config:
 
@@ -67,13 +68,12 @@ class Econfig(Config):
 				licube.add(pos,par)
 			else:
 				del self._c[pos]
-		#print("Initial cubes",licube)
+		debg("Initial cubes ",licube)
 		# here all the cubes have been created and cells have been activated
 		qbsli = []
 		for pos,ac in licube.li.items():
 			qbsli.append((pos,ac.f()))
-		print("QBS",qbsli)
-		# QBSLI =  liste des qcubes (cubes modifiés) et de leur positions
+		debg("QBSLI (list of modified cubes (QCubes) and their position)",qbsli)
 		return create_li(qbsli,0,[(alpha,Econfig())])
 
 def create_li(qbsli,i,newsuper):
