@@ -2,13 +2,15 @@
 from obj.base import Unitary,Position
 from obj.qcubes import QCubes
 from obj.cube import Cube
+from log.log import logd,warn,debg
 
 class QGOL_U(Unitary):
 	
 	def __init_(self):
 		""" Unitary of the Quantum Game of Life, by Arrighi & Grattage"""
 		super().__init__()
-	
+
+	@logd
 	def apply(self,cube):
 		""" Returns the obtained cubes, included in a QCubes object """
 		qbs = QCubes()
@@ -21,6 +23,7 @@ class QGOL_U(Unitary):
 				qbs.addc(cube.copy(),1)
 			else:
 				qbs.addc(cube.reversed(),int(bool(cube.cross()))*(1+1j)*self.sq2)
+
 		elif len(cube) == 3:
 			qbs.addc(cube.reversed(),1)
 			return qbs ## TODO
@@ -42,12 +45,18 @@ class QGOL_U(Unitary):
 			else:
 				pass
 				#I am not sure to understand the rules....
-
+		elif len(cube) == 4:
+			debg("cube of size 4, qbs was:",qbs)
+			debg('adding : ',cube.walled())
+			qbs.addc(cube.walled(),1) # reverse, identity if wall
+			debg("cube of size 4, qbs is:",qbs)
+		elif len(cube) == 5:
+			qbs.addc(cube.walled(),1)
 		else:
 			# if no special configuration is met, 
 			#it's as if they were alone
 			qbs.addc(cube.reversed(),1)
-
+		debg("in .apply : Calculating from ",cube,"\nto:\n",qbs)
 		return qbs
 
 	def difx_uy(self,a,b,c,qbs):

@@ -1,4 +1,6 @@
 from obj.base import Position, Cell
+from obj import partition
+from log.log import debg
 
 class Cube:
 	
@@ -28,7 +30,7 @@ class Cube:
 			self.activate()
 		
 	def reverse(self):
-		""" Reverses the cube """
+		""" Reverses the cube. Assumes that the celltype is Cell. """
 		nc = [[[Cell() for _ in range(2)] for _ in range(2)] for _ in range(2)]
 		for i in range(len(self.cube)):
 			for j in range(len(self.cube[i])):
@@ -39,6 +41,40 @@ class Cube:
 				for k in range(len(self.cube[i][j])) :
 					self.cube[i][j][k].v = nc[i][j][k].v
 	
+	def wall(self):
+		""" modifyes the cube according to whether
+		or not it may contain a bounce on a wall."""
+		raise NotImplementedError # unused, but easily implementable
+
+	def walled(self):
+		""" returns a walled copy of the Cube """
+		
+		pos = self.positions()
+		x0,x1,y0,y1,z0,z1 = parpos = partition(pos)
+		# if there are five of them, a face is maybe full.
+		# it could mean that one of those has 4 pos in it
+		fullfaces = [gr for gr in parpos if len(gr.li) >= 4]
+		if fullfaces:
+			for gr in fullfaces:
+				for p in pos:
+					if p not in gr.li:
+						if gr.c == 'x':
+							p.y = int(not p.y)
+							p.z = int(not p.z)
+						if gr.c == 'y':
+							p.x = int(not p.x)
+							p.z = int(not p.z)
+						if gr.c == 'z':
+							p.y = int(not p.y)
+							p.x = int(not p.x) # could use p.x ^ 1 (bitwise)
+			z = self.copy()
+			z.from_pos(pos)
+			debg("Walled cube : ",z)
+			return z
+		else:
+			debg("Not Walled cube : ",z)
+			return self.reversed()
+
 	def reversed(self):
 		""" returns a reversed copy of the Cube """
 		c  = self.copy()
@@ -83,7 +119,7 @@ class Cube:
 		return [c for l in self.cube for k in l for c in k]
 
 	def cclass(self):
-		"""returns the class of the first cell"""
+		"""returns the class of the first cell. Used to set .celltype."""
 		return self[0,0,0].__class__
 
 	def from_pos(self,pos,newct=None):

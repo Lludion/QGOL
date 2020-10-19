@@ -60,7 +60,7 @@ class Econfig(Config):
 		""" A Configuration of Cells that may evolve
 		This is not a Quantum object."""
 		super().__init__()
-		
+
 	def evolution(self,par,alpha):
 		licube = Cubes()
 		for pos,cell in self._c.items():
