@@ -3,7 +3,7 @@ class Position:
 	""" A container for position.
 	i,j,k should be integers. """	
 
-	def __init__(self,i,j,k):
+	def __init__(self,i=0,j=0,k=0):
 		self.x = i
 		self.y = j
 		self.z = k

@@ -26,6 +26,12 @@ Similarly, the Quantum Game of Life (QGOL) described [here](https://arxiv.org/pd
 
 **Unit** is an abstract class representing a unitary gate. Its implementation here is the unitary U (in 1010.3120), defined in obj.unit as QGOL_U.
 
+**More classes, albeit maybe less useful, were also devised:**
+
+**Position** is a container for x,y and z coordinates. Its methods can also check for adjacency, given another Position.
+
+**PosGroup** is a container for : a list of Positions, a coordinate ('x','y' or 'z') and a value (0 or 1). 
+
 ### Further Comments
 
 Special thanks to Pablo Arrighi and Jonathan Grattage for the creation of the [QGOL](https://arxiv.org/pdf/1010.3120.pdf "QGOL arXiv pdf"). More details and explanations can be found [here](https://docs.google.com/presentation/d/1fBKEK7S0qo7wJeW9lbydZbKjFvYAzMyKeQIjaOYFTi4/edit#slide=id.g4f341a8c7f_0_184 "presentation of rules").
