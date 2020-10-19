@@ -25,26 +25,28 @@ class QGOL_U(Unitary):
 				qbs.addc(cube.reversed(),int(bool(cube.cross()))*(1+1j)*self.sq2)
 
 		elif len(cube) == 3:
-			qbs.addc(cube.reversed(),1)
-			return qbs ## TODO
 			pos = cube.positions()
 			a,b,c = pos
-			if a.x != b.x and a.x != c.x:#a seul sur sa ligne
-				if a.y != b.y and a.y != c.y:
-					# bc commutation - tilted case
-					qbs.addc(Cube().from_pos([Position(a.x,a.y,1-a.z),b,c]),-self.sq2)
-					qbs.addc(Cube().from_pos([Position(b.x,a.y,1-a.z),b,c]),self.sq2)
-				elif a.y != b.y and a.y == c.y:		
-					self.difx_uy(a,b,c,qbs)			 # !! warning !! chirality must be considered
-				elif a.y == b.y and a.y != c.y:		
-					self.difx_uy(a,c,b,qbs)
-				elif a.y == b.y and a.y == c.y:# (else)
-					# bc commutation - plane case
-					qbs.addc(Cube().from_pos([Position(a.x,a.y,1-a.z),b,c]),self.sq2)
-					qbs.addc(Cube().from_pos([Position(a.x,b.y,1-a.z),b,c]),self.sq2)
+			inl = partition_edge(pos)
+			if not inl:
+				qbs.addc(cube.reversed(),1)
 			else:
-				pass
-				#I am not sure to understand the rules....
+				if a.x != b.x and a.x != c.x:#a seul sur sa ligne
+					if a.y != b.y and a.y != c.y:
+						# bc commutation - tilted case
+						qbs.addc(Cube().from_pos([Position(a.x,a.y,1-a.z),b,c]),-self.sq2)
+						qbs.addc(Cube().from_pos([Position(b.x,a.y,1-a.z),b,c]),self.sq2)
+					elif a.y != b.y and a.y == c.y:		
+						self.difx_uy(a,b,c,qbs)			 # !! warning !! chirality must be considered
+					elif a.y == b.y and a.y != c.y:		
+						self.difx_uy(a,c,b,qbs)
+					elif a.y == b.y and a.y == c.y:# (else)
+						# bc commutation - plane case
+						qbs.addc(Cube().from_pos([Position(a.x,a.y,1-a.z),b,c]),self.sq2)
+						qbs.addc(Cube().from_pos([Position(a.x,b.y,1-a.z),b,c]),self.sq2)
+				else: # TODO
+					qbs.addc(cube.reversed(),1)
+					# I am not sure to understand the rules....
 		elif len(cube) == 4:
 			debg("cube of size 4, qbs was:",qbs)
 			debg('adding : ',cube.walled())
@@ -54,7 +56,10 @@ class QGOL_U(Unitary):
 			qbs.addc(cube.walled(),1)
 		else:
 			# if no special configuration is met, 
-			#it's as if they were alone
+			# it's as if they were alone. However, with 6
+			# active cells or more, there is a wall, so 
+			# nothing should move to avoid wall destruction !
+			# (it could be possible to make everything move - anyway)
 			qbs.addc(cube.reversed(),1)
 		debg("in .apply : Calculating from ",cube,"\nto:\n",qbs)
 		return qbs
