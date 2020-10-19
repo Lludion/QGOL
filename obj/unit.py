@@ -15,13 +15,14 @@ class QGOL_U(Unitary):
 		if len(cube) == 1:
 			qbs.addc(cube.reversed(),1)
 		elif len(cube) == 2:
-			qbs.addc(cube.reversed(),int(bool(cube.cross()))*(1+1j)*self.sq2)
-		else:
-			# if no special configuration is met, 
-			#it's as if they were alone
-			qbs.addc(cube.reversed(),1)
-		"""
+			pos = cube.positions()
+			a,b = pos
+			if a.adjacent(b):
+				qbs.addc(cube.copy(),1)
+			else:
+				qbs.addc(cube.reversed(),int(bool(cube.cross()))*(1+1j)*self.sq2)
 		elif len(cube) == 3:
+			qbs.addc(cube.reversed(),1)
 			return qbs ## TODO
 			pos = cube.positions()
 			a,b,c = pos
@@ -31,7 +32,7 @@ class QGOL_U(Unitary):
 					qbs.addc(Cube().from_pos([Position(a.x,a.y,1-a.z),b,c]),-self.sq2)
 					qbs.addc(Cube().from_pos([Position(b.x,a.y,1-a.z),b,c]),self.sq2)
 				elif a.y != b.y and a.y == c.y:		
-					self.difx_uy(a,b,c,qbs)			
+					self.difx_uy(a,b,c,qbs)			 # !! warning !! chirality must be considered
 				elif a.y == b.y and a.y != c.y:		
 					self.difx_uy(a,c,b,qbs)
 				elif a.y == b.y and a.y == c.y:# (else)
@@ -41,7 +42,12 @@ class QGOL_U(Unitary):
 			else:
 				pass
 				#I am not sure to understand the rules....
-		"""
+
+		else:
+			# if no special configuration is met, 
+			#it's as if they were alone
+			qbs.addc(cube.reversed(),1)
+
 		return qbs
 
 	def difx_uy(self,a,b,c,qbs):
