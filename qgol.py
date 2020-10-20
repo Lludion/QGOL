@@ -28,6 +28,9 @@ class QGOL:
 				# use a superposition (Super object) instead
 				for a,conf in li:
 					newsuper[conf] += a
+			else:
+				warn("step ",self.step," ; Suppressed a conf:",conf)
+				print("Suppressed a conf :",conf)
 		self.s = newsuper
 		self.step += 1
 

@@ -188,3 +188,46 @@ print(qg)
 qg.next()
 print(qg)
 
+
+
+print("Testing Rule 3 and further evolution: another usual L shape")
+qg = QGOL()
+qg.bc[-1,0,0] = Cell(True)
+qg.bc[-1,1,0] = Cell(True)
+qg.bc[-1,0,1] = Cell(True)
+
+
+
+print(qg)
+qg.next()
+print(qg)
+
+
+print("Implementing a Hadamard Gate")
+
+qg = QGOL()
+qg.bc[0,0,0] = Cell(True)
+qg.bc[0,1,0] = Cell(True)
+qg.bc[-1,1,0] = Cell(True)
+qg.bc[-1,0,0] = Cell(True)
+qg.bc[1,1,0] = Cell(True)
+qg.bc[1,0,0] = Cell(True)
+qg.bc[2,1,0] = Cell(True)
+qg.bc[2,0,0] = Cell(True)
+qg.bc[1,-2,3] = Cell(True)
+qg.bc[5,-6,7] = Cell(True)
+qg.bc[-20,-18,19] = Cell(True)
+
+print(qg)
+qg.next()
+print(qg)
+qg.next()
+print(qg)
+qg.next()
+print(qg)
+for _ in range(100):
+	qg.next()
+print(qg)
+
+
+

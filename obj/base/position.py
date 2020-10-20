@@ -4,9 +4,9 @@ class Position:
 	i,j,k should be integers. """	
 
 	def __init__(self,i=0,j=0,k=0):
-		self.x = i
-		self.y = j
-		self.z = k
+		self.x = int(i)
+		self.y = int(j)
+		self.z = int(k)
 	
 	def xyz(self):
 		""" Returns a tuple of the three coordinates """

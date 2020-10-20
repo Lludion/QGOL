@@ -1,6 +1,6 @@
 import logging as logg
 
-logg.basicConfig(filename='log/qgol.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s',level=logg.DEBUG)
+logg.basicConfig(filename='log/qgol.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s',level=logg.INFO)
 logg.info('Logging initialized.')
 
 def logd(func):

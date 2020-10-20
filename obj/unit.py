@@ -11,7 +11,7 @@ class QGOL_U(Unitary):
 		""" Unitary of the Quantum Game of Life, by Arrighi & Grattage"""
 		super().__init__()
 
-	@logi
+	@logd
 	def apply(self,cube):
 		""" Returns the obtained cubes, included in a QCubes object """
 		qbs = QCubes()
@@ -26,7 +26,10 @@ class QGOL_U(Unitary):
 				qbs.addc(cube.reversed(),int(bool(cube.cross()))*(1+1j)*self.sq2)
 
 		elif len(cube) == 3:
+		
+			debg("**********3************")
 			pos = cube.positions()
+			debg("INIT:",pos)
 			a,b,c = pos
 			inl = partition_edge(pos)
 			if not inl:
@@ -77,12 +80,16 @@ class QGOL_U(Unitary):
 						newinp = inp
 					newpos1 = Position(newinp.x,not newinp.y,newinp.z)
 					newpos2 = Position(not xv, not newinp.y, not zv)
+				
 				cube1 = Cube()
 				cube1.from_pos([pos1,pos2,newpos1])
 				cube2 = Cube()
 				cube2.from_pos([pos1,pos2,newpos2])
+				debg("Cube1:",[pos1,pos2,newpos1])
+				debg("Cube2:",[pos1,pos2,newpos2])
 				qbs.addc(cube1,self.sq2)
 				qbs.addc(cube2,((-1)**inputval)*self.sq2)
+			debg("***********************")
 		elif len(cube) == 4:
 			debg("cube of size 4, qbs was:",qbs)
 			debg('adding : ',cube.walled())

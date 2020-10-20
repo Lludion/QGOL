@@ -77,7 +77,7 @@ def partition_edge(pos):
 	x0z1 = [p for p in pos if not p.x and p.z]
 	x1z0 = [p for p in pos if p.x and not p.z]
 	x1z1 = [p for p in pos if p.x and p.z]
-	return PosGroup(x0y0,'xy',(0,0)),PosGroup(x0y1,'xy',(0,1)),PosGroup(x1y0,'xy',(1,0)),PosGroup(x1y1,'xy',(1,1)),PosGroup(y0z0,'yz',(0,0)),PosGroup(y0z1,'yz',(0,1)),PosGroup(y1z0,'yz',(1,0)),PosGroup(y1z1,'yz',(1,1)),PosGroup(x0z0,'xz',(0,0)),PosGroup(x0z1,'xz',(0,1)),PosGroup(x1z0,'xz',(1,0)),PosGroup(x1z1,'xz',(1,1))
+	return PosGroup(x0y0,'xy',(0,0)),PosGroup(x0y1,'xy',(0,1)),PosGroup(x1y0,'xy',(1,0)),PosGroup(x1y1,'xy',(1,1)),PosGroup(y0z0,'yz',(0,0)),PosGroup(y0z1,'yz',(0,1)),PosGroup(y1z0,'yz',(1,0)),PosGroup(y1z1,'yz',(1,1)),PosGroup(x0z0,'zx',(0,0)),PosGroup(x0z1,'zx',(1,0)),PosGroup(x1z0,'zx',(0,1)),PosGroup(x1z1,'zx',(1,1))
 	
 def projection(a,b,c,face):
 	coord = face.c
