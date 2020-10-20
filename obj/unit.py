@@ -31,22 +31,53 @@ class QGOL_U(Unitary):
 			if not inl:
 				qbs.addc(cube.reversed(),1)
 			else:
-				if a.x != b.x and a.x != c.x:#a seul sur sa ligne
-					if a.y != b.y and a.y != c.y:
-						# bc commutation - tilted case
-						qbs.addc(Cube().from_pos([Position(a.x,a.y,1-a.z),b,c]),-self.sq2)
-						qbs.addc(Cube().from_pos([Position(b.x,a.y,1-a.z),b,c]),self.sq2)
-					elif a.y != b.y and a.y == c.y:		
-						self.difx_uy(a,b,c,qbs)			 # !! warning !! chirality must be considered
-					elif a.y == b.y and a.y != c.y:		
-						self.difx_uy(a,c,b,qbs)
-					elif a.y == b.y and a.y == c.y:# (else)
-						# bc commutation - plane case
-						qbs.addc(Cube().from_pos([Position(a.x,a.y,1-a.z),b,c]),self.sq2)
-						qbs.addc(Cube().from_pos([Position(a.x,b.y,1-a.z),b,c]),self.sq2)
-				else: # TODO
-					qbs.addc(cube.reversed(),1)
-					# I am not sure to understand the rules....
+			 
+				inp,gr,inputval = PosGroup([a,b,c]).inL()
+				x0,x1,y0,y1,z0,z1 = faces = partition(pos)
+				pos1,pos2 = gr.li
+				axes = gr.c
+				if 'z' not in axes:
+					xv,yv = gr.v
+					if inputval:
+						face1 = [f for f in faces if f.c == 'x' and f.v == xv][0]
+						face2 = [f for f in faces if f.c == 'y' and f.v == yv][0]
+						if find_contam(a,b,c,face1,pos) == inp:
+							newinp = Position(xv,inp.y,inp.z)
+						else:
+							newinp = Position(inp.x,yv,inp.z)
+					else:
+						newinp = inp
+					
+					newpos1 = Position(xv,yv,not inp.z)
+					newpos2 = Position(not xv, not yv, not inp.z)
+				if 'x' not in axes:
+					yv,zv = gr.v
+					if inputval:
+						face1 = [f for f in faces if f.c == 'y' and f.v == yv][0]
+						face2 = [f for f in faces if f.c == 'z' and f.v == zv][0]
+						if find_contam(a,b,c,face1,pos) == inp:
+							newinp = Position(inp.x,yv,inp.z)
+						else:
+							newinp = Position(inp.x,inp.y,zv)
+					else:
+						newinp = inp
+					newpos1 = Position(not inp.x,yv,zv)
+					newpos2 = Position(not inp.x, not yv, not zv)
+				if 'y' not in axes:
+					zv,xv = gr.v
+					if inputval:
+						face1 = [f for f in faces if f.c == 'z' and f.v == zv][0]
+						face2 = [f for f in faces if f.c == 'x' and f.v == xv][0]
+						if find_contam(a,b,c,face1,pos) == inp:
+							newinp = Position(inp.x,inp.y,zv)
+						else:
+							newinp = Position(xv,inp.y,inp.z)
+					else:
+						newinp = inp
+					newpos1 = Position(xv,not inp.y,zv)
+					newpos2 = Position(not xv, not inp.y, not zv)
+				qbs.addc(Cube().from_pos([pos1,pos2,newpos1]),self.sq2)
+				qbs.addc(Cube().from_pos([pos1,pos2,newpos2]),((-1)**inputval)*self.sq2)
 		elif len(cube) == 4:
 			debg("cube of size 4, qbs was:",qbs)
 			debg('adding : ',cube.walled())

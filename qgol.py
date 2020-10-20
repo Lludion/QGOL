@@ -1,4 +1,4 @@
-""" The Quantum Game of Life """
+ """ The Quantum Game of Life """
 from obj import Super, Econfig
 from log.log import logd,warn,debg
 
