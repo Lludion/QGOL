@@ -27,7 +27,7 @@ class Config:
 		return hash(self.__key())
 
 	def __eq__(self, other):
-		if isinstance(other, A):
+		if isinstance(other, self.__class__):
 			return self.__key() == other.__key()
 		return NotImplemented
 
@@ -74,21 +74,25 @@ class Econfig(Config):
 		for pos,ac in licube.li.items():
 			qbsli.append((pos,ac.f()))
 		debg("QBSLI (list of modified cubes (QCubes) and their position)",qbsli)
-		return create_li(qbsli,0,[(alpha,Econfig())])
+		cl = create_li(qbsli,0,[(alpha,Econfig())])
+		debg("CREATED LI : ",str(cl))
+		return cl
 
 def create_li(qbsli,i,newsuper):
 	""" all qcubes < i have been dealt with """
 	# newsuper is a list of amplitude,conf
-	if i >= len(qbsli):
+	if i >= len(qbsli):# all qcubes have been tensored into configs
 		return newsuper
-	litot = []
-	pos,qcubes = qbsli[i]
+	litot = [] # full list
+	qcubepos,qcubes = qbsli[i]# position of the current qcube
 	for qcube in qcubes.cubes:
 		nl = []
 		alpha = qcube.alpha
 		cube = qcube.cube
-		x,y,z = pos
-		act = [pos.xyz() for pos in cube.positions()]
+		x,y,z = qcubepos
+		act = [cellpos.xyz() for cellpos in cube.positions()]
+		debg("POSITIONS OF THE CELLS :",act)
+		debg("POSITIONS OF THE QCUBE :",(x,y,z))
 		act = [(a+x,b+y,c+z) for (a,b,c) in act]
 		for a,conf in newsuper:
 			nc = conf.copy()

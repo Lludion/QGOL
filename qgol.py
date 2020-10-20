@@ -1,4 +1,4 @@
- """ The Quantum Game of Life """
+""" The Quantum Game of Life """
 from obj import Super, Econfig
 from log.log import logd,warn,debg
 
@@ -11,7 +11,6 @@ class QGOL:
 		if conf0 is None:
 			# using the default configuration
 			baseconf = Econfig()
-			baseconf[0,0,0] = True
 			self.s.cs[baseconf] = 1
 			self.bc = baseconf # use for test purposes
 
@@ -24,6 +23,7 @@ class QGOL:
 		for conf,alpha in self.s.cs.items():
 			if alpha:
 				li = conf.evolution(self.pstep(),alpha)
+				debg(li)
 				# extremely sub optimal, a list should never be used for a superposition
 				# use a superposition (Super object) instead
 				for a,conf in li:

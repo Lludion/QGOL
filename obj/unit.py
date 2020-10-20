@@ -3,6 +3,7 @@ from obj.base import Unitary,Position
 from obj.qcubes import QCubes
 from obj.cube import Cube
 from log.log import logd,warn,debg
+from obj.partition import *
 
 class QGOL_U(Unitary):
 	
@@ -10,7 +11,7 @@ class QGOL_U(Unitary):
 		""" Unitary of the Quantum Game of Life, by Arrighi & Grattage"""
 		super().__init__()
 
-	@logd
+	@logi
 	def apply(self,cube):
 		""" Returns the obtained cubes, included in a QCubes object """
 		qbs = QCubes()
@@ -48,8 +49,8 @@ class QGOL_U(Unitary):
 					else:
 						newinp = inp
 					
-					newpos1 = Position(xv,yv,not inp.z)
-					newpos2 = Position(not xv, not yv, not inp.z)
+					newpos1 = Position(newinp.x,newinp.y,not newinp.z)
+					newpos2 = Position(not xv, not yv, not newinp.z)
 				if 'x' not in axes:
 					yv,zv = gr.v
 					if inputval:
@@ -61,8 +62,8 @@ class QGOL_U(Unitary):
 							newinp = Position(inp.x,inp.y,zv)
 					else:
 						newinp = inp
-					newpos1 = Position(not inp.x,yv,zv)
-					newpos2 = Position(not inp.x, not yv, not zv)
+					newpos1 = Position(not newinp.x,newinp.y,newinp.z)
+					newpos2 = Position(not newinp.x, not yv, not zv)
 				if 'y' not in axes:
 					zv,xv = gr.v
 					if inputval:
@@ -74,10 +75,14 @@ class QGOL_U(Unitary):
 							newinp = Position(xv,inp.y,inp.z)
 					else:
 						newinp = inp
-					newpos1 = Position(xv,not inp.y,zv)
-					newpos2 = Position(not xv, not inp.y, not zv)
-				qbs.addc(Cube().from_pos([pos1,pos2,newpos1]),self.sq2)
-				qbs.addc(Cube().from_pos([pos1,pos2,newpos2]),((-1)**inputval)*self.sq2)
+					newpos1 = Position(newinp.x,not newinp.y,newinp.z)
+					newpos2 = Position(not xv, not newinp.y, not zv)
+				cube1 = Cube()
+				cube1.from_pos([pos1,pos2,newpos1])
+				cube2 = Cube()
+				cube2.from_pos([pos1,pos2,newpos2])
+				qbs.addc(cube1,self.sq2)
+				qbs.addc(cube2,((-1)**inputval)*self.sq2)
 		elif len(cube) == 4:
 			debg("cube of size 4, qbs was:",qbs)
 			debg('adding : ',cube.walled())

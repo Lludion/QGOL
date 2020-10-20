@@ -1,3 +1,4 @@
+from log.log import logd,logi
 
 class PosGroup:
 	
@@ -15,7 +16,7 @@ class PosGroup:
 		the PosGroup of the other two things
 		the InputValue (0 or 1)"""
 		try:
-			a,b,c = self.li
+			a,b,c = pos = self.li
 		except ValueError:
 			return False
 		x0y0,x0y1,x1y0,x1y1,y0z0,y0z1,y1z0,y1z1,x0z0,x0z1,x1z0,x1z1 = parpos = partition_edge([a,b,c])
@@ -23,7 +24,7 @@ class PosGroup:
 		candi = []
 		if len(inhab) == 1:
 			# Rotate until well placed, input is 1
-			
+			gr = inhab[0]
 			for p in (a,b,c): # p is not with the others
 				if p not in gr.li:
 					return p,gr,1
@@ -32,20 +33,20 @@ class PosGroup:
 			x0,x1,y0,y1,z0,z1 = faces = partition(pos)
 			fhab = [gr for gr in faces if len(gr.li) >= 3][0]
 			#fhab = inhabited face
-			void = [(0,0),(0,1),(1,0),(1,1)]
 			for p in (a,b,c):
 				if p not in fhab.li:
 					raise BaseException("Unexpected case happened. Contact us.")
 			contcell = find_contam(a,b,c,fhab,pos)
-			stablegroup = [gr for gr in parpos if contcell not in gr and len(gr) == 2][0]
+			stablegroup = [gr for gr in parpos if contcell not in gr.li and len(gr.li) == 2][0]
 			return contcell,stablegroup,0
 		return False
 
 def find_contam(a,b,c,face,pos):
 	""" returns a Position of the contaminated cell """
-	voidcell = [tup in void if tup not in projection(a,b,c,fhab)][0]
-	cont = contaminated(voidcell,fhab.v)
-	contcell = [p for p in pos if proj(p,fhab) == cont][0]# the contaminated cell
+	void = [(0,0),(0,1),(1,0),(1,1)]
+	voidcell = [tup for tup in void if tup not in projection(a,b,c,face)][0]
+	cont = contaminated(voidcell,face.v)
+	contcell = [p for p in pos if proj(p,face) == cont][0]# the contaminated cell
 	return contcell
 
 
@@ -119,9 +120,9 @@ def rotate_well(a,b,c,rot=None):
 	if rot == None:
 		rot = []
 	pos = a,b,c
-	if [p in pos if p.x == 0 and p.y == 0 and p.z == 0]:
-		if [p in pos if p.x == 0 and p.y == 0 and p.z]:
-			if [p in pos if p.x == 0 and p.y == 1 and p.z == 0]:
+	if [p for p in pos if p.x == 0 and p.y == 0 and p.z == 0]:
+		if [p for p in pos if p.x == 0 and p.y == 0 and p.z]:
+			if [p for p in pos if p.x == 0 and p.y == 1 and p.z == 0]:
 				return a,b,c
 	raise NotImplementedError
 

@@ -72,7 +72,7 @@ class Cube:
 			debg("Walled cube : ",z)
 			return z
 		else:
-			debg("Not Walled cube : ",z)
+			debg("Not Walled cube : ",self)
 			return self.reversed()
 
 	def reversed(self):
