@@ -1,4 +1,4 @@
-from log.log import logd,logi
+from log.log import logd,logi,debg
 
 class PosGroup:
 	
@@ -31,14 +31,22 @@ class PosGroup:
 		else:
 			#3 are in a face
 			x0,x1,y0,y1,z0,z1 = faces = partition(pos)
-			fhab = [gr for gr in faces if len(gr.li) >= 3][0]
-			#fhab = inhabited face
-			for p in (a,b,c):
-				if p not in fhab.li:
-					raise BaseException("Unexpected case happened. Contact us.")
-			contcell = find_contam(a,b,c,fhab,pos)
-			stablegroup = [gr for gr in parpos if contcell not in gr.li and len(gr.li) == 2][0]
-			return contcell,stablegroup,0
+			lihab = [gr for gr in faces if len(gr.li) >= 3]
+			if lihab:
+				fhab = lihab[0]
+				#fhab = inhabited face
+				for p in (a,b,c):
+					if p not in fhab.li:
+						raise BaseException("Unexpected case happened. Contact us.")
+				contcell = find_contam(a,b,c,fhab,pos)
+				stablegroup = [gr for gr in parpos if contcell not in gr.li and len(gr.li) == 2][0]
+				return contcell,stablegroup,0
+			else:
+				# "dispersed" case.
+				# no cubes share a face
+				debg("Dispersed case")
+				debg(str(lihab)+str(a)+str(b)+str(c))
+				return False
 		return False
 
 def find_contam(a,b,c,face,pos):

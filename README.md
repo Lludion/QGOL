@@ -8,6 +8,44 @@ Conway's Game of Life can be described in many ways. For mathematicians, it can 
 
 Similarly, the Quantum Game of Life (QGOL) described [here](https://arxiv.org/pdf/1010.3120.pdf "QGOL arXiv pdf") is a grid, populated with active or inactive *quantum* cells, evolving according to a set of local rules. Likewise, it achieves quantum universality, as Hadamard, R(pi/4) and CNOT gates can be effectively implemented. This repository features a concrete implementation of this partitioned quantum cellular automaton ([QCA](https://arxiv.org/pdf/1904.12956.pdf "Quantum Cellular Automaton pdf")).
 
+### Quick Start
+
+**Installation**
+
+Required language : python3 (3.6.9 or later)
+
+Required packages : numpy (1.19.2 or later), pytest (6.1.1 or later) (only used in tests)
+
+Advised packages : numba, matplotlib 
+*(These packages might be used later)*
+
+**Usage Example** 
+
+To run all tests:
+
+```bash
+python3 test.py
+
+```
+You may also use: ``` pytest ```
+However, you will only have info on failed tests.
+
+Often-used arguments:
+
+```bash
+python3 test.py c #this argument executes cube tests
+python3 test.py q 13 90 #this argument executes norm tests with 13 cells and 90 steps
+python3 test.py u #this argument executes tests of the unitary
+python3 test.py u 10 2 #this argument executes tests n°10 and n°2 of the unitary
+python3 test.py r #this argument executes all random tests
+python3 test.py help #this will display a descrption of possible commands
+```
+
+All these commands can be combined:
+```bash
+python3 test.py c q # this will run cube and unitary tests
+```
+
 ### Representation of the objects
 
 **Config** is a non-quantum configuration; it can be seen as a mutable tuple of positions (tuples).
@@ -35,3 +73,4 @@ Similarly, the Quantum Game of Life (QGOL) described [here](https://arxiv.org/pd
 ### Further Comments
 
 Special thanks to Pablo Arrighi and Jonathan Grattage for the creation of the [QGOL](https://arxiv.org/pdf/1010.3120.pdf "QGOL arXiv pdf"). More details and explanations can be found [here](https://docs.google.com/presentation/d/1fBKEK7S0qo7wJeW9lbydZbKjFvYAzMyKeQIjaOYFTi4/edit#slide=id.g4f341a8c7f_0_184 "presentation of rules").
+

@@ -36,59 +36,67 @@ class QGOL_U(Unitary):
 				qbs.addc(cube.reversed(),1)
 			else:
 			 
-				inp,gr,inputval = PosGroup([a,b,c]).inL()
-				x0,x1,y0,y1,z0,z1 = faces = partition(pos)
-				pos1,pos2 = gr.li
-				axes = gr.c
-				if 'z' not in axes:
-					xv,yv = gr.v
-					if inputval:
-						face1 = [f for f in faces if f.c == 'x' and f.v == xv][0]
-						face2 = [f for f in faces if f.c == 'y' and f.v == yv][0]
-						if find_contam(a,b,c,face1,pos) == inp:
-							newinp = Position(xv,inp.y,inp.z)
-						else:
-							newinp = Position(inp.x,yv,inp.z)
-					else:
-						newinp = inp
+				inLresult = PosGroup([a,b,c]).inL()
+				if inLresult:
+					inp,gr,inputval = inLresult
 					
-					newpos1 = Position(newinp.x,newinp.y,not newinp.z)
-					newpos2 = Position(not xv, not yv, not newinp.z)
-				if 'x' not in axes:
-					yv,zv = gr.v
-					if inputval:
-						face1 = [f for f in faces if f.c == 'y' and f.v == yv][0]
-						face2 = [f for f in faces if f.c == 'z' and f.v == zv][0]
-						if find_contam(a,b,c,face1,pos) == inp:
-							newinp = Position(inp.x,yv,inp.z)
+					x0,x1,y0,y1,z0,z1 = faces = partition(pos)
+					pos1,pos2 = gr.li
+					axes = gr.c
+					if 'z' not in axes:
+						xv,yv = gr.v
+						if inputval:
+							face1 = [f for f in faces if f.c == 'x' and f.v == xv][0]
+							face2 = [f for f in faces if f.c == 'y' and f.v == yv][0]
+							if find_contam(a,b,c,face1,pos) == inp:
+								newinp = Position(xv,inp.y,inp.z)
+							else:
+								newinp = Position(inp.x,yv,inp.z)
 						else:
-							newinp = Position(inp.x,inp.y,zv)
-					else:
-						newinp = inp
-					newpos1 = Position(not newinp.x,newinp.y,newinp.z)
-					newpos2 = Position(not newinp.x, not yv, not zv)
-				if 'y' not in axes:
-					zv,xv = gr.v
-					if inputval:
-						face1 = [f for f in faces if f.c == 'z' and f.v == zv][0]
-						face2 = [f for f in faces if f.c == 'x' and f.v == xv][0]
-						if find_contam(a,b,c,face1,pos) == inp:
-							newinp = Position(inp.x,inp.y,zv)
+							newinp = inp
+						
+						newpos1 = Position(newinp.x,newinp.y,not newinp.z)
+						newpos2 = Position(not xv, not yv, not newinp.z)
+					if 'x' not in axes:
+						yv,zv = gr.v
+						if inputval:
+							face1 = [f for f in faces if f.c == 'y' and f.v == yv][0]
+							face2 = [f for f in faces if f.c == 'z' and f.v == zv][0]
+							if find_contam(a,b,c,face1,pos) == inp:
+								newinp = Position(inp.x,yv,inp.z)
+							else:
+								newinp = Position(inp.x,inp.y,zv)
 						else:
-							newinp = Position(xv,inp.y,inp.z)
-					else:
-						newinp = inp
-					newpos1 = Position(newinp.x,not newinp.y,newinp.z)
-					newpos2 = Position(not xv, not newinp.y, not zv)
-				
-				cube1 = Cube()
-				cube1.from_pos([pos1,pos2,newpos1])
-				cube2 = Cube()
-				cube2.from_pos([pos1,pos2,newpos2])
-				debg("Cube1:",[pos1,pos2,newpos1])
-				debg("Cube2:",[pos1,pos2,newpos2])
-				qbs.addc(cube1,self.sq2)
-				qbs.addc(cube2,((-1)**inputval)*self.sq2)
+							newinp = inp
+						newpos1 = Position(not newinp.x,newinp.y,newinp.z)
+						newpos2 = Position(not newinp.x, not yv, not zv)
+					if 'y' not in axes:
+						zv,xv = gr.v
+						if inputval:
+							face1 = [f for f in faces if f.c == 'z' and f.v == zv][0]
+							face2 = [f for f in faces if f.c == 'x' and f.v == xv][0]
+							if find_contam(a,b,c,face1,pos) == inp:
+								newinp = Position(inp.x,inp.y,zv)
+							else:
+								newinp = Position(xv,inp.y,inp.z)
+						else:
+							newinp = inp
+						newpos1 = Position(newinp.x,not newinp.y,newinp.z)
+						newpos2 = Position(not xv, not newinp.y, not zv)
+					
+					cube1 = Cube()
+					cube1.from_pos([pos1,pos2,newpos1])
+					cube2 = Cube()
+					cube2.from_pos([pos1,pos2,newpos2])
+					debg("Cube1:",[pos1,pos2,newpos1])
+					debg("Cube2:",[pos1,pos2,newpos2])
+					qbs.addc(cube1,self.sq2)
+					qbs.addc(cube2,((-1)**inputval)*self.sq2)
+				else:
+					#"Dispersed" case (no common face)
+					debg("Dispersed case:",pos)
+					qbs.addc(cube.reversed(),1)
+					
 			debg("***********************")
 		elif len(cube) == 4:
 			debg("cube of size 4, qbs was:",qbs)
