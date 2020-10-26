@@ -4,6 +4,7 @@ from qgol import *
 from obj.base import *
 from obj import *
 from sys import argv
+from img.colors import printbold
 
 ## qGOL tests
 import numpy as np
@@ -35,7 +36,7 @@ def qgtest(f, n):
 
 @qgtest(1)
 def test_stablesquare():
-	print("1: Testing stability of the well placed square")
+	printbold("1: Testing stability of the well placed square")
 	qg = QGOL()
 	qg.bc[6,6,40] = Cell(True)
 	qg.bc[6,7,40] = Cell(True)
@@ -55,7 +56,7 @@ def test_stablesquare():
 @qgtest(2)
 def test_unstablesquare():
 	if getz(2):
-		print("2: Testing unstability of the ill placed square")
+		printbold("2: Testing unstability of the ill placed square")
 		qg = QGOL()
 		qg.bc[0,0,0] = Cell(True)
 		qg.bc[0,1,0] = Cell(True)
@@ -75,7 +76,7 @@ def test_unstablesquare():
 @qgtest(3)
 def test_walls():
 	if getz(3):
-		print("3: Testing Walls")
+		printbold("3: Testing Walls")
 		qg = QGOL()
 		qg.bc[0,0,0] = Cell(True)
 		qg.bc[0,1,0] = Cell(True)
@@ -108,7 +109,7 @@ def test_walls():
 @qgtest(4)
 def test_wallbounce():
 	if getz(4):
-		print("4: Testing Wall bounce")
+		printbold("4: Testing Wall bounce")
 		qg = QGOL()
 		qg.bc[0,0,0] = Cell(True)
 		qg.bc[0,1,0] = Cell(True)
@@ -142,7 +143,7 @@ def test_wallbounce():
 @qgtest(5)
 def test_LZaxis():
 	if getz(5):
-		print("5: Testing Rule 3: L shape along Z axis")
+		printbold("5: Testing Rule 3: L shape along Z axis")
 		qg = QGOL()
 		qg.bc[0,0,0] = Cell(True)
 		qg.bc[0,0,1] = Cell(True)
@@ -158,7 +159,7 @@ def test_LZaxis():
 @qgtest(6)
 def test_dislocLZaxis():
 	if getz(6):
-		print("6: Testing Rule 3: Dislocated L shape along Z axis")
+		printbold("6: Testing Rule 3: Dislocated L shape along Z axis")
 		qg = QGOL()
 		qg.bc[0,0,0] = Cell(True)
 		qg.bc[0,0,1] = Cell(True)
@@ -174,7 +175,7 @@ def test_dislocLZaxis():
 @qgtest(7)
 def test_LXaxis():
 	if getz(7):
-		print("7: Testing Rule 3: L shape along X axis")
+		printbold("7: Testing Rule 3: L shape along X axis")
 		qg = QGOL()
 		qg.bc[1,1,1] = Cell(True)
 		qg.bc[1,1,0] = Cell(True)
@@ -190,7 +191,7 @@ def test_LXaxis():
 @qgtest(8)
 def test_dislocLXaxis():
 	if getz(8):
-		print("8: Testing Rule 3: dislocated L shape along X axis")
+		printbold("8: Testing Rule 3: dislocated L shape along X axis")
 		qg = QGOL()
 		qg.bc[1,0,1] = Cell(True)
 		qg.bc[1,1,0] = Cell(True)
@@ -206,7 +207,7 @@ def test_dislocLXaxis():
 @qgtest(9)
 def test_dislocLYaxis():
 	if getz(9):
-		print("9: Testing Rule 3 and further evolution: dislocated L shape along Y axis")
+		printbold("9: Testing Rule 3 and further evolution: dislocated L shape along Y axis")
 		qg = QGOL()
 		qg.bc[0,0,0] = Cell(True)
 		qg.bc[1,1,1] = Cell(True)
@@ -228,7 +229,7 @@ def test_dislocLYaxis():
 @qgtest(10)
 def test_L_usual():
 	if getz(10):
-		print("10: Testing Rule 3 and further evolution: usual L shape")
+		printbold("10: Testing Rule 3 and further evolution: usual L shape")
 		qg = QGOL()
 		qg.bc[0,0,0] = Cell(True)
 		qg.bc[1,1,0] = Cell(True)
@@ -250,7 +251,7 @@ def test_L_usual():
 @qgtest(11)
 def test_L_usual2():
 	if getz(11):
-		print("11: Testing Rule 3 and further evolution: another usual L shape")
+		printbold("11: Testing Rule 3 and further evolution: another usual L shape")
 		qg = QGOL()
 		qg.bc[-1,0,0] = Cell(True)
 		qg.bc[-1,1,0] = Cell(True)
@@ -265,7 +266,7 @@ def test_L_usual2():
 
 @qgtest(12)
 def test_hadamard():
-	print("12: Implementing a Hadamard Gate")
+	printbold("12: Implementing a Hadamard Gate")
 
 	qg = QGOL()
 	qg.bc[0,0,0] = Cell(True)

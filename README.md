@@ -38,6 +38,7 @@ python3 test.py q 13 90 #this argument executes norm tests with 13 cells and 90 
 python3 test.py u #this argument executes tests of the unitary
 python3 test.py u 10 2 #this argument executes tests n°10 and n°2 of the unitary
 python3 test.py r #this argument executes all random tests
+python3 test.py r r=60 #this argument executes all random tests, repeated 50 times (default=30)
 python3 test.py help #this will display a descrption of possible commands
 ```
 

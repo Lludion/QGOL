@@ -3,13 +3,15 @@ from sys import argv
 from log.log import logg
 
 help = """
-c		: runs cube tests
-u (n, m ...)	: runs tests on the evolution unitary (optional arguments: numbers of the tests to run)
-help		: displays this help
-r nact nste	: runs randomized tests with int parameters nact & nste; see below
-q nact nste	: same as r
+c			: runs cube tests
+u (n, m ...)		: runs tests on the evolution unitary (optional arguments: numbers of the tests to run)
+help			: displays this help
+r nact nste r=x 	: runs randomized tests with int parameters nact, nste and r; see below
+q nact nste		: same as r
 
-r nact nste runs a simulation for nste steps, where nact active cells, placed at random, are present in the initial configuration.
+r nact nste r=x runs a simulation for nste steps, where nact active cells, placed at random, are present in the initial configuration.
+The tests are repeated x times. example:
+r 20 r=12 30 -> 20 cells, 30 steps, test made with 12 different random initial positioning.
 
 u used alone will display all tests of the evolution unitary.
 u used with numbers between 1 and 12 will display all tests associated with those numbers.
