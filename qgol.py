@@ -1,6 +1,7 @@
 """ The Quantum Game of Life """
 from obj import Super, Econfig
 from log.log import logd,warn,debg
+from img.colors import bcolors as col
 
 class QGOL:
 
@@ -33,12 +34,41 @@ class QGOL:
 				print("Suppressed a conf :",conf)
 		self.s = newsuper
 		self.step += 1
+	
+	def evolve(self,n=1):
+		""" Evolves for n steps.
+		It executes n times the method .step
+		"""
+		for _ in range(n):
+			self.next()
 
 	@logd
 	def pstep(self):
 		""" Returns the parity of the step. 
 		 begins with an even step """
 		return not (self.step % 2)
+
+	def cellconservation(self):
+		""" Tests whether no configuration has a different number of cells """
+		confnum = [len(k) for k,v in self.s.cs.items() if v]
+		debg([(k,len(k)) for k,v in self.s.cs.items() if v])
+		assert not [False for n in confnum if n != confnum[0]]
+
+	def numconf(self):
+		""" Returns the number of active configurations """
+		return len([False for _,v in self.s.cs.items() if v])
+
+	def print_norm(self):
+		n = self.s.normc()
+		#logg.debug("norm:"+str(n))
+		if abs(n) < 0.9:
+			color = col.FAIL
+		elif abs(n - 1)>1/100000:
+			color = col.WARNING
+		else:
+			color = ""
+		print(color , n , col.ENDC)
+		return color
 
 	def __repr__(self):
 		return "QGOL on step " + str(self.step) + " : " + str(self.s.cs)

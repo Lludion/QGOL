@@ -17,26 +17,42 @@ for arg in argv:
 def getz(n):
 	return n in z or not z
 
+def parametrized(dec):
+    def layer(*args, **kwargs):
+        def repl(f):
+            return dec(f, *args, **kwargs)
+        return repl
+    return layer
 
+@parametrized
+def qgtest(f, n):
+    def aux(*xs, **kws):
+    	if getz(n):
+		    qg = f(*xs, **kws)
+		    qg.cellconservation()
+		    return qg
+    return aux
+
+@qgtest(1)
 def test_stablesquare():
-	if getz(1):
-		print("1: Testing stability of the well placed square")
-		qg = QGOL()
-		qg.bc[6,6,40] = Cell(True)
-		qg.bc[6,7,40] = Cell(True)
-		qg.bc[5,7,40] = Cell(True)
-		qg.bc[5,6,40] = Cell(True)
+	print("1: Testing stability of the well placed square")
+	qg = QGOL()
+	qg.bc[6,6,40] = Cell(True)
+	qg.bc[6,7,40] = Cell(True)
+	qg.bc[5,7,40] = Cell(True)
+	qg.bc[5,6,40] = Cell(True)
 
 
-		print(qg)
-		qg.next()
-		print(qg)
-		qg.next()
-		print(qg)
-		qg.next()
-		print(qg)
+	print(qg)
+	qg.next()
+	print(qg)
+	qg.next()
+	print(qg)
+	qg.next()
+	print(qg)
+	return qg
 
-
+@qgtest(2)
 def test_unstablesquare():
 	if getz(2):
 		print("2: Testing unstability of the ill placed square")
@@ -54,8 +70,9 @@ def test_unstablesquare():
 		print(qg)
 		qg.next()
 		print(qg)
+		return qg
 
-
+@qgtest(3)
 def test_walls():
 	if getz(3):
 		print("3: Testing Walls")
@@ -86,7 +103,9 @@ def test_walls():
 		print(qg)
 		qg.next()
 		print(qg)
+		return qg
 
+@qgtest(4)
 def test_wallbounce():
 	if getz(4):
 		print("4: Testing Wall bounce")
@@ -117,7 +136,10 @@ def test_wallbounce():
 		qg.next()
 		print(qg)
 		print("Wandering cell in position : ",[(x,y,z) for conf in qg.s.cs for (x,y,z) in conf.tuple() if z])
+		
+		return qg
 
+@qgtest(5)
 def test_LZaxis():
 	if getz(5):
 		print("5: Testing Rule 3: L shape along Z axis")
@@ -131,7 +153,9 @@ def test_LZaxis():
 		print(qg)
 		qg.next()
 		print(qg)
+		return qg
 
+@qgtest(6)
 def test_dislocLZaxis():
 	if getz(6):
 		print("6: Testing Rule 3: Dislocated L shape along Z axis")
@@ -145,7 +169,9 @@ def test_dislocLZaxis():
 		print(qg)
 		qg.next()
 		print(qg)
+		return qg
 
+@qgtest(7)
 def test_LXaxis():
 	if getz(7):
 		print("7: Testing Rule 3: L shape along X axis")
@@ -159,7 +185,9 @@ def test_LXaxis():
 		print(qg)
 		qg.next()
 		print(qg)
+		return qg
 
+@qgtest(8)
 def test_dislocLXaxis():
 	if getz(8):
 		print("8: Testing Rule 3: dislocated L shape along X axis")
@@ -173,8 +201,9 @@ def test_dislocLXaxis():
 		print(qg)
 		qg.next()
 		print(qg)
+		return qg
 
-
+@qgtest(9)
 def test_dislocLYaxis():
 	if getz(9):
 		print("9: Testing Rule 3 and further evolution: dislocated L shape along Y axis")
@@ -194,7 +223,9 @@ def test_dislocLYaxis():
 		print(qg)
 		qg.next()
 		print(qg)
+		return qg
 
+@qgtest(10)
 def test_L_usual():
 	if getz(10):
 		print("10: Testing Rule 3 and further evolution: usual L shape")
@@ -214,7 +245,9 @@ def test_L_usual():
 		print(qg)
 		qg.next()
 		print(qg)
+		return qg
 
+@qgtest(11)
 def test_L_usual2():
 	if getz(11):
 		print("11: Testing Rule 3 and further evolution: another usual L shape")
@@ -228,34 +261,34 @@ def test_L_usual2():
 		print(qg)
 		qg.next()
 		print(qg)
+		return qg
 
+@qgtest(12)
 def test_hadamard():
-	if getz(12):
-		print("12: Implementing a Hadamard Gate")
+	print("12: Implementing a Hadamard Gate")
 
-		qg = QGOL()
-		qg.bc[0,0,0] = Cell(True)
-		qg.bc[0,1,0] = Cell(True)
-		qg.bc[-1,1,0] = Cell(True)
-		qg.bc[-1,0,0] = Cell(True)
-		qg.bc[1,1,0] = Cell(True)
-		qg.bc[1,0,0] = Cell(True)
-		qg.bc[2,1,0] = Cell(True)
-		qg.bc[2,0,0] = Cell(True)
-		qg.bc[1,-2,3] = Cell(True)
-		qg.bc[5,-6,7] = Cell(True)
-		qg.bc[-20,-18,19] = Cell(True)
+	qg = QGOL()
+	qg.bc[0,0,0] = Cell(True)
+	qg.bc[0,1,0] = Cell(True)
+	qg.bc[-1,1,0] = Cell(True)
+	qg.bc[-1,0,0] = Cell(True)
+	qg.bc[1,1,0] = Cell(True)
+	qg.bc[1,0,0] = Cell(True)
+	qg.bc[2,1,0] = Cell(True)
+	qg.bc[2,0,0] = Cell(True)
+	qg.bc[1,-2,3] = Cell(True)
+	qg.bc[5,-6,7] = Cell(True)
+	qg.bc[-20,-18,19] = Cell(True)
 
-		print(qg)
-		qg.next()
-		print(qg)
-		qg.next()
-		print(qg)
-		qg.next()
-		print(qg)
-		for _ in range(100):
-			qg.next()
-		print(qg)
-
-
+	print(qg)
+	qg.next()
+	print(qg)
+	qg.next()
+	print(qg)
+	qg.next()
+	print(qg)
+	qg.evolve(100)
+	print(qg)
+	assert qg.numconf() == 8
+	return qg
 

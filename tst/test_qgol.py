@@ -3,9 +3,15 @@
 from qgol import *
 from obj.base import *
 from obj import *
-from img.colors import bcolors as col
 from log.log import logg
 from pytest import xfail
+from img.colors import bcolors as col
+
+def norm_verif(qg):
+	color = qg.print_norm()
+	if color == col.WARNING:
+		xfail("Norm was a little bit off.")
+	assert color != col.FAIL
 
 def test_qgol(argv=None):
 	print("Randomized tests")
@@ -43,22 +49,8 @@ def test_qgol(argv=None):
 	#logg.debug(str(qg))
 	#logg.debug(str(nsteps)+" steps, "+str(actcell)+' cells')
 
-	for _ in range(nsteps):
-		qg.next()
+	qg.evolve(nsteps)
 
 	print(f"Norm after {nsteps} steps:")
-	n = qg.s.normc()
-	#logg.debug("norm:"+str(n))
-	if abs(n) < 0.9:
-		color = col.FAIL
-	if abs(n - 1)>1/100000:
-		color = col.WARNING
-	else:
-		color = ""
-	print(color , n , col.ENDC)
-	if color == col.WARNING:
-		xfail("Norm was a little bit off.")
-	assert color != col.FAIL
-
-
+	norm_verif(qg)
 

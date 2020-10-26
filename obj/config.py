@@ -14,8 +14,13 @@ class Config:
 		""" returns a tuple of the activated locations """
 		return tuple([k for k,v in self._c.items() if v])
 
-	def conf(i1,i2,i3):
+	def conf(self,i1,i2,i3):
+		# unused
 		return self._c[i1,i2,i3]
+	
+	def cell_number(self):
+		""" Alias for len(self) """
+		return len(self)
 
 	def quiescent(self,*args,**kwargs):
 		return self.q
@@ -41,6 +46,9 @@ class Config:
 			item = Cell(item)
 		item.p = key
 		self._c[key] = item
+	
+	def __len__(self):
+		return len(self.tuple())
 	
 	def __repr__(self):
 		return str(self.tuple())
