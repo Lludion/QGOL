@@ -21,7 +21,10 @@ u used with numbers between 1 and 12 will display all tests associated with thos
 def test_all():
 	if 'help' in argv:
 		print(help)
-
+	if 'g' in argv:
+		import graph
+		graph.test_unitary()
+		graph.test_show()
 	if len(argv) == 1 or 'c' in argv:
 		import tst.test_cube
 		tst.test_cube.test_cube()
