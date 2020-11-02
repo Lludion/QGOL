@@ -293,3 +293,82 @@ def test_hadamard():
 	assert qg.numconf() == 8
 	return qg
 
+@qgtest(13)
+def test_2cells():
+	printbold("13: Testing usual errored case with 2 cells (randomized)")
+
+	qg = find_error()(2)
+	print(qg)
+	qg.next()
+	print(qg)
+	assert qg.numconf() == 1
+	return qg
+
+@qgtest(14)
+def test_3cells():
+	printbold("14: Testing usual errored case with 3 cells (randomized)")
+
+	qg = find_error()(3)
+	print(qg)
+	qg.next()
+	print(qg)
+	assert qg.numconf() > 0
+	return qg
+
+@qgtest(15)
+def test_4cells():
+	printbold("15: Testing usual errored case with 4 cells (randomized)")
+
+	qg = find_error()(4)
+	print(qg)
+	qg.next()
+	print(qg)
+	assert qg.numconf() > 0
+	return qg
+
+def find_error():
+	""" returns a function that finds errors in the unitary evolution of a cube """
+	from random import randint
+	try:
+		from scipy.special import binom
+	except:
+		def fact(n):
+			if n == 0: return 1
+			else: return n * fact(n-1)
+		def minifact(n,k):
+			if n <= k: return 1
+			else: return n * minifact(n-1)
+		def binom(n,k):
+			return minifact(n,k) // fact(n-k)
+
+	def newpos(pos,mini=0):
+
+		while True:
+			x = randint(mini,mini+1)
+			y = randint(mini,mini+1)
+			z = randint(mini,mini+1)
+			if (x,y,z) not in pos:
+				break
+		return x,y,z
+
+	def errored(qg):
+		return qg.numconf() < 1
+
+	def error_finder(M=4):
+		if M > 4: warn("M too big in error finder")
+		k = 0
+		while True:
+			qg = QGOL()
+			pos = []
+			for _ in range(M):
+				p = newpos(pos,0)
+				qg.bc[p] = Cell(True)
+				pos.append(p)
+			qg.next()
+			k += 1
+			if errored(qg) or k > 2*binom(8,M):
+				break
+		return qg
+
+	return error_finder
+
