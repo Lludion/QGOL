@@ -1,6 +1,8 @@
 import logging as logg
+numba_logger = logg.getLogger('numba')
+numba_logger.setLevel(logg.INFO)
 
-logg.basicConfig(filename='log/qgol.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s',level=logg.INFO)
+logg.basicConfig(filename='log/qgol.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s',level=logg.DEBUG)
 logg.info('Logging initialized.')
 
 def logd(func):
