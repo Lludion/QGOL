@@ -14,7 +14,10 @@ Similarly, the Quantum Game of Life (QGOL) described [here](https://arxiv.org/pd
 
 Required language : python3 (3.6.9 or later)
 
-Required packages : numpy (1.19.2 or later), pytest (6.1.1 or later) (only used in tests)
+Required packages : numpy (1.19.2 or later)
+
+Required packages for tests: pytest (6.1.1 or later), hypothesis (5.41.0 or later)
+
 
 Advised packages : numba, matplotlib 
 *(These packages might be used later)*
@@ -34,6 +37,7 @@ Often-used arguments:
 
 ```bash
 python3 test.py c #this argument executes cube tests
+python3 test.py g #this argument executes graphical tests
 python3 test.py q 13 90 #this argument executes norm tests with 13 cells and 90 steps
 python3 test.py u #this argument executes tests of the unitary
 python3 test.py u 10 2 #this argument executes tests n°10 and n°2 of the unitary

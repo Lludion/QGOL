@@ -4,6 +4,7 @@ from log.log import logg
 
 help = """
 c			: runs cube tests
+g			: runs graphical tests
 u (n, m ...)		: runs tests on the evolution unitary (optional arguments: numbers of the tests to run)
 help			: displays this help
 r nact nste r=x 	: runs randomized tests with int parameters nact, nste and r; see below
@@ -21,7 +22,10 @@ u used with numbers between 1 and 12 will display all tests associated with thos
 def test_all():
 	if 'help' in argv:
 		print(help)
-
+	if 'g' in argv:
+		import tst.test_display
+		tst.test_display.test_unitary()
+		tst.test_display.test_show()
 	if len(argv) == 1 or 'c' in argv:
 		import tst.test_cube
 		tst.test_cube.test_cube()

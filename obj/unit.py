@@ -23,7 +23,10 @@ class QGOL_U(Unitary):
 			if a.adjacent(b):
 				qbs.addc(cube.copy(),1)
 			else:
-				qbs.addc(cube.reversed(),int(bool(cube.cross()))*(1+1j)*self.sq2)
+				if cube.cross():
+					qbs.addc(cube.reversed(),(1+1j)*self.sq2)
+				else:
+					qbs.addc(cube.reversed(),1)
 
 		elif len(cube) == 3:
 		

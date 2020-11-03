@@ -42,7 +42,6 @@ class QGOL:
 		for _ in range(n):
 			self.next()
 
-	@logd
 	def pstep(self):
 		""" Returns the parity of the step. 
 		 begins with an even step """
