@@ -53,7 +53,7 @@ def plot_cube(point,ax,alpha):
 
 
     faces = Poly3DCollection(edges, linewidths=1, edgecolors='k')
-    faces.set_facecolor((0,0,1,alpha))
+    faces.set_facecolor((1-(alpha/2),0,0,alpha))
 
     ax.add_collection3d(faces)
 

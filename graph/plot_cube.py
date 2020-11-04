@@ -6,8 +6,13 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
 
-def plot_cube(point,ax,alpha):
+def plot_cube(point,ax,alpha,index_color):
     """ Plots a cube in the position 'point', with amplitude alpha """
+    alpha=round(alpha,3)
+    
+    list_color=[[1,0,0],[0,1,0],[0,0,1],[0.5,0.5,0],[0.5,0,0.5],[0,0.5,0.5],[0.33,0.33,0.33],[0.25,0.25,0.5]]
+    color = list_color[index_color]
+    
     
     cube_definition = [point]
     for i in range(3):
@@ -46,7 +51,15 @@ def plot_cube(point,ax,alpha):
 
 
     faces = Poly3DCollection(edges, linewidths=1, edgecolors='k')
-    faces.set_facecolor((1-alpha,1-alpha,alpha,alpha))
+    
+    #Calculate the colors of the cube
+    new_color=[0,0,0]
+    for i in range(3):
+        if(color[i]!=0):
+            new_color[i]=round(color[i]-color[i]*(alpha/2),3)
+            
+
+    faces.set_facecolor((new_color[0],new_color[1],new_color[2],alpha))
 
     ax.add_collection3d(faces)
 
