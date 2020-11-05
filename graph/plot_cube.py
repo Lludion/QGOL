@@ -6,7 +6,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection, Line3DCollection
 
-def plot_cube(point,ax,alpha,index_color):
+def plot_cube(point,ax,alpha,index_color,scale=(0,0,0)):
     """ Plots a cube in the position 'point', with amplitude alpha """
     alpha=round(alpha,3)
     
@@ -68,4 +68,6 @@ def plot_cube(point,ax,alpha,index_color):
     ax.scatter(points[:,0], points[:,1], points[:,2], s=0)
 
     #ax.set_aspect('equal')
-
+    
+    
+    return
