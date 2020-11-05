@@ -1,6 +1,9 @@
 # logging test files
 log/log/*
 
+#Gif tests
+graph/gif/*.jpg
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod~]

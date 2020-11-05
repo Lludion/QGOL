@@ -22,6 +22,8 @@ u used with numbers between 1 and 12 will display all tests associated with thos
 def test_all():
 	if 'help' in argv:
 		print(help)
+	if "gif" in argv:
+		import graph.gif_generator
 	if 'g' in argv:
 		import tst.test_display
 		tst.test_display.test_unitary()

@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cmath as comp
 import math as mt
+from os import path,makedirs
 
 def fusion(qgol):
     """ Calculates a config from a superposition, by adding the amplitudes. """
@@ -41,7 +42,11 @@ def afficher_qgol(qgol,show=False,save='',scale=(0,0,0)):
         ax.set_zlim(scale[2])
     if show: return plt.show()
     if len(save)>0:
-        plt.savefig("graph\gif\ "+ save +".jpg")
+        if not isinstance(save,str):
+        	save = str(save)
+        filename = path.join("graph","gif",save + ".jpg")
+        makedirs(path.dirname(filename), exist_ok=True) #os function
+        plt.savefig(filename)
         return (ax.get_xlim(),ax.get_ylim(),ax.get_zlim())
     else: 
         plt.clf()
