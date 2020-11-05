@@ -326,12 +326,25 @@ def test_4cells():
 	assert qg.numconf() > 0
 	return qg
 
+@qgtest(16)
+def test_crossing():
+	printbold("16: Testing crossing (it should change the phase)")
+	
+	qg = QGOL()
+	qg.bc[0,0,0] = Cell(True)
+	qg.bc[0,1,1] = Cell(True)
+	print(qg)
+	qg.next()
+	print(qg)
+	assert qg.numconf() > 0
+	return qg
+
 def find_error():
 	""" returns a function that finds errors in the unitary evolution of a cube """
 	from random import randint
 	try:
 		from scipy.special import binom
-	except:
+	except ModuleNotFoundError:
 		def fact(n):
 			if n == 0: return 1
 			else: return n * fact(n-1)
