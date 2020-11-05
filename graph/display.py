@@ -26,7 +26,7 @@ def fusion(qgol):
     return amplitude,color
 
 
-def afficher_qgol(qgol,show=False):
+def afficher_qgol(qgol,show=False,save='',scale=(0,0,0)):
     """ Plots the qgol if show is true.
     Else, only calculates the figure, then clears it. """
     amplitude,color = fusion(qgol)
@@ -35,7 +35,14 @@ def afficher_qgol(qgol,show=False):
     #ax.set_axis_off()
     for point,alpha in amplitude.items():
         plot_cube(point, ax,alpha,color[point])
+    if(scale[0]!=0):
+        ax.set_xlim(scale[0])
+        ax.set_ylim(scale[1])
+        ax.set_zlim(scale[2])
     if show: return plt.show()
+    if len(save)>0:
+        plt.savefig("graph\gif\ "+ save +".jpg")
+        return (ax.get_xlim(),ax.get_ylim(),ax.get_zlim())
     else: 
         plt.clf()
         plt.clf()
