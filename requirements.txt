@@ -1,0 +1,6 @@
+matplotlib==3.3.2
+numba==0.51.2
+numpy==1.19.2
+pytest==6.1.1
+hypothesis==5.41.0
+

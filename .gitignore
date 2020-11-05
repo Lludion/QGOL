@@ -9,6 +9,14 @@ __pycache__/
 # C extensions
 *.so
 
+#Autodoc files
+_build/*
+build/*
+make.bat
+Makefile
+index.rst
+conf.py
+
 # Distribution / packaging
 .Python
 build/
