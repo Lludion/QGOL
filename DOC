@@ -1,0 +1,4 @@
+#Makefile for pydoc
+
+pydoc3 -w `find -name '*.py'`
+mv *.html doc

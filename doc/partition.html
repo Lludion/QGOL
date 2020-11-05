@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module partition</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>partition</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/urem/Desktop/work/ARTeQ/QGOL/obj/partition.py">/home/urem/Desktop/work/ARTeQ/QGOL/obj/partition.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="partition.html#PosGroup">PosGroup</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PosGroup">class <strong>PosGroup</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="PosGroup-__init__"><strong>__init__</strong></a>(self, li=None, c='x', v=0)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="PosGroup-inL"><strong>inL</strong></a>(self)</dt><dd><tt>checks&nbsp;whether&nbsp;the&nbsp;<a href="#PosGroup">PosGroup</a>&nbsp;is&nbsp;in&nbsp;a&nbsp;L&nbsp;shape&nbsp;or&nbsp;not.&nbsp;<br>
+If&nbsp;it&nbsp;is,&nbsp;it&nbsp;returns&nbsp;the&nbsp;"top"&nbsp;of&nbsp;the&nbsp;L&nbsp;(which&nbsp;is,&nbsp;the&nbsp;one<br>
+Cell&nbsp;that&nbsp;should&nbsp;be&nbsp;'moving'&nbsp;),<br>
+the&nbsp;<a href="#PosGroup">PosGroup</a>&nbsp;of&nbsp;the&nbsp;other&nbsp;two&nbsp;things<br>
+the&nbsp;InputValue&nbsp;(0&nbsp;or&nbsp;1)</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-contaminated"><strong>contaminated</strong></a>(vc, value)</dt><dd><tt>returns&nbsp;the&nbsp;cell&nbsp;contaminated&nbsp;by&nbsp;the&nbsp;void&nbsp;cell</tt></dd></dl>
+ <dl><dt><a name="-find_contam"><strong>find_contam</strong></a>(a, b, c, face, pos)</dt><dd><tt>returns&nbsp;a&nbsp;Position&nbsp;of&nbsp;the&nbsp;contaminated&nbsp;cell</tt></dd></dl>
+ <dl><dt><a name="-horaire"><strong>horaire</strong></a>(vc)</dt><dd><tt>rotation&nbsp;of&nbsp;vc&nbsp;in&nbsp;the&nbsp;clock&nbsp;direction</tt></dd></dl>
+ <dl><dt><a name="-partition"><strong>partition</strong></a>(pos)</dt><dd><tt>returns&nbsp;a&nbsp;partition&nbsp;x0,x1,y0,y1,z0,z1&nbsp;of&nbsp;the&nbsp;list&nbsp;'&nbsp;pos&nbsp;'<br>
+&nbsp;<br>
+where,&nbsp;for&nbsp;instance:<br>
+x0&nbsp;=&nbsp;[p&nbsp;for&nbsp;p&nbsp;in&nbsp;pos&nbsp;if&nbsp;not&nbsp;p.x]</tt></dd></dl>
+ <dl><dt><a name="-partition_edge"><strong>partition_edge</strong></a>(pos)</dt><dd><tt>partition&nbsp;around&nbsp;edges</tt></dd></dl>
+ <dl><dt><a name="-proj"><strong>proj</strong></a>(p, face)</dt></dl>
+ <dl><dt><a name="-projection"><strong>projection</strong></a>(a, b, c, face)</dt></dl>
+ <dl><dt><a name="-rotate"><strong>rotate</strong></a>(pos, c, v)</dt><dd><tt>rotates&nbsp;according&nbsp;to&nbsp;a&nbsp;coordinate&nbsp;and&nbsp;a&nbsp;value</tt></dd></dl>
+ <dl><dt><a name="-rotate_well"><strong>rotate_well</strong></a>(a, b, c, rot=None)</dt><dd><tt>computes&nbsp;all&nbsp;the&nbsp;required&nbsp;rotations</tt></dd></dl>
+ <dl><dt><a name="-trigo"><strong>trigo</strong></a>(vc)</dt><dd><tt>rotation&nbsp;in&nbsp;the&nbsp;trigonometric&nbsp;direction</tt></dd></dl>
+</td></tr></table>
+</body></html>

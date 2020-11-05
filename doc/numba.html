@@ -1,0 +1,2921 @@
+<span style="white-space: pre-line"></span>
+<div class="text">
+<pre>
+Help on package numba:
+
+NAME
+    numba - Expose top-level symbols that are safe for import *
+
+PACKAGE CONTENTS
+    __main__
+    _dispatcher
+    _dynfunc
+    _helperlib
+    _version
+    cext (package)
+    core (package)
+    cpython (package)
+    cuda (package)
+    experimental (package)
+    extending
+    misc (package)
+    mviewbuf
+    np (package)
+    parfors (package)
+    pycc (package)
+    roc (package)
+    runtests
+    scripts (package)
+    stencils (package)
+    testing (package)
+    tests (package)
+    typed (package)
+    types (package)
+
+SUBMODULES
+    config
+    errors
+
+CLASSES
+    builtins.Exception(builtins.BaseException)
+        numba.core.errors.NumbaError
+            numba.core.errors.ByteCodeSupportError
+            numba.core.errors.CompilerError
+            numba.core.errors.ConstantInferenceError
+            numba.core.errors.DeprecationError
+            numba.core.errors.ForceLiteralArg
+            numba.core.errors.IRError
+                numba.core.errors.NotDefinedError
+                numba.core.errors.RedefinedError
+                numba.core.errors.VerificationError
+            numba.core.errors.InternalError
+            numba.core.errors.LoweringError
+                numba.core.errors.ForbiddenConstruct
+            numba.core.errors.MacroError
+            numba.core.errors.TypingError
+                numba.core.errors.LiteralTypingError
+                numba.core.errors.RequireLiteralValue
+                numba.core.errors.UntypedAttributeError
+            numba.core.errors.UnsupportedError
+                numba.core.errors.UnsupportedRewriteError
+            numba.core.errors.UnsupportedParforsError
+    builtins.Warning(builtins.Exception)
+        numba.core.errors.NumbaWarning
+            numba.core.errors.NumbaDeprecationWarning
+            numba.core.errors.NumbaExperimentalFeatureWarning
+            numba.core.errors.NumbaParallelSafetyWarning
+            numba.core.errors.NumbaPendingDeprecationWarning
+            numba.core.errors.NumbaPerformanceWarning
+            numba.core.errors.NumbaTypeSafetyWarning
+    builtins.object
+        numba.misc.special.prange
+    numba.core.types.abstract.Type(builtins.object)
+        numba.core.types.misc.DeferredType
+        numba.core.types.misc.Optional
+    
+    class ByteCodeSupportError(NumbaError)
+     |  Failure to extract the bytecode of the user's function.
+     |  
+     |  Method resolution order:
+     |      ByteCodeSupportError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, msg, loc=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from NumbaError:
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class CompilerError(NumbaError)
+     |  Some high-level error in the compiler.
+     |  
+     |  Method resolution order:
+     |      CompilerError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class ConstantInferenceError(NumbaError)
+     |  Failure during constant inference.
+     |  
+     |  Method resolution order:
+     |      ConstantInferenceError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, value, loc=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from NumbaError:
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class DeprecationError(NumbaError)
+     |  Functionality is deprecated.
+     |  
+     |  Method resolution order:
+     |      DeprecationError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class ForbiddenConstruct(LoweringError)
+     |  A forbidden Python construct was encountered (e.g. use of locals()).
+     |  
+     |  Method resolution order:
+     |      ForbiddenConstruct
+     |      LoweringError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from LoweringError:
+     |  
+     |  __init__(self, msg, loc=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from NumbaError:
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class ForceLiteralArg(NumbaError)
+     |  A Pseudo-exception to signal the dispatcher to type an argument literally
+     |  
+     |  Attributes
+     |  ----------
+     |  requested_args : frozenset[int]
+     |      requested positions of the arguments.
+     |  
+     |  Method resolution order:
+     |      ForceLiteralArg
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, arg_indices, fold_arguments=None, loc=None)
+     |      Parameters
+     |      ----------
+     |      arg_indices : Sequence[int]
+     |          requested positions of the arguments.
+     |      fold_arguments: callable
+     |          A function ``(tuple, dict) -> tuple`` that binds and flattens
+     |          the ``args`` and ``kwargs``.
+     |      loc : numba.ir.Loc or None
+     |  
+     |  __or__(self, other)
+     |      Same as self.combine(other)
+     |  
+     |  bind_fold_arguments(self, fold_arguments)
+     |      Bind the fold_arguments function
+     |  
+     |  combine(self, other)
+     |      Returns a new instance by or'ing the requested_args.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from NumbaError:
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class IRError(NumbaError)
+     |  An error occurred during Numba IR generation.
+     |  
+     |  Method resolution order:
+     |      IRError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class InternalError(NumbaError)
+     |  For wrapping internal error occured within the compiler
+     |  
+     |  Method resolution order:
+     |      InternalError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, exception)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from NumbaError:
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class LiteralTypingError(TypingError)
+     |  Failure in typing a Literal type
+     |  
+     |  Method resolution order:
+     |      LiteralTypingError
+     |      TypingError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class LoweringError(NumbaError)
+     |  An error occurred during lowering.
+     |  
+     |  Method resolution order:
+     |      LoweringError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, msg, loc=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from NumbaError:
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class MacroError(NumbaError)
+     |  An error occurred during macro expansion.
+     |  
+     |  Method resolution order:
+     |      MacroError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class NotDefinedError(IRError)
+     |  An undefined variable is encountered during interpretation of IR.
+     |  
+     |  Method resolution order:
+     |      NotDefinedError
+     |      IRError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, name, loc=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from NumbaError:
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class NumbaDeprecationWarning(NumbaWarning)
+     |  Warning category for use of a deprecated feature.
+     |  
+     |  Method resolution order:
+     |      NumbaDeprecationWarning
+     |      NumbaWarning
+     |      builtins.Warning
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaWarning:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaWarning:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Warning:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class NumbaError(builtins.Exception)
+     |  Common base class for all non-exit exceptions.
+     |  
+     |  Method resolution order:
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class NumbaExperimentalFeatureWarning(NumbaWarning)
+     |  Warning category for using an experimental feature.
+     |  
+     |  Method resolution order:
+     |      NumbaExperimentalFeatureWarning
+     |      NumbaWarning
+     |      builtins.Warning
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaWarning:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaWarning:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Warning:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class NumbaParallelSafetyWarning(NumbaWarning)
+     |  Warning category for when an operation in a prange
+     |  might not have parallel semantics.
+     |  
+     |  Method resolution order:
+     |      NumbaParallelSafetyWarning
+     |      NumbaWarning
+     |      builtins.Warning
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaWarning:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaWarning:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Warning:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class NumbaPendingDeprecationWarning(NumbaWarning)
+     |  Warning category for use of a feature that is pending deprecation.
+     |  
+     |  Method resolution order:
+     |      NumbaPendingDeprecationWarning
+     |      NumbaWarning
+     |      builtins.Warning
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaWarning:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaWarning:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Warning:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class NumbaPerformanceWarning(NumbaWarning)
+     |  Warning category for when an operation might not be
+     |  as fast as expected.
+     |  
+     |  Method resolution order:
+     |      NumbaPerformanceWarning
+     |      NumbaWarning
+     |      builtins.Warning
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaWarning:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaWarning:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Warning:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class NumbaTypeSafetyWarning(NumbaWarning)
+     |  Warning category for unsafe casting operations.
+     |  
+     |  Method resolution order:
+     |      NumbaTypeSafetyWarning
+     |      NumbaWarning
+     |      builtins.Warning
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaWarning:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaWarning:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Warning:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class NumbaWarning(builtins.Warning)
+     |  Base category for all Numba compiler warnings.
+     |  
+     |  Method resolution order:
+     |      NumbaWarning
+     |      builtins.Warning
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Warning:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class RedefinedError(IRError)
+     |  An error occurred during interpretation of IR due to variable redefinition.
+     |  
+     |  Method resolution order:
+     |      RedefinedError
+     |      IRError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class RequireLiteralValue(TypingError)
+     |  For signalling that a function's typing requires a constant value for
+     |  some of its arguments.
+     |  
+     |  Method resolution order:
+     |      RequireLiteralValue
+     |      TypingError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class TypingError(NumbaError)
+     |  A type inference failure.
+     |  
+     |  Method resolution order:
+     |      TypingError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class UnsupportedError(NumbaError)
+     |  Numba does not have an implementation for this functionality.
+     |  
+     |  Method resolution order:
+     |      UnsupportedError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class UnsupportedParforsError(NumbaError)
+     |  An error ocurred because parfors is not supported on the platform.
+     |  
+     |  Method resolution order:
+     |      UnsupportedParforsError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class UnsupportedRewriteError(UnsupportedError)
+     |  UnsupportedError from rewrite passes
+     |  
+     |  Method resolution order:
+     |      UnsupportedRewriteError
+     |      UnsupportedError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class UntypedAttributeError(TypingError)
+     |  A type inference failure.
+     |  
+     |  Method resolution order:
+     |      UntypedAttributeError
+     |      TypingError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, value, attr, loc=None)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from NumbaError:
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    class VerificationError(IRError)
+     |  An error occurred during IR verification. Once Numba's internal
+     |  representation (IR) is constructed it is then verified to ensure that
+     |  terminators are both present and in the correct places within the IR. If
+     |  it is the case that this condition is not met, a VerificationError is
+     |  raised.
+     |  
+     |  Method resolution order:
+     |      VerificationError
+     |      IRError
+     |      NumbaError
+     |      builtins.Exception
+     |      builtins.BaseException
+     |      builtins.object
+     |  
+     |  Methods inherited from NumbaError:
+     |  
+     |  __init__(self, msg, loc=None, highlighting=True)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  add_context(self, msg)
+     |      Add contextual info.  The exception message is expanded with the new
+     |      contextual information.
+     |  
+     |  patch_message(self, new_message)
+     |      Change the error message to the given new message.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from NumbaError:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  contexts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.Exception:
+     |  
+     |  __new__(*args, **kwargs) from builtins.type
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from builtins.BaseException:
+     |  
+     |  __delattr__(self, name, /)
+     |      Implement delattr(self, name).
+     |  
+     |  __getattribute__(self, name, /)
+     |      Return getattr(self, name).
+     |  
+     |  __reduce__(...)
+     |      helper for pickle
+     |  
+     |  __repr__(self, /)
+     |      Return repr(self).
+     |  
+     |  __setattr__(self, name, value, /)
+     |      Implement setattr(self, name, value).
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(self, /)
+     |      Return str(self).
+     |  
+     |  with_traceback(...)
+     |      Exception.with_traceback(tb) --
+     |      set self.__traceback__ to tb and return self.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from builtins.BaseException:
+     |  
+     |  __cause__
+     |      exception cause
+     |  
+     |  __context__
+     |      exception context
+     |  
+     |  __dict__
+     |  
+     |  __suppress_context__
+     |  
+     |  __traceback__
+     |  
+     |  args
+    
+    deferred_type = class DeferredType(numba.core.types.abstract.Type)
+     |  Represents a type that will be defined later.  It must be defined
+     |  before it is materialized (used in the compiler).  Once defined, it
+     |  behaves exactly as the type it is defining.
+     |  
+     |  Method resolution order:
+     |      DeferredType
+     |      numba.core.types.abstract.Type
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  define(self, typ)
+     |  
+     |  get(self)
+     |  
+     |  unify(self, typingctx, other)
+     |      Try to unify this type with the *other*.  A third type must
+     |      be returned, or None if unification is not possible.
+     |      Only override this if the coercion logic cannot be expressed
+     |      as simple casting rules.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __abstractmethods__ = frozenset()
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from numba.core.types.abstract.Type:
+     |  
+     |  __call__(self, *args)
+     |      Call self as a function.
+     |  
+     |  __eq__(self, other)
+     |      Return self==value.
+     |  
+     |  __getitem__(self, args)
+     |      Return an array of this type.
+     |  
+     |  __hash__(self)
+     |      Return hash(self).
+     |  
+     |  __ne__(self, other)
+     |      Return self!=value.
+     |  
+     |  __reduce__(self)
+     |      helper for pickle
+     |  
+     |  __repr__(self)
+     |      Return repr(self).
+     |  
+     |  augment(self, other)
+     |      Augment this type with the *other*.  Return the augmented type,
+     |      or None if not supported.
+     |  
+     |  can_convert_from(self, typingctx, other)
+     |      Similar to *can_convert_to*, but in reverse.  Only needed if
+     |      the type provides conversion from other types.
+     |  
+     |  can_convert_to(self, typingctx, other)
+     |      Check whether this type can be converted to the *other*.
+     |      If successful, must return a string describing the conversion, e.g.
+     |      "exact", "promote", "unsafe", "safe"; otherwise None is returned.
+     |  
+     |  cast_python_value(self, args)
+     |  
+     |  dump(self, tab='')
+     |  
+     |  is_precise(self)
+     |      Whether this type is precise, i.e. can be part of a successful
+     |      type inference.  Default implementation returns True.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from numba.core.types.abstract.Type:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  is_internal
+     |      Returns True if this class is an internally defined Numba type by
+     |      virtue of the module in which it is instantiated, False else.
+     |  
+     |  key
+     |      A property used for __eq__, __ne__ and __hash__.  Can be overridden
+     |      in subclasses.
+     |  
+     |  mangling_args
+     |      Returns `(basename, args)` where `basename` is the name of the type
+     |      and `args` is a sequence of parameters of the type.
+     |      
+     |      Subclass should override to specialize the behavior.
+     |      By default, this returns `(self.name, ())`.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from numba.core.types.abstract.Type:
+     |  
+     |  mutable = False
+     |  
+     |  reflected = False
+    
+    optional = class Optional(numba.core.types.abstract.Type)
+     |  Type class for optional types, i.e. union { some type, None }
+     |  
+     |  Method resolution order:
+     |      Optional
+     |      numba.core.types.abstract.Type
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, typ)
+     |      Initialize self.  See help(type(self)) for accurate signature.
+     |  
+     |  __str__(self)
+     |      Return str(self).
+     |  
+     |  can_convert_from(self, typingctx, other)
+     |      Similar to *can_convert_to*, but in reverse.  Only needed if
+     |      the type provides conversion from other types.
+     |  
+     |  can_convert_to(self, typingctx, other)
+     |      Check whether this type can be converted to the *other*.
+     |      If successful, must return a string describing the conversion, e.g.
+     |      "exact", "promote", "unsafe", "safe"; otherwise None is returned.
+     |  
+     |  unify(self, typingctx, other)
+     |      Try to unify this type with the *other*.  A third type must
+     |      be returned, or None if unification is not possible.
+     |      Only override this if the coercion logic cannot be expressed
+     |      as simple casting rules.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  key
+     |      A property used for __eq__, __ne__ and __hash__.  Can be overridden
+     |      in subclasses.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  __abstractmethods__ = frozenset()
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from numba.core.types.abstract.Type:
+     |  
+     |  __call__(self, *args)
+     |      Call self as a function.
+     |  
+     |  __eq__(self, other)
+     |      Return self==value.
+     |  
+     |  __getitem__(self, args)
+     |      Return an array of this type.
+     |  
+     |  __hash__(self)
+     |      Return hash(self).
+     |  
+     |  __ne__(self, other)
+     |      Return self!=value.
+     |  
+     |  __reduce__(self)
+     |      helper for pickle
+     |  
+     |  __repr__(self)
+     |      Return repr(self).
+     |  
+     |  augment(self, other)
+     |      Augment this type with the *other*.  Return the augmented type,
+     |      or None if not supported.
+     |  
+     |  cast_python_value(self, args)
+     |  
+     |  dump(self, tab='')
+     |  
+     |  is_precise(self)
+     |      Whether this type is precise, i.e. can be part of a successful
+     |      type inference.  Default implementation returns True.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from numba.core.types.abstract.Type:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  is_internal
+     |      Returns True if this class is an internally defined Numba type by
+     |      virtue of the module in which it is instantiated, False else.
+     |  
+     |  mangling_args
+     |      Returns `(basename, args)` where `basename` is the name of the type
+     |      and `args` is a sequence of parameters of the type.
+     |      
+     |      Subclass should override to specialize the behavior.
+     |      By default, this returns `(self.name, ())`.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from numba.core.types.abstract.Type:
+     |  
+     |  mutable = False
+     |  
+     |  reflected = False
+    
+    class prange(builtins.object)
+     |  Provides a 1D parallel iterator that generates a sequence of integers.
+     |  In non-parallel contexts, prange is identical to range.
+     |  
+     |  Static methods defined here:
+     |  
+     |  __new__(cls, *args)
+     |      Create and return a new object.  See help(type) for accurate signature.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+
+FUNCTIONS
+    cfunc(sig, locals={}, cache=False, **options)
+        This decorator is used to compile a Python function into a C callback
+        usable with foreign C libraries.
+        
+        Usage::
+            @cfunc("float64(float64, float64)", nopython=True, cache=True)
+            def add(a, b):
+                return a + b
+    
+    from_dtype(dtype)
+        Return a Numba Type instance corresponding to the given Numpy *dtype*.
+        NotImplementedError is raised on unsupported Numpy dtypes.
+    
+    gdb(*args)
+        Calling this function will invoke gdb and attach it to the current process
+        at the call site. Arguments are strings in the gdb command language syntax
+        which will be executed by gdb once initialisation has occurred.
+    
+    gdb_breakpoint()
+        Calling this function will inject a breakpoint at the call site that is
+        recognised by both `gdb` and `gdb_init`, this is to allow breaking at
+        multiple points. gdb will stop in the user defined code just after the frame
+        employed by the breakpoint returns.
+    
+    gdb_init(*args)
+        Calling this function will invoke gdb and attach it to the current process
+        at the call site, then continue executing the process under gdb's control.
+        Arguments are strings in the gdb command language syntax which will be
+        executed by gdb once initialisation has occurred.
+    
+    get_num_threads()
+        Get the number of threads used for parallel execution.
+        
+        By default (if :func:`~.set_num_threads` is never called), all
+        :obj:`numba.config.NUMBA_NUM_THREADS` threads are used.
+        
+        This number is less than or equal to the total number of threads that are
+        launched, :obj:`numba.config.NUMBA_NUM_THREADS`.
+        
+        This function can be used inside of a jitted function.
+        
+        Returns
+        -------
+        The number of threads.
+        
+        See Also
+        --------
+        set_num_threads, numba.config.NUMBA_NUM_THREADS,
+        numba.config.NUMBA_DEFAULT_NUM_THREADS, :envvar:`NUMBA_NUM_THREADS`
+    
+    guvectorize(ftylist, signature, **kws)
+        guvectorize(ftylist, signature, target='cpu', identity=None, **kws)
+        
+        A decorator to create numpy generialized-ufunc object from Numba compiled
+        code.
+        
+        Args
+        -----
+        ftylist: iterable
+            An iterable of type signatures, which are either
+            function type object or a string describing the
+            function type.
+        
+        signature: str
+            A NumPy generialized-ufunc signature.
+            e.g. "(m, n), (n, p)->(m, p)"
+        
+        identity: int, str, or None
+            The identity (or unit) value for the element-wise function
+            being implemented.  Allowed values are None (the default), 0, 1,
+            and "reorderable".
+        
+        cache: bool
+            Turns on caching.
+        
+        target: str
+                A string for code generation target.  Defaults to "cpu".
+        
+        Returns
+        --------
+        
+        A NumPy generialized universal-function
+        
+        Example
+        -------
+            @guvectorize(['void(int32[:,:], int32[:,:], int32[:,:])',
+                          'void(float32[:,:], float32[:,:], float32[:,:])'],
+                          '(x, y),(x, y)->(x, y)')
+            def add_2d_array(a, b, c):
+                for i in range(c.shape[0]):
+                    for j in range(c.shape[1]):
+                        c[i, j] = a[i, j] + b[i, j]
+    
+    jit(signature_or_function=None, locals={}, cache=False, pipeline_class=None, boundscheck=False, **options)
+        This decorator is used to compile a Python function into native code.
+        
+        Args
+        -----
+        signature_or_function:
+            The (optional) signature or list of signatures to be compiled.
+            If not passed, required signatures will be compiled when the
+            decorated function is called, depending on the argument values.
+            As a convenience, you can directly pass the function to be compiled
+            instead.
+        
+        locals: dict
+            Mapping of local variable names to Numba types. Used to override the
+            types deduced by Numba's type inference engine.
+        
+        target (deprecated): str
+            Specifies the target platform to compile for. Valid targets are cpu,
+            gpu, npyufunc, and cuda. Defaults to cpu.
+        
+        pipeline_class: type numba.compiler.CompilerBase
+                The compiler pipeline type for customizing the compilation stages.
+        
+        options:
+            For a cpu target, valid options are:
+                nopython: bool
+                    Set to True to disable the use of PyObjects and Python API
+                    calls. The default behavior is to allow the use of PyObjects
+                    and Python API. Default value is False.
+        
+                forceobj: bool
+                    Set to True to force the use of PyObjects for every value.
+                    Default value is False.
+        
+                looplift: bool
+                    Set to True to enable jitting loops in nopython mode while
+                    leaving surrounding code in object mode. This allows functions
+                    to allocate NumPy arrays and use Python objects, while the
+                    tight loops in the function can still be compiled in nopython
+                    mode. Any arrays that the tight loop uses should be created
+                    before the loop is entered. Default value is True.
+        
+                error_model: str
+                    The error-model affects divide-by-zero behavior.
+                    Valid values are 'python' and 'numpy'. The 'python' model
+                    raises exception.  The 'numpy' model sets the result to
+                    *+/-inf* or *nan*. Default value is 'python'.
+        
+                inline: str or callable
+                    The inline option will determine whether a function is inlined
+                    at into its caller if called. String options are 'never'
+                    (default) which will never inline, and 'always', which will
+                    always inline. If a callable is provided it will be called with
+                    the call expression node that is requesting inlining, the
+                    caller's IR and callee's IR as arguments, it is expected to
+                    return Truthy as to whether to inline.
+                    NOTE: This inlining is performed at the Numba IR level and is in
+                    no way related to LLVM inlining.
+        
+                boundscheck: bool
+                    Set to True to enable bounds checking for array indices. Out
+                    of bounds accesses will raise IndexError. The default is to
+                    not do bounds checking. If bounds checking is disabled, out of
+                    bounds accesses can produce garbage results or segfaults.
+                    However, enabling bounds checking will slow down typical
+                    functions, so it is recommended to only use this flag for
+                    debugging. You can also set the NUMBA_BOUNDSCHECK environment
+                    variable to 0 or 1 to globally override this flag.
+        
+        Returns
+        --------
+        A callable usable as a compiled function.  Actual compiling will be
+        done lazily if no explicit signatures are passed.
+        
+        Examples
+        --------
+        The function can be used in the following ways:
+        
+        1) jit(signatures, target='cpu', **targetoptions) -> jit(function)
+        
+            Equivalent to:
+        
+                d = dispatcher(function, targetoptions)
+                for signature in signatures:
+                    d.compile(signature)
+        
+            Create a dispatcher object for a python function.  Then, compile
+            the function with the given signature(s).
+        
+            Example:
+        
+                @jit("int32(int32, int32)")
+                def foo(x, y):
+                    return x + y
+        
+                @jit(["int32(int32, int32)", "float32(float32, float32)"])
+                def bar(x, y):
+                    return x + y
+        
+        2) jit(function, target='cpu', **targetoptions) -> dispatcher
+        
+            Create a dispatcher function object that specializes at call site.
+        
+            Examples:
+        
+                @jit
+                def foo(x, y):
+                    return x + y
+        
+                @jit(target='cpu', nopython=True)
+                def bar(x, y):
+                    return x + y
+    
+    jit_module(**kwargs)
+        Automatically ``jit``-wraps functions defined in a Python module
+        
+        Note that ``jit_module`` should only be called at the end of the module to
+        be jitted. In addition, only functions which are defined in the module
+        ``jit_module`` is called from are considered for automatic jit-wrapping.
+        See the Numba documentation for more information about what can/cannot be
+        jitted.
+        
+        :param kwargs: Keyword arguments to pass to ``jit`` such as ``nopython``
+                       or ``error_model``.
+    
+    jitclass = _warning_jitclass(spec)
+        Re-export of numba.experimental.jitclass with a warning.
+        To be used in numba/__init__.py.
+        This endpoint is deprecated.
+    
+    literal_unroll(container)
+    
+    njit(*args, **kws)
+        Equivalent to jit(nopython=True)
+        
+        See documentation for jit function/decorator for full description.
+    
+    set_num_threads(n)
+        Set the number of threads to use for parallel execution.
+        
+        By default, all :obj:`numba.config.NUMBA_NUM_THREADS` threads are used.
+        
+        This functionality works by masking out threads that are not used.
+        Therefore, the number of threads *n* must be less than or equal to
+        :obj:`~.NUMBA_NUM_THREADS`, the total number of threads that are launched.
+        See its documentation for more details.
+        
+        This function can be used inside of a jitted function.
+        
+        Parameters
+        ----------
+        n: The number of threads. Must be between 1 and NUMBA_NUM_THREADS.
+        
+        See Also
+        --------
+        get_num_threads, numba.config.NUMBA_NUM_THREADS,
+        numba.config.NUMBA_DEFAULT_NUM_THREADS, :envvar:`NUMBA_NUM_THREADS`
+    
+    stencil(func_or_mode='constant', **options)
+    
+    typeof(val, purpose=<Purpose.argument: 1>)
+        Get the Numba type of a Python value for the given purpose.
+    
+    vectorize(ftylist_or_function=(), **kws)
+        vectorize(ftylist_or_function=(), target='cpu', identity=None, **kws)
+        
+        A decorator that creates a Numpy ufunc object using Numba compiled
+        code.  When no arguments or only keyword arguments are given,
+        vectorize will return a Numba dynamic ufunc (DUFunc) object, where
+        compilation/specialization may occur at call-time.
+        
+        Args
+        -----
+        ftylist_or_function: function or iterable
+        
+            When the first argument is a function, signatures are dealt
+            with at call-time.
+        
+            When the first argument is an iterable of type signatures,
+            which are either function type object or a string describing
+            the function type, signatures are finalized at decoration
+            time.
+        
+        Keyword Args
+        ------------
+        
+        target: str
+                A string for code generation target.  Default to "cpu".
+        
+        identity: int, str, or None
+            The identity (or unit) value for the element-wise function
+            being implemented.  Allowed values are None (the default), 0, 1,
+            and "reorderable".
+        
+        cache: bool
+            Turns on caching.
+        
+        
+        Returns
+        --------
+        
+        A NumPy universal function
+        
+        Examples
+        -------
+            @vectorize(['float32(float32, float32)',
+                        'float64(float64, float64)'], identity=1)
+            def sum(a, b):
+                return a + b
+        
+            @vectorize
+            def sum(a, b):
+                return a + b
+        
+            @vectorize(identity=1)
+            def mul(a, b):
+                return a * b
+
+DATA
+    __all__ = ['cfunc', 'from_dtype', 'guvectorize', 'jit', 'experimental'...
+    b1 = bool
+    bool_ = bool
+    boolean = bool
+    byte = uint8
+    c16 = complex128
+    c8 = complex64
+    char = int8
+    complex128 = complex128
+    complex64 = complex64
+    double = float64
+    f4 = float32
+    f8 = float64
+    ffi = ffi
+    ffi_forced_object = ffi_forced_object
+    float32 = float32
+    float64 = float64
+    float_ = float32
+    i1 = int8
+    i2 = int16
+    i4 = int32
+    i8 = int64
+    int16 = int16
+    int32 = int32
+    int64 = int64
+    int8 = int8
+    int_ = int64
+    intc = int32
+    intp = int64
+    long_ = int64
+    longlong = int64
+    none = none
+    objmode = <numba.core.withcontexts._ObjModeContextType object>
+    short = int16
+    u1 = uint8
+    u2 = uint16
+    u4 = uint32
+    u8 = uint64
+    uchar = uint8
+    uint = uint64
+    uint16 = uint16
+    uint32 = uint32
+    uint64 = uint64
+    uint8 = uint8
+    uintc = uint32
+    uintp = uint64
+    ulong = uint64
+    ulonglong = uint64
+    ushort = uint16
+    void = none
+
+VERSION
+    0.51.2
+
+FILE
+    /home/urem/.local/lib/python3.6/site-packages/numba/__init__.py
+
+
+</pre>
+</div>
+
