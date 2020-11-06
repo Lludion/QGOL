@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>obj.cube API documentation</title>
+<meta name="description" content="Defines the Cube class" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>obj.cube</code></h1>
+</header>
+<section id="section-intro">
+<p>Defines the Cube class</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34; Defines the Cube class &#34;&#34;&#34;
+from obj.base import Position, Cell
+from obj import partition
+from log.log import debg
+
+class Cube:
+        
+        def __init__(self,op=None,celltype=Cell):
+                &#34;&#34;&#34; A cube of eight cells.
+                Cells are of the provided celltype &#34;&#34;&#34;
+                if celltype is None:
+                        self.cube = None
+                else:
+                        self.cube = [[[celltype() for _ in range(2)] for _ in range(2)] for _ in range(2)]
+                self.op = op
+                self.p = None # position (unused)
+
+        def activation(self,*args):
+                &#34;&#34;&#34; Activates the specified Cell. &#34;&#34;&#34;
+                if len(args) == 1:
+                        if type(args) == type(Cell()):
+                                for c in self.flatcube():
+                                        if c == args[0]:
+                                                c.activate()
+                elif len(args) &gt;= 3:                    
+                        self.cube[args[0]][args[1]][args[2]].activate()
+                elif len(args) == 2:
+                        raise NotImplementedError
+                else:
+                        print(&#34;WARNING : You should use the .activate method instead.&#34;)
+                        self.activate()
+                
+        def reverse(self):
+                &#34;&#34;&#34; Reverses the cube. Assumes that the celltype is Cell. &#34;&#34;&#34;
+                nc = [[[Cell() for _ in range(2)] for _ in range(2)] for _ in range(2)]
+                for i in range(len(self.cube)):
+                        for j in range(len(self.cube[i])):
+                                for k in range(len(self.cube[i][j])) :
+                                        nc[1-i][1-j][1-k].v = self[i,j,k].v
+                for i in range(len(self.cube)):
+                        for j in range(len(self.cube[i])):
+                                for k in range(len(self.cube[i][j])) :
+                                        self.cube[i][j][k].v = nc[i][j][k].v
+        
+        def wall(self):
+                &#34;&#34;&#34; modifyes the cube according to whether
+                or not it may contain a bounce on a wall.&#34;&#34;&#34;
+                raise NotImplementedError # unused, but easily implementable
+
+        def walled(self):
+                &#34;&#34;&#34; returns a walled copy of the Cube &#34;&#34;&#34;
+                
+                pos = self.positions()
+                x0,x1,y0,y1,z0,z1 = parpos = partition(pos)
+                # if there are five of them, a face is maybe full.
+                # it could mean that one of those has 4 pos in it
+                fullfaces = [gr for gr in parpos if len(gr.li) &gt;= 4]
+                if fullfaces:
+                        for gr in fullfaces:
+                                for p in pos:
+                                        if p not in gr.li:
+                                                if gr.c == &#39;x&#39;:
+                                                        p.y = int(not p.y)
+                                                        p.z = int(not p.z)
+                                                if gr.c == &#39;y&#39;:
+                                                        p.x = int(not p.x)
+                                                        p.z = int(not p.z)
+                                                if gr.c == &#39;z&#39;:
+                                                        p.y = int(not p.y)
+                                                        p.x = int(not p.x) # could use p.x ^ 1 (bitwise)
+                        z = self.copy()
+                        z.from_pos(pos)
+                        debg(&#34;Walled cube : &#34;,z)
+                        return z
+                else:
+                        debg(&#34;Not Walled cube : &#34;,self)
+                        return self.reversed()
+
+        def reversed(self):
+                &#34;&#34;&#34; returns a reversed copy of the Cube &#34;&#34;&#34;
+                c  = self.copy()
+                c.reverse(); return c
+        
+        def copy(self):
+                &#34;&#34;&#34; Returns a shallow copy of the Cube &#34;&#34;&#34;
+                nc = Cube(self.op,None)
+                nc.cube = [[[self[i,j,k] for k in range(2)] for j in range(2)] for i in range(2)]#shallow copy
+                return nc
+        
+        def bump(self):
+                &#34;&#34;&#34; Number of crossing particles &#34;&#34;&#34;
+                return len([False for i in range(2) for j in range(2) for k in range(2) if self[i,j,k].v and self[1-i,1-j,1-k].v])
+
+        def adj(self,i,j,k):
+                &#34;&#34;&#34; Adjacent cells of a given cell.&#34;&#34;&#34;
+                return [(ip,jp,kp) for ip in range(2) for jp in range(2) for kp in range(2) if (i==ip or k == kp or j == jp) and not (i,j,k)==(ip,jp,kp)]
+
+        def cross(self):
+                &#34;&#34;&#34; Crossing cells. We probably, like .bump, do NOT need the cells, only their number.&#34;&#34;&#34;
+                return [(i,j,k,ip,jp,kp) for i in range(2) for k in range(2) for j in range(2) for ip in range(2) for jp in range(2) for kp in range(2) if (i,j,k) != (ip,jp,kp) and not (ip,jp,kp) not in self.adj(i,j,k) and self[i,j,k].v and self[ip,jp,kp]]
+
+        def f(self):
+                &#34;&#34;&#34; Applies the Unitary associated with this Cube.&#34;&#34;&#34;
+                if self.op is None:
+                        raise Exception(&#34;No operator provided.\nPlease provide a valid Unitary object to Transform this Cube.&#34;)
+                else:
+                        return self.op.apply(self)
+
+        def positions(self):
+                &#34;&#34;&#34; Returns the list of positions of the activated cells in the Cube &#34;&#34;&#34;
+                return [Position(i,j,k) for i in range(2) for k in range(2) for j in range(2) if self[i,j,k]]
+
+        def activate(self):
+                &#34;&#34;&#34; activates all the Cells of a given Cube &#34;&#34;&#34;
+                for c in self.flatcube():
+                        c.activate()
+
+        def flatcube(self):
+                &#34;&#34;&#34; returns a list of all Cells in the Cube &#34;&#34;&#34;
+                return [c for l in self.cube for k in l for c in k]
+
+        def cclass(self):
+                &#34;&#34;&#34;returns the class of the first cell. Used to set .celltype.&#34;&#34;&#34;
+                return self[0,0,0].__class__
+
+        def from_pos(self,pos,newct=None):
+                if newct is None:
+                        newct = self.cclass()
+                self.cube = [[[newct() for _ in range(2)] for _ in range(2)] for _ in range(2)]
+                for p in pos:
+                        if type(p) == type(Position()):
+                                self[p.x,p.y,p.z].v = True
+                        else:
+                                self[p[0],p[1],p[2]].v = True
+
+        def __len__(self):
+                &#34;&#34;&#34; returns the number of active cells &#34;&#34;&#34;
+                return len([False for l in self.cube for k in l for i in k if i.v])
+        
+        def len(self):
+                &#34;&#34;&#34; returns the number of active cells &#34;&#34;&#34;
+                return len(self)
+
+        def __getitem__(self, item):
+                &#39;&#39;&#39; returning the corresponding cell
+                print(item)
+                print(self.cube)
+                print(self.cube[item[0]])
+                &#39;&#39;&#39;
+                return self.cube[item[0]][item[1]][item[2]]
+
+        def __setitem__(self, key, item):
+                &#34;&#34;&#34; Setting the corresponding Cell &#34;&#34;&#34;
+                if item.__class__ != Cell:
+                        item = Cell(item)
+                self.cube[key[0]][key[1]][key[2]]= item
+
+        def __repr__(self):
+                return &#34;CUBE{&#34; + str(id(self)) + &#34;}:\n&#34; + str(self.cube)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="obj.cube.Cube"><code class="flex name class">
+<span>class <span class="ident">Cube</span></span>
+<span>(</span><span>op=None, celltype=obj.base.cell.Cell)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A cube of eight cells.
+Cells are of the provided celltype</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Cube:
+        
+        def __init__(self,op=None,celltype=Cell):
+                &#34;&#34;&#34; A cube of eight cells.
+                Cells are of the provided celltype &#34;&#34;&#34;
+                if celltype is None:
+                        self.cube = None
+                else:
+                        self.cube = [[[celltype() for _ in range(2)] for _ in range(2)] for _ in range(2)]
+                self.op = op
+                self.p = None # position (unused)
+
+        def activation(self,*args):
+                &#34;&#34;&#34; Activates the specified Cell. &#34;&#34;&#34;
+                if len(args) == 1:
+                        if type(args) == type(Cell()):
+                                for c in self.flatcube():
+                                        if c == args[0]:
+                                                c.activate()
+                elif len(args) &gt;= 3:                    
+                        self.cube[args[0]][args[1]][args[2]].activate()
+                elif len(args) == 2:
+                        raise NotImplementedError
+                else:
+                        print(&#34;WARNING : You should use the .activate method instead.&#34;)
+                        self.activate()
+                
+        def reverse(self):
+                &#34;&#34;&#34; Reverses the cube. Assumes that the celltype is Cell. &#34;&#34;&#34;
+                nc = [[[Cell() for _ in range(2)] for _ in range(2)] for _ in range(2)]
+                for i in range(len(self.cube)):
+                        for j in range(len(self.cube[i])):
+                                for k in range(len(self.cube[i][j])) :
+                                        nc[1-i][1-j][1-k].v = self[i,j,k].v
+                for i in range(len(self.cube)):
+                        for j in range(len(self.cube[i])):
+                                for k in range(len(self.cube[i][j])) :
+                                        self.cube[i][j][k].v = nc[i][j][k].v
+        
+        def wall(self):
+                &#34;&#34;&#34; modifyes the cube according to whether
+                or not it may contain a bounce on a wall.&#34;&#34;&#34;
+                raise NotImplementedError # unused, but easily implementable
+
+        def walled(self):
+                &#34;&#34;&#34; returns a walled copy of the Cube &#34;&#34;&#34;
+                
+                pos = self.positions()
+                x0,x1,y0,y1,z0,z1 = parpos = partition(pos)
+                # if there are five of them, a face is maybe full.
+                # it could mean that one of those has 4 pos in it
+                fullfaces = [gr for gr in parpos if len(gr.li) &gt;= 4]
+                if fullfaces:
+                        for gr in fullfaces:
+                                for p in pos:
+                                        if p not in gr.li:
+                                                if gr.c == &#39;x&#39;:
+                                                        p.y = int(not p.y)
+                                                        p.z = int(not p.z)
+                                                if gr.c == &#39;y&#39;:
+                                                        p.x = int(not p.x)
+                                                        p.z = int(not p.z)
+                                                if gr.c == &#39;z&#39;:
+                                                        p.y = int(not p.y)
+                                                        p.x = int(not p.x) # could use p.x ^ 1 (bitwise)
+                        z = self.copy()
+                        z.from_pos(pos)
+                        debg(&#34;Walled cube : &#34;,z)
+                        return z
+                else:
+                        debg(&#34;Not Walled cube : &#34;,self)
+                        return self.reversed()
+
+        def reversed(self):
+                &#34;&#34;&#34; returns a reversed copy of the Cube &#34;&#34;&#34;
+                c  = self.copy()
+                c.reverse(); return c
+        
+        def copy(self):
+                &#34;&#34;&#34; Returns a shallow copy of the Cube &#34;&#34;&#34;
+                nc = Cube(self.op,None)
+                nc.cube = [[[self[i,j,k] for k in range(2)] for j in range(2)] for i in range(2)]#shallow copy
+                return nc
+        
+        def bump(self):
+                &#34;&#34;&#34; Number of crossing particles &#34;&#34;&#34;
+                return len([False for i in range(2) for j in range(2) for k in range(2) if self[i,j,k].v and self[1-i,1-j,1-k].v])
+
+        def adj(self,i,j,k):
+                &#34;&#34;&#34; Adjacent cells of a given cell.&#34;&#34;&#34;
+                return [(ip,jp,kp) for ip in range(2) for jp in range(2) for kp in range(2) if (i==ip or k == kp or j == jp) and not (i,j,k)==(ip,jp,kp)]
+
+        def cross(self):
+                &#34;&#34;&#34; Crossing cells. We probably, like .bump, do NOT need the cells, only their number.&#34;&#34;&#34;
+                return [(i,j,k,ip,jp,kp) for i in range(2) for k in range(2) for j in range(2) for ip in range(2) for jp in range(2) for kp in range(2) if (i,j,k) != (ip,jp,kp) and not (ip,jp,kp) not in self.adj(i,j,k) and self[i,j,k].v and self[ip,jp,kp]]
+
+        def f(self):
+                &#34;&#34;&#34; Applies the Unitary associated with this Cube.&#34;&#34;&#34;
+                if self.op is None:
+                        raise Exception(&#34;No operator provided.\nPlease provide a valid Unitary object to Transform this Cube.&#34;)
+                else:
+                        return self.op.apply(self)
+
+        def positions(self):
+                &#34;&#34;&#34; Returns the list of positions of the activated cells in the Cube &#34;&#34;&#34;
+                return [Position(i,j,k) for i in range(2) for k in range(2) for j in range(2) if self[i,j,k]]
+
+        def activate(self):
+                &#34;&#34;&#34; activates all the Cells of a given Cube &#34;&#34;&#34;
+                for c in self.flatcube():
+                        c.activate()
+
+        def flatcube(self):
+                &#34;&#34;&#34; returns a list of all Cells in the Cube &#34;&#34;&#34;
+                return [c for l in self.cube for k in l for c in k]
+
+        def cclass(self):
+                &#34;&#34;&#34;returns the class of the first cell. Used to set .celltype.&#34;&#34;&#34;
+                return self[0,0,0].__class__
+
+        def from_pos(self,pos,newct=None):
+                if newct is None:
+                        newct = self.cclass()
+                self.cube = [[[newct() for _ in range(2)] for _ in range(2)] for _ in range(2)]
+                for p in pos:
+                        if type(p) == type(Position()):
+                                self[p.x,p.y,p.z].v = True
+                        else:
+                                self[p[0],p[1],p[2]].v = True
+
+        def __len__(self):
+                &#34;&#34;&#34; returns the number of active cells &#34;&#34;&#34;
+                return len([False for l in self.cube for k in l for i in k if i.v])
+        
+        def len(self):
+                &#34;&#34;&#34; returns the number of active cells &#34;&#34;&#34;
+                return len(self)
+
+        def __getitem__(self, item):
+                &#39;&#39;&#39; returning the corresponding cell
+                print(item)
+                print(self.cube)
+                print(self.cube[item[0]])
+                &#39;&#39;&#39;
+                return self.cube[item[0]][item[1]][item[2]]
+
+        def __setitem__(self, key, item):
+                &#34;&#34;&#34; Setting the corresponding Cell &#34;&#34;&#34;
+                if item.__class__ != Cell:
+                        item = Cell(item)
+                self.cube[key[0]][key[1]][key[2]]= item
+
+        def __repr__(self):
+                return &#34;CUBE{&#34; + str(id(self)) + &#34;}:\n&#34; + str(self.cube)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="obj.cube.Cube.activate"><code class="name flex">
+<span>def <span class="ident">activate</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>activates all the Cells of a given Cube</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def activate(self):
+        &#34;&#34;&#34; activates all the Cells of a given Cube &#34;&#34;&#34;
+        for c in self.flatcube():
+                c.activate()</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.activation"><code class="name flex">
+<span>def <span class="ident">activation</span></span>(<span>self, *args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Activates the specified Cell.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def activation(self,*args):
+        &#34;&#34;&#34; Activates the specified Cell. &#34;&#34;&#34;
+        if len(args) == 1:
+                if type(args) == type(Cell()):
+                        for c in self.flatcube():
+                                if c == args[0]:
+                                        c.activate()
+        elif len(args) &gt;= 3:                    
+                self.cube[args[0]][args[1]][args[2]].activate()
+        elif len(args) == 2:
+                raise NotImplementedError
+        else:
+                print(&#34;WARNING : You should use the .activate method instead.&#34;)
+                self.activate()</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.adj"><code class="name flex">
+<span>def <span class="ident">adj</span></span>(<span>self, i, j, k)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adjacent cells of a given cell.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def adj(self,i,j,k):
+        &#34;&#34;&#34; Adjacent cells of a given cell.&#34;&#34;&#34;
+        return [(ip,jp,kp) for ip in range(2) for jp in range(2) for kp in range(2) if (i==ip or k == kp or j == jp) and not (i,j,k)==(ip,jp,kp)]</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.bump"><code class="name flex">
+<span>def <span class="ident">bump</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Number of crossing particles</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bump(self):
+        &#34;&#34;&#34; Number of crossing particles &#34;&#34;&#34;
+        return len([False for i in range(2) for j in range(2) for k in range(2) if self[i,j,k].v and self[1-i,1-j,1-k].v])</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.cclass"><code class="name flex">
+<span>def <span class="ident">cclass</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>returns the class of the first cell. Used to set .celltype.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cclass(self):
+        &#34;&#34;&#34;returns the class of the first cell. Used to set .celltype.&#34;&#34;&#34;
+        return self[0,0,0].__class__</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.copy"><code class="name flex">
+<span>def <span class="ident">copy</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a shallow copy of the Cube</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy(self):
+        &#34;&#34;&#34; Returns a shallow copy of the Cube &#34;&#34;&#34;
+        nc = Cube(self.op,None)
+        nc.cube = [[[self[i,j,k] for k in range(2)] for j in range(2)] for i in range(2)]#shallow copy
+        return nc</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.cross"><code class="name flex">
+<span>def <span class="ident">cross</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Crossing cells. We probably, like .bump, do NOT need the cells, only their number.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cross(self):
+        &#34;&#34;&#34; Crossing cells. We probably, like .bump, do NOT need the cells, only their number.&#34;&#34;&#34;
+        return [(i,j,k,ip,jp,kp) for i in range(2) for k in range(2) for j in range(2) for ip in range(2) for jp in range(2) for kp in range(2) if (i,j,k) != (ip,jp,kp) and not (ip,jp,kp) not in self.adj(i,j,k) and self[i,j,k].v and self[ip,jp,kp]]</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.f"><code class="name flex">
+<span>def <span class="ident">f</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Applies the Unitary associated with this Cube.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def f(self):
+        &#34;&#34;&#34; Applies the Unitary associated with this Cube.&#34;&#34;&#34;
+        if self.op is None:
+                raise Exception(&#34;No operator provided.\nPlease provide a valid Unitary object to Transform this Cube.&#34;)
+        else:
+                return self.op.apply(self)</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.flatcube"><code class="name flex">
+<span>def <span class="ident">flatcube</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>returns a list of all Cells in the Cube</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def flatcube(self):
+        &#34;&#34;&#34; returns a list of all Cells in the Cube &#34;&#34;&#34;
+        return [c for l in self.cube for k in l for c in k]</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.from_pos"><code class="name flex">
+<span>def <span class="ident">from_pos</span></span>(<span>self, pos, newct=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def from_pos(self,pos,newct=None):
+        if newct is None:
+                newct = self.cclass()
+        self.cube = [[[newct() for _ in range(2)] for _ in range(2)] for _ in range(2)]
+        for p in pos:
+                if type(p) == type(Position()):
+                        self[p.x,p.y,p.z].v = True
+                else:
+                        self[p[0],p[1],p[2]].v = True</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.len"><code class="name flex">
+<span>def <span class="ident">len</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>returns the number of active cells</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def len(self):
+        &#34;&#34;&#34; returns the number of active cells &#34;&#34;&#34;
+        return len(self)</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.positions"><code class="name flex">
+<span>def <span class="ident">positions</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the list of positions of the activated cells in the Cube</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def positions(self):
+        &#34;&#34;&#34; Returns the list of positions of the activated cells in the Cube &#34;&#34;&#34;
+        return [Position(i,j,k) for i in range(2) for k in range(2) for j in range(2) if self[i,j,k]]</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.reverse"><code class="name flex">
+<span>def <span class="ident">reverse</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reverses the cube. Assumes that the celltype is Cell.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reverse(self):
+        &#34;&#34;&#34; Reverses the cube. Assumes that the celltype is Cell. &#34;&#34;&#34;
+        nc = [[[Cell() for _ in range(2)] for _ in range(2)] for _ in range(2)]
+        for i in range(len(self.cube)):
+                for j in range(len(self.cube[i])):
+                        for k in range(len(self.cube[i][j])) :
+                                nc[1-i][1-j][1-k].v = self[i,j,k].v
+        for i in range(len(self.cube)):
+                for j in range(len(self.cube[i])):
+                        for k in range(len(self.cube[i][j])) :
+                                self.cube[i][j][k].v = nc[i][j][k].v</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.reversed"><code class="name flex">
+<span>def <span class="ident">reversed</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>returns a reversed copy of the Cube</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reversed(self):
+        &#34;&#34;&#34; returns a reversed copy of the Cube &#34;&#34;&#34;
+        c  = self.copy()
+        c.reverse(); return c</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.wall"><code class="name flex">
+<span>def <span class="ident">wall</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>modifyes the cube according to whether
+or not it may contain a bounce on a wall.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wall(self):
+        &#34;&#34;&#34; modifyes the cube according to whether
+        or not it may contain a bounce on a wall.&#34;&#34;&#34;
+        raise NotImplementedError # unused, but easily implementable</code></pre>
+</details>
+</dd>
+<dt id="obj.cube.Cube.walled"><code class="name flex">
+<span>def <span class="ident">walled</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>returns a walled copy of the Cube</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def walled(self):
+        &#34;&#34;&#34; returns a walled copy of the Cube &#34;&#34;&#34;
+        
+        pos = self.positions()
+        x0,x1,y0,y1,z0,z1 = parpos = partition(pos)
+        # if there are five of them, a face is maybe full.
+        # it could mean that one of those has 4 pos in it
+        fullfaces = [gr for gr in parpos if len(gr.li) &gt;= 4]
+        if fullfaces:
+                for gr in fullfaces:
+                        for p in pos:
+                                if p not in gr.li:
+                                        if gr.c == &#39;x&#39;:
+                                                p.y = int(not p.y)
+                                                p.z = int(not p.z)
+                                        if gr.c == &#39;y&#39;:
+                                                p.x = int(not p.x)
+                                                p.z = int(not p.z)
+                                        if gr.c == &#39;z&#39;:
+                                                p.y = int(not p.y)
+                                                p.x = int(not p.x) # could use p.x ^ 1 (bitwise)
+                z = self.copy()
+                z.from_pos(pos)
+                debg(&#34;Walled cube : &#34;,z)
+                return z
+        else:
+                debg(&#34;Not Walled cube : &#34;,self)
+                return self.reversed()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="obj" href="index.html">obj</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="obj.cube.Cube" href="#obj.cube.Cube">Cube</a></code></h4>
+<ul class="two-column">
+<li><code><a title="obj.cube.Cube.activate" href="#obj.cube.Cube.activate">activate</a></code></li>
+<li><code><a title="obj.cube.Cube.activation" href="#obj.cube.Cube.activation">activation</a></code></li>
+<li><code><a title="obj.cube.Cube.adj" href="#obj.cube.Cube.adj">adj</a></code></li>
+<li><code><a title="obj.cube.Cube.bump" href="#obj.cube.Cube.bump">bump</a></code></li>
+<li><code><a title="obj.cube.Cube.cclass" href="#obj.cube.Cube.cclass">cclass</a></code></li>
+<li><code><a title="obj.cube.Cube.copy" href="#obj.cube.Cube.copy">copy</a></code></li>
+<li><code><a title="obj.cube.Cube.cross" href="#obj.cube.Cube.cross">cross</a></code></li>
+<li><code><a title="obj.cube.Cube.f" href="#obj.cube.Cube.f">f</a></code></li>
+<li><code><a title="obj.cube.Cube.flatcube" href="#obj.cube.Cube.flatcube">flatcube</a></code></li>
+<li><code><a title="obj.cube.Cube.from_pos" href="#obj.cube.Cube.from_pos">from_pos</a></code></li>
+<li><code><a title="obj.cube.Cube.len" href="#obj.cube.Cube.len">len</a></code></li>
+<li><code><a title="obj.cube.Cube.positions" href="#obj.cube.Cube.positions">positions</a></code></li>
+<li><code><a title="obj.cube.Cube.reverse" href="#obj.cube.Cube.reverse">reverse</a></code></li>
+<li><code><a title="obj.cube.Cube.reversed" href="#obj.cube.Cube.reversed">reversed</a></code></li>
+<li><code><a title="obj.cube.Cube.wall" href="#obj.cube.Cube.wall">wall</a></code></li>
+<li><code><a title="obj.cube.Cube.walled" href="#obj.cube.Cube.walled">walled</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>

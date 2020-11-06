@@ -1,63 +1,338 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module qgol</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head><body bgcolor="#f0f0f8">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>qgol API documentation</title>
+<meta name="description" content="The Quantum Game of Life" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>qgol</code></h1>
+</header>
+<section id="section-intro">
+<p>The Quantum Game of Life</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34; The Quantum Game of Life &#34;&#34;&#34;
+from obj import Super, Econfig
+from log.log import logd,warn,debg
+from img.colors import bcolors as col
 
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
-<tr bgcolor="#7799ee">
-<td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>qgol</strong></big></big></font></td
-><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/urem/Desktop/work/ARTeQ/QGOL/qgol.py">/home/urem/Desktop/work/ARTeQ/QGOL/qgol.py</a></font></td></tr></table>
-    <p><tt>The&nbsp;Quantum&nbsp;Game&nbsp;of&nbsp;Life</tt></p>
-<p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ee77aa">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
-    
-<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl>
-<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
-</font></dt><dd>
+class QGOL:
+
+        @logd
+        def __init__(self,conf0=None):
+                self.s = Super()
+                self.step = 0
+                if conf0 is None:
+                        # using the default configuration
+                        baseconf = Econfig()
+                        self.s.cs[baseconf] = 1
+                        self.bc = baseconf # use for test purposes
+
+        @logd
+        def next(self):
+                &#34;&#34;&#34; Executes a step H &#34;&#34;&#34;
+                debg(&#34;STEP : &#34;,self.step,&#34;PARITY:&#34;,self.pstep())
+                debg(&#34;IPAR : &#34;,1 - self.pstep())
+                newsuper = Super()
+                for conf,alpha in self.s.cs.items():
+                        if alpha:
+                                li = conf.evolution(self.pstep(),alpha)
+                                debg(li)
+                                # extremely sub optimal, a list should never be used for a superposition
+                                # use a superposition (Super object) instead
+                                for a,conf in li:
+                                        newsuper[conf] += a
+                        else:
+                                warn(&#34;step &#34;,self.step,&#34; ; Suppressed a conf:&#34;,conf)
+                                print(&#34;Suppressed a conf :&#34;,conf)
+                self.s = newsuper
+                self.step += 1
+        
+        def evolve(self,n=1):
+                &#34;&#34;&#34; Evolves for n steps.
+                It executes n times the method .step
+                &#34;&#34;&#34;
+                for _ in range(n):
+                        self.next()
+
+        def pstep(self):
+                &#34;&#34;&#34; Returns the parity of the step. 
+                 begins with an even step &#34;&#34;&#34;
+                return not (self.step % 2)
+
+        def cellconservation(self):
+                &#34;&#34;&#34; Tests whether no configuration has a different number of cells &#34;&#34;&#34;
+                confnum = [len(k) for k,v in self.s.cs.items() if v]
+                debg([(k,len(k)) for k,v in self.s.cs.items() if v])
+                assert not [False for n in confnum if n != confnum[0]]
+
+        def numconf(self):
+                &#34;&#34;&#34; Returns the number of active configurations &#34;&#34;&#34;
+                return len([False for _,v in self.s.cs.items() if v])
+
+        def print_norm(self):
+                n = self.s.normc()
+                #logg.debug(&#34;norm:&#34;+str(n))
+                if abs(n) &lt; 0.9:
+                        color = col.FAIL
+                elif abs(n - 1)&gt;1/100000:
+                        color = col.WARNING
+                else:
+                        color = &#34;&#34;
+                print(color , n , col.ENDC)
+                return color
+
+        def __repr__(self):
+                return &#34;QGOL on step &#34; + str(self.step) + &#34; : &#34; + str(self.s.cs)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt><font face="helvetica, arial"><a href="qgol.html#QGOL">QGOL</a>
-</font></dt></dl>
+<dt id="qgol.QGOL"><code class="flex name class">
+<span>class <span class="ident">QGOL</span></span>
+<span>(</span><span>**arg)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class QGOL:
+
+        @logd
+        def __init__(self,conf0=None):
+                self.s = Super()
+                self.step = 0
+                if conf0 is None:
+                        # using the default configuration
+                        baseconf = Econfig()
+                        self.s.cs[baseconf] = 1
+                        self.bc = baseconf # use for test purposes
+
+        @logd
+        def next(self):
+                &#34;&#34;&#34; Executes a step H &#34;&#34;&#34;
+                debg(&#34;STEP : &#34;,self.step,&#34;PARITY:&#34;,self.pstep())
+                debg(&#34;IPAR : &#34;,1 - self.pstep())
+                newsuper = Super()
+                for conf,alpha in self.s.cs.items():
+                        if alpha:
+                                li = conf.evolution(self.pstep(),alpha)
+                                debg(li)
+                                # extremely sub optimal, a list should never be used for a superposition
+                                # use a superposition (Super object) instead
+                                for a,conf in li:
+                                        newsuper[conf] += a
+                        else:
+                                warn(&#34;step &#34;,self.step,&#34; ; Suppressed a conf:&#34;,conf)
+                                print(&#34;Suppressed a conf :&#34;,conf)
+                self.s = newsuper
+                self.step += 1
+        
+        def evolve(self,n=1):
+                &#34;&#34;&#34; Evolves for n steps.
+                It executes n times the method .step
+                &#34;&#34;&#34;
+                for _ in range(n):
+                        self.next()
+
+        def pstep(self):
+                &#34;&#34;&#34; Returns the parity of the step. 
+                 begins with an even step &#34;&#34;&#34;
+                return not (self.step % 2)
+
+        def cellconservation(self):
+                &#34;&#34;&#34; Tests whether no configuration has a different number of cells &#34;&#34;&#34;
+                confnum = [len(k) for k,v in self.s.cs.items() if v]
+                debg([(k,len(k)) for k,v in self.s.cs.items() if v])
+                assert not [False for n in confnum if n != confnum[0]]
+
+        def numconf(self):
+                &#34;&#34;&#34; Returns the number of active configurations &#34;&#34;&#34;
+                return len([False for _,v in self.s.cs.items() if v])
+
+        def print_norm(self):
+                n = self.s.normc()
+                #logg.debug(&#34;norm:&#34;+str(n))
+                if abs(n) &lt; 0.9:
+                        color = col.FAIL
+                elif abs(n - 1)&gt;1/100000:
+                        color = col.WARNING
+                else:
+                        color = &#34;&#34;
+                print(color , n , col.ENDC)
+                return color
+
+        def __repr__(self):
+                return &#34;QGOL on step &#34; + str(self.step) + &#34; : &#34; + str(self.s.cs)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="qgol.QGOL.cellconservation"><code class="name flex">
+<span>def <span class="ident">cellconservation</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Tests whether no configuration has a different number of cells</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cellconservation(self):
+        &#34;&#34;&#34; Tests whether no configuration has a different number of cells &#34;&#34;&#34;
+        confnum = [len(k) for k,v in self.s.cs.items() if v]
+        debg([(k,len(k)) for k,v in self.s.cs.items() if v])
+        assert not [False for n in confnum if n != confnum[0]]</code></pre>
+</details>
+</dd>
+<dt id="qgol.QGOL.evolve"><code class="name flex">
+<span>def <span class="ident">evolve</span></span>(<span>self, n=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Evolves for n steps.
+It executes n times the method .step</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def evolve(self,n=1):
+        &#34;&#34;&#34; Evolves for n steps.
+        It executes n times the method .step
+        &#34;&#34;&#34;
+        for _ in range(n):
+                self.next()</code></pre>
+</details>
+</dd>
+<dt id="qgol.QGOL.next"><code class="name flex">
+<span>def <span class="ident">next</span></span>(<span>*ar, **arg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Executes a step H</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def func_wrapper(*ar,**arg):
+        logg.debug(&#34;Entering function &#34; + str(func_wrapper.__name__))
+        z = func(*ar,**arg)
+        logg.debug(&#34;Exiting function &#34; + str(func_wrapper.__name__))
+        return z</code></pre>
+</details>
+</dd>
+<dt id="qgol.QGOL.numconf"><code class="name flex">
+<span>def <span class="ident">numconf</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the number of active configurations</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def numconf(self):
+        &#34;&#34;&#34; Returns the number of active configurations &#34;&#34;&#34;
+        return len([False for _,v in self.s.cs.items() if v])</code></pre>
+</details>
+</dd>
+<dt id="qgol.QGOL.print_norm"><code class="name flex">
+<span>def <span class="ident">print_norm</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_norm(self):
+        n = self.s.normc()
+        #logg.debug(&#34;norm:&#34;+str(n))
+        if abs(n) &lt; 0.9:
+                color = col.FAIL
+        elif abs(n - 1)&gt;1/100000:
+                color = col.WARNING
+        else:
+                color = &#34;&#34;
+        print(color , n , col.ENDC)
+        return color</code></pre>
+</details>
+</dd>
+<dt id="qgol.QGOL.pstep"><code class="name flex">
+<span>def <span class="ident">pstep</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the parity of the step.
+begins with an even step</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def pstep(self):
+        &#34;&#34;&#34; Returns the parity of the step. 
+         begins with an even step &#34;&#34;&#34;
+        return not (self.step % 2)</code></pre>
+</details>
 </dd>
 </dl>
- <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="QGOL">class <strong>QGOL</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
-    
-<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%">Methods defined here:<br>
-<dl><dt><a name="QGOL-__init__"><strong>__init__</strong></a>(*ar, **arg)</dt></dl>
-
-<dl><dt><a name="QGOL-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
-
-<dl><dt><a name="QGOL-cellconservation"><strong>cellconservation</strong></a>(self)</dt><dd><tt>Tests&nbsp;whether&nbsp;no&nbsp;configuration&nbsp;has&nbsp;a&nbsp;different&nbsp;number&nbsp;of&nbsp;cells</tt></dd></dl>
-
-<dl><dt><a name="QGOL-evolve"><strong>evolve</strong></a>(self, n=1)</dt><dd><tt>Evolves&nbsp;for&nbsp;n&nbsp;steps.<br>
-It&nbsp;executes&nbsp;n&nbsp;times&nbsp;the&nbsp;method&nbsp;.step</tt></dd></dl>
-
-<dl><dt><a name="QGOL-next"><strong>next</strong></a>(*ar, **arg)</dt></dl>
-
-<dl><dt><a name="QGOL-numconf"><strong>numconf</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;number&nbsp;of&nbsp;active&nbsp;configurations</tt></dd></dl>
-
-<dl><dt><a name="QGOL-print_norm"><strong>print_norm</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="QGOL-pstep"><strong>pstep</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;parity&nbsp;of&nbsp;the&nbsp;step.&nbsp;<br>
-begins&nbsp;with&nbsp;an&nbsp;even&nbsp;step</tt></dd></dl>
-
-<hr>
-Data descriptors defined here:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dd>
 </dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-</td></tr></table></td></tr></table>
-</body></html>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li>
+<h3>Sub-modules</h3>
+<ul>
+<li><code><a title="tst" href="tst/index.html">tst</a></code></li>
+<li><code><a title="obj" href="obj/index.html">obj</a></code></li>
+<li><code><a title="img" href="img/index.html">img</a></code></li>
+<li><code><a title="log" href="log/index.html">log</a></code></li>
+<li><code><a title="efficient" href="efficient/index.html">efficient</a></code></li>
+</ul>
+<ul>
+<li>
+<h4><code><a title="qgol.QGOL" href="#qgol.QGOL">QGOL</a></code></h4>
+<ul class="two-column">
+<li><code><a title="qgol.QGOL.cellconservation" href="#qgol.QGOL.cellconservation">cellconservation</a></code></li>
+<li><code><a title="qgol.QGOL.evolve" href="#qgol.QGOL.evolve">evolve</a></code></li>
+<li><code><a title="qgol.QGOL.next" href="#qgol.QGOL.next">next</a></code></li>
+<li><code><a title="qgol.QGOL.numconf" href="#qgol.QGOL.numconf">numconf</a></code></li>
+<li><code><a title="qgol.QGOL.print_norm" href="#qgol.QGOL.print_norm">print_norm</a></code></li>
+<li><code><a title="qgol.QGOL.pstep" href="#qgol.QGOL.pstep">pstep</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>
