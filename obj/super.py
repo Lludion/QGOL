@@ -1,3 +1,4 @@
+""" Defines the Super class """
 from obj.config import *
 import numpy as np
 from collections import defaultdict

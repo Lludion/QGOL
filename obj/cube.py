@@ -1,3 +1,4 @@
+""" Defines the Cube class """
 from obj.base import Position, Cell
 from obj import partition
 from log.log import debg

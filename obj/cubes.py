@@ -1,3 +1,5 @@
+""" Defines the Cubes class.
+This class handles several cubes."""
 from obj import Cube, QGOL_U
 from collections import defaultdict
 from log.log import logd,debg
@@ -9,6 +11,8 @@ def unitarycube():
 
 class Cubes:
 	def __init__(self):
+		""" This class handles several cubes thanks to 
+		its .li field """
 		self.li = defaultdict(unitarycube)
 
 	def add(self,poscel,par):

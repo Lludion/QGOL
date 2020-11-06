@@ -1,3 +1,4 @@
+""" Defines the Config class """
 from obj.base import Cell
 from collections import defaultdict
 from log.log import logd,warn,debg

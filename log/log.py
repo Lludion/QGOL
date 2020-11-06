@@ -15,6 +15,7 @@ def logd(func):
 		logg.debug("Exiting function " + str(func_wrapper.__name__))
 		return z
 	func_wrapper.__name__ = func.__name__
+	func_wrapper.__doc__ = func.__doc__
 	return func_wrapper
 
 def logi(func):
@@ -27,6 +28,7 @@ def logi(func):
 		logg.info("Exiting function " + str(func_wrapper.__name__))
 		return z
 	func_wrapper.__name__ = func.__name__
+	func_wrapper.__doc__ = func.__doc__
 	return func_wrapper
 
 def warn(*args):

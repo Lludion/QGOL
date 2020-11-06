@@ -1,3 +1,4 @@
+""" Defines the Partition class """
 from log.log import logd,logi,debg
 
 class PosGroup:

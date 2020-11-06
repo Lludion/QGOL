@@ -1,4 +1,4 @@
-""" Defines a useful Unitary """
+""" Defines a usable Unitary class """
 from obj.base import Unitary,Position
 from obj.qcubes import QCubes
 from obj.cube import Cube

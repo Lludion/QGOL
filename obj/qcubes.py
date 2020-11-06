@@ -1,9 +1,15 @@
+""" Defines the SCubes class.
+This class handles several QCubes."""
 from obj.base import QCube
 from obj.cube import Cube
 
 class QCubes:
 	
 	def __init__(self,cubes=None):
+		"""
+		This class handles several QCubes with its
+		.cubes field
+		"""
 		if cubes is None:
 			cubes = []
 		self.cubes = cubes
