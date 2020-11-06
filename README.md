@@ -8,6 +8,8 @@ Conway's Game of Life can be described in many ways. For mathematicians, it can 
 
 Similarly, the Quantum Game of Life (QGOL) described [here](https://arxiv.org/pdf/1010.3120.pdf "QGOL arXiv pdf") is a grid, populated with active or inactive *quantum* cells, evolving according to a set of local rules. Likewise, it achieves quantum universality, as Hadamard, R(pi/4) and CNOT gates can be effectively implemented. This repository features a concrete implementation of this partitioned quantum cellular automaton ([QCA](https://arxiv.org/pdf/1904.12956.pdf "Quantum Cellular Automaton pdf")).
 
+![qgol_example](https://user-images.githubusercontent.com/45879010/98400759-e83c0c80-2064-11eb-902b-ae5ed83969c7.gif)
+
 ### Quick Start
 
 **Installation**
@@ -21,8 +23,11 @@ Required packages for tests: pytest (6.1.1 or later), hypothesis (5.41.0 or late
 Advised packages : numba (0.51.2)
 *(These packages might be used later)*
 
+All these packages will be installed on python 3 by using the command "make" in the command line, on Linux machines.
 
-All these packages will be installed on python 3 by running the ./INSTALL executable bash script.
+![Example of usage of make on Linux Machines](https://user-images.githubusercontent.com/45879010/98398407-3b13c500-2061-11eb-9295-9fdda8d79e27.png)
+
+On any OS supporting command line pip (MacOS, Linux, Windows, ...), ``` pip install -r requirements.txt ``` can also do the trick.
 
 **Usage Example** 
 
@@ -81,4 +86,5 @@ python3 test.py c q # this will run cube and unitary tests
 ### Further Comments
 
 Special thanks to Pablo Arrighi and Jonathan Grattage for the creation of the [QGOL](https://arxiv.org/pdf/1010.3120.pdf "QGOL arXiv pdf"). More details and explanations can be found [here](https://docs.google.com/presentation/d/1fBKEK7S0qo7wJeW9lbydZbKjFvYAzMyKeQIjaOYFTi4/edit#slide=id.g4f341a8c7f_0_184 "presentation of rules").
+
 

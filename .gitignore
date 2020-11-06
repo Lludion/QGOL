@@ -13,7 +13,6 @@ __pycache__/
 _build/*
 build/*
 make.bat
-Makefile
 index.rst
 conf.py
 
