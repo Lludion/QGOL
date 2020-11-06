@@ -59,7 +59,7 @@ def main():
 				file.write(html)
 
 	#print("lkjlk")
-	files = glof("/home/urem/Desktop/work/ARTeQ/QGOL/")
+	files = list(dict.fromkeys(glof("/home/urem/Desktop/work/ARTeQ/QGOL/")))
 	#print("FILES:",files)
 
 	for f in files:
@@ -84,25 +84,88 @@ def main():
 <li><code><a title="efficient" href="efficient/index.html">efficient</a></code></li>
 </ul>
 		"""
-	for f in files:
-		mark =""" <ul id="index">
-<li>"""
-		if "qgol.html" in f and not 'test' in f:
-			sti = ""
-			stj = ""
+
+	def add_supermod(x):
+		s = "../qgol"
+		if "base" in x:
+			s = "../index"
+		elif "qgol" in x and "test" not in x:
+			return ""
+		return '''
+<h3>Super-modules</h3>
+<ul>
+<li><code><a title="super" href="'''+s+""".html">(super)</a></code></li></ul>
+		"""
+	
+	def cleanf(f):
+		""" Adding the right path to a file f"""
+		try:
+			with open(f,"r") as filen:
+				pass
+			return f
+		except:
+			#print("FILE:",f)
+			if "log" in f:
+				f = "doc/log/log.html"
+			elif "qgol" in f and "test" not in f:
+				f = "doc/"+f
+			elif "index" in f:
+				f = "doc/qgol.html"
+			elif f[:-5] in ["qcubes","config","cube","cubes","index","partition","super","unit"]:
+				f = "doc/obj/"+f
+			elif len(f) > 15:
+				f = f[:-5] + "/index.html"
+			else:
+				f = "doc/" + f[:-5] + "/index.html"
+			return f
+
+	def stistj(f,mark):
+		""" Cutting the file f in half according to a mark.
+		The mark is in the secondpart"""
+		sti,stj,st = "","",f
+		try:
 			with open(f,"r") as filen:
 				st = filen.read()
-				mkpos = 0
+				sti = st
 				for i in range(len(st)):
 					if st[i:(i+len(mark))%len(st)] == mark:
 						sti = st[:i]
 						stj = st[i:]
-			
-			with open(f,"w") as f:
-				f.write(sti+incantation+stj)	
-			
-		
+						break
+		except FileNotFoundError as e:
+			print("problem:",e)
+		return sti,stj,st
 
+	for f in files:
+		mark =""" <ul id="index">
+<li>"""
+		if "qgol.html" in f and not 'test' in f:
+			
+			f = cleanf(f)
+			sti,stj,st = stistj(f,mark)
+			
+			
+			try:
+				if incantation not in st:
+					with open(f,"w") as f:
+						f.write(sti+incantation+stj)
+				else:
+					print("NO INCANTATION FOR",f)
+			except BaseException as e:
+				print("INCANTATION ERROR for ",f,e)
+		
+		elif ".html" in f and ".." not in f:
+			f = cleanf(f)
+			sm = add_supermod(f)
+			sti,stj,st = stistj(f,mark)
+			try:
+				if "Super-modules" not in st and (sti or stj):
+					print("SUPERMOD TO",f,sm)
+					with open(f,"w") as f:
+						f.write(sti+sm+stj)
+			except: pass
+	
+	os.rename("doc/obj/base.html","doc/obj/base/index.html")
 
 main()
 
