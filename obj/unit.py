@@ -114,7 +114,7 @@ class QGOL_U(Unitary):
 			# active cells or more, there is a wall, so 
 			# nothing should move to avoid wall destruction !
 			# (it could be possible to make everything move - anyway)
-			qbs.addc(cube.reversed(),1)
+			qbs.addc(cube.copy(),1)
 		debg("in .apply : Calculating from ",cube,"\nto:\n",qbs)
 		return qbs
 

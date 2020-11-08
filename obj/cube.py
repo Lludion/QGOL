@@ -124,6 +124,7 @@ class Cube:
 		return self[0,0,0].__class__
 
 	def from_pos(self,pos,newct=None):
+		""" self.cube becomes as described in the lit of positions pos"""
 		if newct is None:
 			newct = self.cclass()
 		self.cube = [[[newct() for _ in range(2)] for _ in range(2)] for _ in range(2)]

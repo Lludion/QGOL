@@ -15,6 +15,10 @@ class Config:
 		""" returns a tuple of the activated locations """
 		return tuple([k for k,v in self._c.items() if v])
 
+	def show_tuple(self,msk=[]):
+		""" returns a tuple of the locations that are both activated and marked """
+		return tuple([k for k,v in self._c.items() if v and k not in msk])
+
 	def conf(self,i1,i2,i3):
 		# unused
 		return self._c[i1,i2,i3]
@@ -52,7 +56,7 @@ class Config:
 		return len(self.tuple())
 	
 	def __repr__(self):
-		return str(self.tuple())
+		return str(self.show_tuple())
 	
 	def copy(self):
 		""" shallow copy """

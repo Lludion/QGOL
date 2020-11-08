@@ -16,10 +16,11 @@ class Position:
 		assert isinstance(self.x,int)
 		assert isinstance(self.y,int)
 		assert isinstance(self.z,int)
-	
+
 	def adjacent(a,b):
 		return (a.x == b.x and a.y == b.y) or (a.z == b.z and a.y == b.y) or (a.x == b.x and a.z == b.z)
 	
 	def __repr__(self):
 		return str((self.x,self.y,self.z))
 
+Pos = Position # Alias

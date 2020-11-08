@@ -70,11 +70,11 @@ class QGOL:
         return color
 
     def __repr__(self):
-        return "QGOL on step " + str(self.step) + " : " + str(self.s.cs)
+        return "QGOL on step " + str(self.step) + " : " + str(self.s)
     
     def copy(self):
-        qgol=QGOL()
-        qgol.step=self.step
-        qgol.s=self.s.copy()
+        qgol = QGOL()
+        qgol.step = self.step
+        qgol.s = self.s.copy()
         return qgol
 
