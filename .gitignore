@@ -2,7 +2,7 @@
 log/log/*
 
 #Gif tests
-graph/gif/*.jpg
+img/gif/*.jpg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

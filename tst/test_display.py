@@ -7,7 +7,7 @@ Created on Tue Oct 27 20:52:49 2020
 
 from qgol import *
 from obj import *
-from graph.display import *
+from img.display import *
 from hypothesis import given,settings
 from random import randint
 import hypothesis.strategies as st
