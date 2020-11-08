@@ -7,7 +7,7 @@ Created on Wed Nov  4 16:37:15 2020
 
 from qgol import *
 from obj import *
-from graph.display import *
+from img.display import *
 from os import environ
 
 

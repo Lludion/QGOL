@@ -2,7 +2,7 @@
 @author: jmcos, lludion
 """
 
-from graph.plot_cube import plot_cube
+from img.plot_cube import plot_cube
 from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
