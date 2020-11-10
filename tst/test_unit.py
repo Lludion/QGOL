@@ -1,38 +1,22 @@
 
-###TESTS FOR QGOL
+"""TESTS FOR QGOL
+
+Be sure to name all tests test_***(something)***
+
+examples of correct names:
+test_square
+test_
+test_89
+
+"""
 from qgol import *
 from obj.base import *
 from obj import *
-from sys import argv
 from img.colors import printbold
-
-## qGOL tests
+from tst.wrappers import *
 import numpy as np
-z = []
-for arg in argv:
-	try:
-		z.append(int(arg))
-	except ValueError:
-		pass
 
-def getz(n):
-	return n in z or not z
 
-def parametrized(dec):
-    def layer(*args, **kwargs):
-        def repl(f):
-            return dec(f, *args, **kwargs)
-        return repl
-    return layer
-
-@parametrized
-def qgtest(f, n):
-    def aux(*xs, **kws):
-    	if getz(n):
-		    qg = f(*xs, **kws)
-		    qg.cellconservation()
-		    return qg
-    return aux
 
 @qgtest(1)
 def test_stablesquare():

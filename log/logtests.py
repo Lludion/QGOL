@@ -16,7 +16,7 @@ def f(x):
 def ff(x):
 	print(f(f))
 
-ff(f(z))
+#ff(f(z))
 
 
 @logi
@@ -24,4 +24,4 @@ def akayabu(tau,pi,lambdaprime):
 	print(tau,pi)
 	print(lambdaprime(tau))
 
-akayabu(akayabu,f,f)
+#akayabu(akayabu,f,f)

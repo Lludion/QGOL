@@ -21,6 +21,7 @@ class QGOL:
         debg("STEP : ",self.step,"PARITY:",self.pstep())
         debg("IPAR : ",1 - self.pstep())
         newsuper = Super()
+        newsuper.mask = self.s.mask
         for conf,alpha in self.s.cs.items():
             if alpha:
                 li = conf.evolution(self.pstep(),alpha)
@@ -33,6 +34,7 @@ class QGOL:
                 warn("step ",self.step," ; Suppressed a conf:",conf)
                 print("Suppressed a conf :",conf)
         self.s = newsuper
+        debg("mask:",self.s.mask)
         self.step += 1
     
     def evolve(self,n=1):

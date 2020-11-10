@@ -4,7 +4,9 @@ from ope.operations import *
 from img.colors import printbold
 from obj.base import Pos
 from qgol import *
+from tst.wrappers import *
 
+@qgtest(1)
 def test_cube():
 	printbold("1: Cube creation")
 	qg = QGOL()
@@ -26,14 +28,13 @@ def test_cube():
 		k = qg.s.cs.keys()
 		k = list(k)[0].tuple()
 		print(2*i,[x for x in qg2 if x not in k])
+	return qg
 
-test_cube()
-
+@qgtest(2)
 def test_tunnel():
 	printbold("2: Testing stability of the tunnel")
 	qg = QGOL()
-	qg.bc[2,0,0].activate()
-	msk = tunnelx(qg.bc,Pos(0,-1,-1),6)
+	msk = tunnelx(qg.bc,Pos(-1,-1,-1),2)
 	qg.s.mask += msk
 	print(qg)
 	qg.next()
@@ -42,5 +43,23 @@ def test_tunnel():
 	print(qg)
 	qg.next()
 	print(qg)
+	assert not [z for z in [k.show_tuple(qg.s.mask) for (k,v) in qg.s.cs.items()] if z != ()]
+	return qg
 
-test_tunnel()
+@qgtest(3)
+def test_tunnel_qubit():
+	printbold("3: Testing stability of the tunnel with an entry qubit")
+	qg = QGOL()
+	qg.bc[2,0,0].activate()
+	msk = tunnelx(qg.bc,Pos(-1,-1,-1),6)
+	qg.s.mask += msk
+	print(qg)
+	qg.next()
+	print(qg)
+	qg.next()
+	print(qg)
+	qg.evolve(8)
+	print(qg)
+	assert len( [z for z in [k.show_tuple(qg.s.mask) for (k,v) in qg.s.cs.items()] if z != ()] ) == 1
+	return qg
+

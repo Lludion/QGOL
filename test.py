@@ -1,6 +1,7 @@
 from sys import argv
 
-from log.log import logg
+#from log.log import logg
+from tst.wrappers import handler
 
 help = """
 c			: runs cube tests
@@ -24,6 +25,7 @@ def test_all():
 		print(help)
 	if "op" in argv:
 		import tst.test_operations
+		handler(tst.test_operations)
 	if "gif" in argv:
 		import graph.gif_generator
 	if 'g' in argv:
@@ -38,15 +40,7 @@ def test_all():
 		tst.test_qgol.test_qgol()
 	if len(argv) == 1 or 'u' in argv:
 		import tst.test_unit
-		tests = tst.test_unit.__dict__.items()
-		
-		for n,c in tests:# this executes all the activated tests
-			try:
-				c()
-			except TypeError:
-				pass
-			except ValueError:
-				pass
+		handler(tst.test_unit)
 
 if __name__ == '__main__':
 	test_all()
