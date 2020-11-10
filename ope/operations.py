@@ -32,10 +32,17 @@ def tunnelx(c,p,n=2,show=False):
 	for i in range(n):
 		for j in range(4):
 			for k in range(4):
-				if ((j%3) or (k%3)) and not ((j%3) and  (k%3)):
+				if ((j%3) or (k%3)) and not ((j%3) and (k%3)):
 					c[x+i,y+j,z+k].activate()
+					c[x+i,y+j+(j==3),z+k].activate()
+					c[x+i,y+j-(j==0),z+k].activate()
+					c[x+i,y+j,z+k+(k==3)].activate()
+					c[x+i,y+j,z+k-(k==0)].activate()
+					c[x+i+(i==3),y+j,z+k].activate()
+					c[x+i-(i==0),y+j,z+k].activate()
 					if not show:msk.append((x+i,y+j,z+k))
 	return msk
 
-	
+
+
 

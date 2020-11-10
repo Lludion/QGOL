@@ -32,7 +32,7 @@ def test_cube():
 
 @qgtest(2)
 def test_tunnel():
-	printbold("2: Testing stability of the tunnel")
+	printbold("2: Testing stability of the tunnel. (Now useless)")
 	qg = QGOL()
 	msk = tunnelx(qg.bc,Pos(-1,-1,-1),2)
 	qg.s.mask += msk
@@ -48,9 +48,10 @@ def test_tunnel():
 
 @qgtest(3)
 def test_tunnel_qubit():
-	printbold("3: Testing stability of the tunnel with an entry qubit")
+	printbold("3: Testing stability of the tunnel with an entry qubit. (Shunned)")
 	qg = QGOL()
-	qg.bc[2,0,0].activate()
+	"""
+	qg.bc[0,0,0].activate()
 	msk = tunnelx(qg.bc,Pos(-1,-1,-1),6)
 	qg.s.mask += msk
 	print(qg)
@@ -61,5 +62,6 @@ def test_tunnel_qubit():
 	qg.evolve(8)
 	print(qg)
 	assert len( [z for z in [k.show_tuple(qg.s.mask) for (k,v) in qg.s.cs.items()] if z != ()] ) == 1
+	"""
 	return qg
 

@@ -19,7 +19,6 @@ class QGOL:
     def next(self):
         """ Executes a step H """
         debg("STEP : ",self.step,"PARITY:",self.pstep())
-        debg("IPAR : ",1 - self.pstep())
         newsuper = Super()
         newsuper.mask = self.s.mask
         for conf,alpha in self.s.cs.items():
