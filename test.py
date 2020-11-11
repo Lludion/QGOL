@@ -23,6 +23,9 @@ u used with numbers between 1 and 12 will display all tests associated with thos
 def test_all():
 	if 'help' in argv:
 		print(help)
+	if "do" in argv:
+		import tst.test_doors
+		handler(tst.test_doors)
 	if "op" in argv:
 		import tst.test_operations
 		handler(tst.test_operations)

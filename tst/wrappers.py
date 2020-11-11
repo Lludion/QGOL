@@ -10,6 +10,8 @@ test_
 test_89
 
 """
+from img.colors import printbold
+
 TEST_WRAPPER_LIST = []
 for arg in argv:
 	try:
@@ -29,12 +31,13 @@ def parametrized(dec):
 
 @parametrized
 def qgtest(f, n):
-    def aux(*xs, **kws):
-    	if getz(n):
-		    qg = f(*xs, **kws)
-		    qg.cellconservation()
-		    return qg
-    return aux
+	def aux(*xs, **kws):
+		if getz(n):
+			printbold(n,":",f.__doc__)
+			qg = f(*xs, **kws)
+			qg.cellconservation()
+			return qg
+	return aux
 
 def handler(module):
 	""" 
@@ -55,4 +58,7 @@ def handler(module):
 				pass
 			except ValueError:
 				pass
+			except BaseException as e:
+				raise(e)
+
 

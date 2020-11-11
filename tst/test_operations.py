@@ -8,7 +8,7 @@ from tst.wrappers import *
 
 @qgtest(1)
 def test_cube():
-	printbold("1: Cube creation")
+	""" Cube creation """
 	qg = QGOL()
 	msk = fullcube(qg.bc,Pos(0,0,0),2)
 	qg2 = list(qg.s.cs.keys())[0].tuple()
@@ -32,8 +32,9 @@ def test_cube():
 
 @qgtest(2)
 def test_tunnel():
-	printbold("2: Testing stability of the tunnel. (Now useless)")
+	"""Testing stability of the tunnel. (Shunned)"""
 	qg = QGOL()
+	"""
 	msk = tunnelx(qg.bc,Pos(-1,-1,-1),2)
 	qg.s.mask += msk
 	print(qg)
@@ -44,11 +45,12 @@ def test_tunnel():
 	qg.next()
 	print(qg)
 	assert not [z for z in [k.show_tuple(qg.s.mask) for (k,v) in qg.s.cs.items()] if z != ()]
+	"""
 	return qg
 
 @qgtest(3)
 def test_tunnel_qubit():
-	printbold("3: Testing stability of the tunnel with an entry qubit. (Shunned)")
+	""" Testing stability of the tunnel with an entry qubit. (Shunned)"""
 	qg = QGOL()
 	"""
 	qg.bc[0,0,0].activate()
@@ -64,4 +66,5 @@ def test_tunnel_qubit():
 	assert len( [z for z in [k.show_tuple(qg.s.mask) for (k,v) in qg.s.cs.items()] if z != ()] ) == 1
 	"""
 	return qg
+
 
