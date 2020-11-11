@@ -3,6 +3,7 @@ log/log/*
 
 #Gif tests
 img/gif/*.jpg
+img/gif/**.jpg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -136,3 +137,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+
+*.jpg

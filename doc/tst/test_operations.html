@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.1" />
-<title>img.colors API documentation</title>
-<meta name="description" content="Module defining various colors used in texts." />
+<title>tst.test_operations API documentation</title>
+<meta name="description" content="Tests for operations on configurations" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,38 +19,82 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>img.colors</code></h1>
+<h1 class="title">Module <code>tst.test_operations</code></h1>
 </header>
 <section id="section-intro">
-<p>Module defining various colors used in texts.</p>
+<p>Tests for operations on configurations</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34; Module defining various colors used in texts. &#34;&#34;&#34;
+<pre><code class="python">&#34;&#34;&#34; Tests for operations on configurations &#34;&#34;&#34;
 
-class bcolors:
-        &#34;&#34;&#34; Module defining various colors used in texts. &#34;&#34;&#34;
-        HEADER = &#39;\033[95m&#39;
-        OKBLUE = &#39;\033[94m&#39;
-        OKCYAN = &#39;\033[96m&#39;
-        OKGREEN = &#39;\033[92m&#39;
-        WARNING = &#39;\033[93m&#39;
-        FAIL = &#39;\033[91m&#39;
-        ENDC = CEND = &#39;\033[0m&#39;
-        BOLD = &#39;\033[1m&#39;
-        UNDERLINE = &#39;\033[4m&#39;
+from ope.operations import *
+from img.colors import printbold
+from obj.base import Pos
+from qgol import *
+from tst.wrappers import *
 
-def printbold(*args,**kw):
-        &#34;&#34;&#34; prints in bold &#34;&#34;&#34;
-        if &#39;end&#39; in kw:
-                end = &#39;&#39;
-        else:
-                end = &#39;\n&#39;
-        if None in args:
-                end = &#39;&#39;
-        args = [x for x in args if x is not None]
-        print(bcolors.BOLD,*args,bcolors.CEND,end=end)</code></pre>
+@qgtest(1)
+def test_cube():
+        &#34;&#34;&#34; Cube creation &#34;&#34;&#34;
+        qg = QGOL()
+        msk = fullcube(qg.bc,Pos(0,0,0),2)
+        qg2 = list(qg.s.cs.keys())[0].tuple()
+        print(qg)
+        qg.next()
+        print(qg)
+        k = qg.s.cs.keys()
+        print(k)
+        k = list(k)[0].tuple()
+        print(k)
+        print([x for x in qg2 if x not in k])
+        for i in range(2,10):
+                qg = QGOL()
+                msk = fullcube(qg.bc,Pos(0,0,0),2*i)
+                qg2 = list(qg.s.cs.keys())[0].tuple()
+                qg.next()
+                k = qg.s.cs.keys()
+                k = list(k)[0].tuple()
+                print(2*i,[x for x in qg2 if x not in k])
+        return qg
+
+@qgtest(2)
+def test_tunnel():
+        &#34;&#34;&#34;Testing stability of the tunnel. (Shunned)&#34;&#34;&#34;
+        qg = QGOL()
+        &#34;&#34;&#34;
+        msk = tunnelx(qg.bc,Pos(-1,-1,-1),2)
+        qg.s.mask += msk
+        print(qg)
+        qg.next()
+        print(qg)
+        qg.next()
+        print(qg)
+        qg.next()
+        print(qg)
+        assert not [z for z in [k.show_tuple(qg.s.mask) for (k,v) in qg.s.cs.items()] if z != ()]
+        &#34;&#34;&#34;
+        return qg
+
+@qgtest(3)
+def test_tunnel_qubit():
+        &#34;&#34;&#34; Testing stability of the tunnel with an entry qubit. (Shunned)&#34;&#34;&#34;
+        qg = QGOL()
+        &#34;&#34;&#34;
+        qg.bc[0,0,0].activate()
+        msk = tunnelx(qg.bc,Pos(-1,-1,-1),6)
+        qg.s.mask += msk
+        print(qg)
+        qg.next()
+        print(qg)
+        qg.next()
+        print(qg)
+        qg.evolve(8)
+        print(qg)
+        assert len( [z for z in [k.show_tuple(qg.s.mask) for (k,v) in qg.s.cs.items()] if z != ()] ) == 1
+        &#34;&#34;&#34;
+        return qg</code></pre>
 </details>
 </section>
 <section>
@@ -58,100 +102,8 @@ def printbold(*args,**kw):
 <section>
 </section>
 <section>
-<h2 class="section-title" id="header-functions">Functions</h2>
-<dl>
-<dt id="img.colors.printbold"><code class="name flex">
-<span>def <span class="ident">printbold</span></span>(<span>*args, **kw)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>prints in bold</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def printbold(*args,**kw):
-        &#34;&#34;&#34; prints in bold &#34;&#34;&#34;
-        if &#39;end&#39; in kw:
-                end = &#39;&#39;
-        else:
-                end = &#39;\n&#39;
-        if None in args:
-                end = &#39;&#39;
-        args = [x for x in args if x is not None]
-        print(bcolors.BOLD,*args,bcolors.CEND,end=end)</code></pre>
-</details>
-</dd>
-</dl>
 </section>
 <section>
-<h2 class="section-title" id="header-classes">Classes</h2>
-<dl>
-<dt id="img.colors.bcolors"><code class="flex name class">
-<span>class <span class="ident">bcolors</span></span>
-</code></dt>
-<dd>
-<div class="desc"><p>Module defining various colors used in texts.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class bcolors:
-        &#34;&#34;&#34; Module defining various colors used in texts. &#34;&#34;&#34;
-        HEADER = &#39;\033[95m&#39;
-        OKBLUE = &#39;\033[94m&#39;
-        OKCYAN = &#39;\033[96m&#39;
-        OKGREEN = &#39;\033[92m&#39;
-        WARNING = &#39;\033[93m&#39;
-        FAIL = &#39;\033[91m&#39;
-        ENDC = CEND = &#39;\033[0m&#39;
-        BOLD = &#39;\033[1m&#39;
-        UNDERLINE = &#39;\033[4m&#39;</code></pre>
-</details>
-<h3>Class variables</h3>
-<dl>
-<dt id="img.colors.bcolors.BOLD"><code class="name">var <span class="ident">BOLD</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.CEND"><code class="name">var <span class="ident">CEND</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.ENDC"><code class="name">var <span class="ident">ENDC</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.FAIL"><code class="name">var <span class="ident">FAIL</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.HEADER"><code class="name">var <span class="ident">HEADER</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.OKBLUE"><code class="name">var <span class="ident">OKBLUE</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.OKCYAN"><code class="name">var <span class="ident">OKCYAN</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.OKGREEN"><code class="name">var <span class="ident">OKGREEN</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.UNDERLINE"><code class="name">var <span class="ident">UNDERLINE</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.WARNING"><code class="name">var <span class="ident">WARNING</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-</dl>
-</dd>
-</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -162,31 +114,7 @@ def printbold(*args,**kw):
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="img" href="index.html">img</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="">
-<li><code><a title="img.colors.printbold" href="#img.colors.printbold">printbold</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-classes">Classes</a></h3>
-<ul>
-<li>
-<h4><code><a title="img.colors.bcolors" href="#img.colors.bcolors">bcolors</a></code></h4>
-<ul class="two-column">
-<li><code><a title="img.colors.bcolors.BOLD" href="#img.colors.bcolors.BOLD">BOLD</a></code></li>
-<li><code><a title="img.colors.bcolors.CEND" href="#img.colors.bcolors.CEND">CEND</a></code></li>
-<li><code><a title="img.colors.bcolors.ENDC" href="#img.colors.bcolors.ENDC">ENDC</a></code></li>
-<li><code><a title="img.colors.bcolors.FAIL" href="#img.colors.bcolors.FAIL">FAIL</a></code></li>
-<li><code><a title="img.colors.bcolors.HEADER" href="#img.colors.bcolors.HEADER">HEADER</a></code></li>
-<li><code><a title="img.colors.bcolors.OKBLUE" href="#img.colors.bcolors.OKBLUE">OKBLUE</a></code></li>
-<li><code><a title="img.colors.bcolors.OKCYAN" href="#img.colors.bcolors.OKCYAN">OKCYAN</a></code></li>
-<li><code><a title="img.colors.bcolors.OKGREEN" href="#img.colors.bcolors.OKGREEN">OKGREEN</a></code></li>
-<li><code><a title="img.colors.bcolors.UNDERLINE" href="#img.colors.bcolors.UNDERLINE">UNDERLINE</a></code></li>
-<li><code><a title="img.colors.bcolors.WARNING" href="#img.colors.bcolors.WARNING">WARNING</a></code></li>
-</ul>
-</li>
+<li><code><a title="tst" href="index.html">tst</a></code></li>
 </ul>
 </li>
 </ul>

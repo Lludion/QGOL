@@ -57,7 +57,9 @@ class Cubes:
                 debg((x-xc,y-yc,z-zc,xc,yc,zc))
                 debg(self.li[xc,yc,zc])
 
-        def pos(self,poscel,par):
+        def pos(self,poscel,par,parityset=True):
+                if not parityset:
+                        par = not (par % 2)
                 ipar = 1 - int(par)
                 x = poscel[0] - 1 * abs(poscel[0] % 2 - ipar)
                 y = poscel[1] - 1 * abs(poscel[1] % 2 - ipar)
@@ -123,7 +125,9 @@ its .li field</p></div>
                 debg((x-xc,y-yc,z-zc,xc,yc,zc))
                 debg(self.li[xc,yc,zc])
 
-        def pos(self,poscel,par):
+        def pos(self,poscel,par,parityset=True):
+                if not parityset:
+                        par = not (par % 2)
                 ipar = 1 - int(par)
                 x = poscel[0] - 1 * abs(poscel[0] % 2 - ipar)
                 y = poscel[1] - 1 * abs(poscel[1] % 2 - ipar)
@@ -159,7 +163,7 @@ not already there. It activates the right cell.</p></div>
 </details>
 </dd>
 <dt id="obj.cubes.Cubes.pos"><code class="name flex">
-<span>def <span class="ident">pos</span></span>(<span>self, poscel, par)</span>
+<span>def <span class="ident">pos</span></span>(<span>self, poscel, par, parityset=True)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -167,7 +171,9 @@ not already there. It activates the right cell.</p></div>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def pos(self,poscel,par):
+<pre><code class="python">def pos(self,poscel,par,parityset=True):
+        if not parityset:
+                par = not (par % 2)
         ipar = 1 - int(par)
         x = poscel[0] - 1 * abs(poscel[0] % 2 - ipar)
         y = poscel[1] - 1 * abs(poscel[1] % 2 - ipar)

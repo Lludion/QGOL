@@ -12,7 +12,15 @@ class bcolors:
 	BOLD = '\033[1m'
 	UNDERLINE = '\033[4m'
 
-def printbold(*args):
+def printbold(*args,**kw):
 	""" prints in bold """
-	print(bcolors.BOLD,*args,bcolors.CEND)
+	if 'end' in kw:
+		end = ''
+	else:
+		end = '\n'
+	if None in args:
+		end = ''
+	args = [x for x in args if x is not None]
+	print(bcolors.BOLD,*args,bcolors.CEND,end=end)
+
 

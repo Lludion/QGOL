@@ -34,72 +34,79 @@ from img.colors import bcolors as col
 
 class QGOL:
 
-        @logd
-        def __init__(self,conf0=None):
-                self.s = Super()
-                self.step = 0
-                if conf0 is None:
-                        # using the default configuration
-                        baseconf = Econfig()
-                        self.s.cs[baseconf] = 1
-                        self.bc = baseconf # use for test purposes
+    @logd
+    def __init__(self,conf0=None):
+        self.s = Super()
+        self.step = 0
+        if conf0 is None:
+            # using the default configuration
+            baseconf = Econfig()
+            self.s.cs[baseconf] = 1
+            self.bc = baseconf # use for test purposes
 
-        @logd
-        def next(self):
-                &#34;&#34;&#34; Executes a step H &#34;&#34;&#34;
-                debg(&#34;STEP : &#34;,self.step,&#34;PARITY:&#34;,self.pstep())
-                debg(&#34;IPAR : &#34;,1 - self.pstep())
-                newsuper = Super()
-                for conf,alpha in self.s.cs.items():
-                        if alpha:
-                                li = conf.evolution(self.pstep(),alpha)
-                                debg(li)
-                                # extremely sub optimal, a list should never be used for a superposition
-                                # use a superposition (Super object) instead
-                                for a,conf in li:
-                                        newsuper[conf] += a
-                        else:
-                                warn(&#34;step &#34;,self.step,&#34; ; Suppressed a conf:&#34;,conf)
-                                print(&#34;Suppressed a conf :&#34;,conf)
-                self.s = newsuper
-                self.step += 1
-        
-        def evolve(self,n=1):
-                &#34;&#34;&#34; Evolves for n steps.
-                It executes n times the method .step
-                &#34;&#34;&#34;
-                for _ in range(n):
-                        self.next()
+    @logd
+    def next(self):
+        &#34;&#34;&#34; Executes a step H &#34;&#34;&#34;
+        debg(&#34;STEP : &#34;,self.step,&#34;PARITY:&#34;,self.pstep())
+        newsuper = Super()
+        newsuper.mask = self.s.mask
+        for conf,alpha in self.s.cs.items():
+            if alpha:
+                li = conf.evolution(self.pstep(),alpha)
+                debg(li)
+                # extremely sub optimal, a list should never be used for a superposition
+                # use a superposition (Super object) instead
+                for a,conf in li:
+                    newsuper[conf] += a
+            else:
+                warn(&#34;step &#34;,self.step,&#34; ; Suppressed a conf:&#34;,conf)
+                print(&#34;Suppressed a conf :&#34;,conf)
+        self.s = newsuper
+        debg(&#34;mask:&#34;,self.s.mask)
+        self.step += 1
+    
+    def evolve(self,n=1):
+        &#34;&#34;&#34; Evolves for n steps.
+        It executes n times the method .step
+        &#34;&#34;&#34;
+        for _ in range(n):
+            self.next()
 
-        def pstep(self):
-                &#34;&#34;&#34; Returns the parity of the step. 
-                 begins with an even step &#34;&#34;&#34;
-                return not (self.step % 2)
+    def pstep(self):
+        &#34;&#34;&#34; Returns the parity of the step. 
+         begins with an even step &#34;&#34;&#34;
+        return not (self.step % 2)
 
-        def cellconservation(self):
-                &#34;&#34;&#34; Tests whether no configuration has a different number of cells &#34;&#34;&#34;
-                confnum = [len(k) for k,v in self.s.cs.items() if v]
-                debg([(k,len(k)) for k,v in self.s.cs.items() if v])
-                assert not [False for n in confnum if n != confnum[0]]
+    def cellconservation(self):
+        &#34;&#34;&#34; Tests whether no configuration has a different number of cells &#34;&#34;&#34;
+        confnum = [len(k) for k,v in self.s.cs.items() if v]
+        debg([(k,len(k)) for k,v in self.s.cs.items() if v])
+        assert not [False for n in confnum if n != confnum[0]]
 
-        def numconf(self):
-                &#34;&#34;&#34; Returns the number of active configurations &#34;&#34;&#34;
-                return len([False for _,v in self.s.cs.items() if v])
+    def numconf(self):
+        &#34;&#34;&#34; Returns the number of active configurations &#34;&#34;&#34;
+        return len([False for _,v in self.s.cs.items() if v])
 
-        def print_norm(self):
-                n = self.s.normc()
-                #logg.debug(&#34;norm:&#34;+str(n))
-                if abs(n) &lt; 0.9:
-                        color = col.FAIL
-                elif abs(n - 1)&gt;1/100000:
-                        color = col.WARNING
-                else:
-                        color = &#34;&#34;
-                print(color , n , col.ENDC)
-                return color
+    def print_norm(self):
+        n = self.s.normc()
+        #logg.debug(&#34;norm:&#34;+str(n))
+        if abs(n) &lt; 0.9:
+            color = col.FAIL
+        elif abs(n - 1)&gt;1/100000:
+            color = col.WARNING
+        else:
+            color = &#34;&#34;
+        print(color , n , col.ENDC)
+        return color
 
-        def __repr__(self):
-                return &#34;QGOL on step &#34; + str(self.step) + &#34; : &#34; + str(self.s.cs)</code></pre>
+    def __repr__(self):
+        return &#34;QGOL on step &#34; + str(self.step) + &#34; : &#34; + str(self.s)
+    
+    def copy(self):
+        qgol = QGOL()
+        qgol.step = self.step
+        qgol.s = self.s.copy()
+        return qgol</code></pre>
 </details>
 </section>
 <section>
@@ -123,72 +130,79 @@ class QGOL:
 </summary>
 <pre><code class="python">class QGOL:
 
-        @logd
-        def __init__(self,conf0=None):
-                self.s = Super()
-                self.step = 0
-                if conf0 is None:
-                        # using the default configuration
-                        baseconf = Econfig()
-                        self.s.cs[baseconf] = 1
-                        self.bc = baseconf # use for test purposes
+    @logd
+    def __init__(self,conf0=None):
+        self.s = Super()
+        self.step = 0
+        if conf0 is None:
+            # using the default configuration
+            baseconf = Econfig()
+            self.s.cs[baseconf] = 1
+            self.bc = baseconf # use for test purposes
 
-        @logd
-        def next(self):
-                &#34;&#34;&#34; Executes a step H &#34;&#34;&#34;
-                debg(&#34;STEP : &#34;,self.step,&#34;PARITY:&#34;,self.pstep())
-                debg(&#34;IPAR : &#34;,1 - self.pstep())
-                newsuper = Super()
-                for conf,alpha in self.s.cs.items():
-                        if alpha:
-                                li = conf.evolution(self.pstep(),alpha)
-                                debg(li)
-                                # extremely sub optimal, a list should never be used for a superposition
-                                # use a superposition (Super object) instead
-                                for a,conf in li:
-                                        newsuper[conf] += a
-                        else:
-                                warn(&#34;step &#34;,self.step,&#34; ; Suppressed a conf:&#34;,conf)
-                                print(&#34;Suppressed a conf :&#34;,conf)
-                self.s = newsuper
-                self.step += 1
-        
-        def evolve(self,n=1):
-                &#34;&#34;&#34; Evolves for n steps.
-                It executes n times the method .step
-                &#34;&#34;&#34;
-                for _ in range(n):
-                        self.next()
+    @logd
+    def next(self):
+        &#34;&#34;&#34; Executes a step H &#34;&#34;&#34;
+        debg(&#34;STEP : &#34;,self.step,&#34;PARITY:&#34;,self.pstep())
+        newsuper = Super()
+        newsuper.mask = self.s.mask
+        for conf,alpha in self.s.cs.items():
+            if alpha:
+                li = conf.evolution(self.pstep(),alpha)
+                debg(li)
+                # extremely sub optimal, a list should never be used for a superposition
+                # use a superposition (Super object) instead
+                for a,conf in li:
+                    newsuper[conf] += a
+            else:
+                warn(&#34;step &#34;,self.step,&#34; ; Suppressed a conf:&#34;,conf)
+                print(&#34;Suppressed a conf :&#34;,conf)
+        self.s = newsuper
+        debg(&#34;mask:&#34;,self.s.mask)
+        self.step += 1
+    
+    def evolve(self,n=1):
+        &#34;&#34;&#34; Evolves for n steps.
+        It executes n times the method .step
+        &#34;&#34;&#34;
+        for _ in range(n):
+            self.next()
 
-        def pstep(self):
-                &#34;&#34;&#34; Returns the parity of the step. 
-                 begins with an even step &#34;&#34;&#34;
-                return not (self.step % 2)
+    def pstep(self):
+        &#34;&#34;&#34; Returns the parity of the step. 
+         begins with an even step &#34;&#34;&#34;
+        return not (self.step % 2)
 
-        def cellconservation(self):
-                &#34;&#34;&#34; Tests whether no configuration has a different number of cells &#34;&#34;&#34;
-                confnum = [len(k) for k,v in self.s.cs.items() if v]
-                debg([(k,len(k)) for k,v in self.s.cs.items() if v])
-                assert not [False for n in confnum if n != confnum[0]]
+    def cellconservation(self):
+        &#34;&#34;&#34; Tests whether no configuration has a different number of cells &#34;&#34;&#34;
+        confnum = [len(k) for k,v in self.s.cs.items() if v]
+        debg([(k,len(k)) for k,v in self.s.cs.items() if v])
+        assert not [False for n in confnum if n != confnum[0]]
 
-        def numconf(self):
-                &#34;&#34;&#34; Returns the number of active configurations &#34;&#34;&#34;
-                return len([False for _,v in self.s.cs.items() if v])
+    def numconf(self):
+        &#34;&#34;&#34; Returns the number of active configurations &#34;&#34;&#34;
+        return len([False for _,v in self.s.cs.items() if v])
 
-        def print_norm(self):
-                n = self.s.normc()
-                #logg.debug(&#34;norm:&#34;+str(n))
-                if abs(n) &lt; 0.9:
-                        color = col.FAIL
-                elif abs(n - 1)&gt;1/100000:
-                        color = col.WARNING
-                else:
-                        color = &#34;&#34;
-                print(color , n , col.ENDC)
-                return color
+    def print_norm(self):
+        n = self.s.normc()
+        #logg.debug(&#34;norm:&#34;+str(n))
+        if abs(n) &lt; 0.9:
+            color = col.FAIL
+        elif abs(n - 1)&gt;1/100000:
+            color = col.WARNING
+        else:
+            color = &#34;&#34;
+        print(color , n , col.ENDC)
+        return color
 
-        def __repr__(self):
-                return &#34;QGOL on step &#34; + str(self.step) + &#34; : &#34; + str(self.s.cs)</code></pre>
+    def __repr__(self):
+        return &#34;QGOL on step &#34; + str(self.step) + &#34; : &#34; + str(self.s)
+    
+    def copy(self):
+        qgol = QGOL()
+        qgol.step = self.step
+        qgol.s = self.s.copy()
+        return qgol</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -202,10 +216,26 @@ class QGOL:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def cellconservation(self):
-        &#34;&#34;&#34; Tests whether no configuration has a different number of cells &#34;&#34;&#34;
-        confnum = [len(k) for k,v in self.s.cs.items() if v]
-        debg([(k,len(k)) for k,v in self.s.cs.items() if v])
-        assert not [False for n in confnum if n != confnum[0]]</code></pre>
+    &#34;&#34;&#34; Tests whether no configuration has a different number of cells &#34;&#34;&#34;
+    confnum = [len(k) for k,v in self.s.cs.items() if v]
+    debg([(k,len(k)) for k,v in self.s.cs.items() if v])
+    assert not [False for n in confnum if n != confnum[0]]</code></pre>
+</details>
+</dd>
+<dt id="qgol.QGOL.copy"><code class="name flex">
+<span>def <span class="ident">copy</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy(self):
+    qgol = QGOL()
+    qgol.step = self.step
+    qgol.s = self.s.copy()
+    return qgol</code></pre>
 </details>
 </dd>
 <dt id="qgol.QGOL.evolve"><code class="name flex">
@@ -219,11 +249,11 @@ It executes n times the method .step</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def evolve(self,n=1):
-        &#34;&#34;&#34; Evolves for n steps.
-        It executes n times the method .step
-        &#34;&#34;&#34;
-        for _ in range(n):
-                self.next()</code></pre>
+    &#34;&#34;&#34; Evolves for n steps.
+    It executes n times the method .step
+    &#34;&#34;&#34;
+    for _ in range(n):
+        self.next()</code></pre>
 </details>
 </dd>
 <dt id="qgol.QGOL.next"><code class="name flex">
@@ -252,8 +282,8 @@ It executes n times the method .step</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def numconf(self):
-        &#34;&#34;&#34; Returns the number of active configurations &#34;&#34;&#34;
-        return len([False for _,v in self.s.cs.items() if v])</code></pre>
+    &#34;&#34;&#34; Returns the number of active configurations &#34;&#34;&#34;
+    return len([False for _,v in self.s.cs.items() if v])</code></pre>
 </details>
 </dd>
 <dt id="qgol.QGOL.print_norm"><code class="name flex">
@@ -266,16 +296,16 @@ It executes n times the method .step</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def print_norm(self):
-        n = self.s.normc()
-        #logg.debug(&#34;norm:&#34;+str(n))
-        if abs(n) &lt; 0.9:
-                color = col.FAIL
-        elif abs(n - 1)&gt;1/100000:
-                color = col.WARNING
-        else:
-                color = &#34;&#34;
-        print(color , n , col.ENDC)
-        return color</code></pre>
+    n = self.s.normc()
+    #logg.debug(&#34;norm:&#34;+str(n))
+    if abs(n) &lt; 0.9:
+        color = col.FAIL
+    elif abs(n - 1)&gt;1/100000:
+        color = col.WARNING
+    else:
+        color = &#34;&#34;
+    print(color , n , col.ENDC)
+    return color</code></pre>
 </details>
 </dd>
 <dt id="qgol.QGOL.pstep"><code class="name flex">
@@ -289,9 +319,9 @@ begins with an even step</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def pstep(self):
-        &#34;&#34;&#34; Returns the parity of the step. 
-         begins with an even step &#34;&#34;&#34;
-        return not (self.step % 2)</code></pre>
+    &#34;&#34;&#34; Returns the parity of the step. 
+     begins with an even step &#34;&#34;&#34;
+    return not (self.step % 2)</code></pre>
 </details>
 </dd>
 </dl>
@@ -311,6 +341,7 @@ begins with an even step</p></div>
 <h4><code><a title="qgol.QGOL" href="#qgol.QGOL">QGOL</a></code></h4>
 <ul class="two-column">
 <li><code><a title="qgol.QGOL.cellconservation" href="#qgol.QGOL.cellconservation">cellconservation</a></code></li>
+<li><code><a title="qgol.QGOL.copy" href="#qgol.QGOL.copy">copy</a></code></li>
 <li><code><a title="qgol.QGOL.evolve" href="#qgol.QGOL.evolve">evolve</a></code></li>
 <li><code><a title="qgol.QGOL.next" href="#qgol.QGOL.next">next</a></code></li>
 <li><code><a title="qgol.QGOL.numconf" href="#qgol.QGOL.numconf">numconf</a></code></li>

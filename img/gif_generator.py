@@ -34,14 +34,19 @@ def generer_gif(qgol,nb_step,name,scale=(0,0,0),autoscale=False):
             qgol.next()
     return
 
-qgol = QGOL()
-qgol.bc[0,0,0] = Cell(True)
-qgol.bc[1,0,0] = Cell(True)
-qgol.bc[0,1,0] = Cell(True)
-qgol.bc[3,4,4] = Cell(True)
-qgol.bc[3,5,5] = Cell(True)
-qgol.bc[3,3,1] = Cell(True)
+def test_main():
+	qgol = QGOL()
+	qgol.bc[0,0,0] = Cell(True)
+	qgol.bc[1,0,0] = Cell(True)
+	qgol.bc[0,1,0] = Cell(True)
+	qgol.bc[3,4,4] = Cell(True)
+	qgol.bc[3,5,5] = Cell(True)
+	qgol.bc[3,3,1] = Cell(True)
 
-    
-generer_gif(qgol,10, "test")
+		
+	generer_gif(qgol,10, "test")
+
+if __name__ == '__main__':
+	test_main()
+
 

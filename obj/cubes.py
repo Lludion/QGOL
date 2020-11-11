@@ -26,7 +26,9 @@ class Cubes:
 		debg((x-xc,y-yc,z-zc,xc,yc,zc))
 		debg(self.li[xc,yc,zc])
 
-	def pos(self,poscel,par):
+	def pos(self,poscel,par,parityset=True):
+		if not parityset:
+			par = not (par % 2)
 		ipar = 1 - int(par)
 		x = poscel[0] - 1 * abs(poscel[0] % 2 - ipar)
 		y = poscel[1] - 1 * abs(poscel[1] % 2 - ipar)

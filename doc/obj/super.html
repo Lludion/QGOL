@@ -35,25 +35,36 @@ from efficient import probatab
 
 class Super:
 
-        def __init__(self):
-                self.cs = defaultdict(np.complex)
-                # No need to add the phase in the configs
-                # It is handled in the dict value (as the amplitude)
-                self.norm = 0
+    def __init__(self):
+        self.cs = defaultdict(np.complex)
+        # No need to add the phase in the configs
+        # It is handled in the dict value (as the amplitude)
+        self.norm = 0
+        self.mask = []
 
-        def normc(self):
-                norm = 0.
-                # TODO : test use probatab for efficiency later
-                for _,alpha in self.cs.items():
-                        norm += np.abs(alpha)**2
-                self.norm = norm
-                return norm
-                
-        def __getitem__(self,key):
-                return self.cs[key]
-                
-        def __setitem__(self,key,item):
-                self.cs[key] = item</code></pre>
+    def normc(self):
+        norm = 0.
+        # TODO : test use probatab for efficiency later
+        for _,alpha in self.cs.items():
+            norm += np.abs(alpha)**2
+        self.norm = norm
+        return norm
+        
+    def __getitem__(self,key):
+        return self.cs[key]
+        
+    def __setitem__(self,key,item):
+        self.cs[key] = item
+
+    def __str__(self):
+        return str([(k.show_tuple(self.mask),v) for (k,v) in self.cs.items()])
+    
+    def copy(self):
+        sup = Super()
+        sup.cs = self.cs.copy()
+        sup.norm = self.norm
+        sup.mask = self.mask
+        return sup</code></pre>
 </details>
 </section>
 <section>
@@ -76,28 +87,56 @@ class Super:
 </summary>
 <pre><code class="python">class Super:
 
-        def __init__(self):
-                self.cs = defaultdict(np.complex)
-                # No need to add the phase in the configs
-                # It is handled in the dict value (as the amplitude)
-                self.norm = 0
+    def __init__(self):
+        self.cs = defaultdict(np.complex)
+        # No need to add the phase in the configs
+        # It is handled in the dict value (as the amplitude)
+        self.norm = 0
+        self.mask = []
 
-        def normc(self):
-                norm = 0.
-                # TODO : test use probatab for efficiency later
-                for _,alpha in self.cs.items():
-                        norm += np.abs(alpha)**2
-                self.norm = norm
-                return norm
-                
-        def __getitem__(self,key):
-                return self.cs[key]
-                
-        def __setitem__(self,key,item):
-                self.cs[key] = item</code></pre>
+    def normc(self):
+        norm = 0.
+        # TODO : test use probatab for efficiency later
+        for _,alpha in self.cs.items():
+            norm += np.abs(alpha)**2
+        self.norm = norm
+        return norm
+        
+    def __getitem__(self,key):
+        return self.cs[key]
+        
+    def __setitem__(self,key,item):
+        self.cs[key] = item
+
+    def __str__(self):
+        return str([(k.show_tuple(self.mask),v) for (k,v) in self.cs.items()])
+    
+    def copy(self):
+        sup = Super()
+        sup.cs = self.cs.copy()
+        sup.norm = self.norm
+        sup.mask = self.mask
+        return sup</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
+<dt id="obj.super.Super.copy"><code class="name flex">
+<span>def <span class="ident">copy</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def copy(self):
+    sup = Super()
+    sup.cs = self.cs.copy()
+    sup.norm = self.norm
+    sup.mask = self.mask
+    return sup</code></pre>
+</details>
+</dd>
 <dt id="obj.super.Super.normc"><code class="name flex">
 <span>def <span class="ident">normc</span></span>(<span>self)</span>
 </code></dt>
@@ -108,12 +147,12 @@ class Super:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def normc(self):
-        norm = 0.
-        # TODO : test use probatab for efficiency later
-        for _,alpha in self.cs.items():
-                norm += np.abs(alpha)**2
-        self.norm = norm
-        return norm</code></pre>
+    norm = 0.
+    # TODO : test use probatab for efficiency later
+    for _,alpha in self.cs.items():
+        norm += np.abs(alpha)**2
+    self.norm = norm
+    return norm</code></pre>
 </details>
 </dd>
 </dl>
@@ -137,6 +176,7 @@ class Super:
 <li>
 <h4><code><a title="obj.super.Super" href="#obj.super.Super">Super</a></code></h4>
 <ul class="">
+<li><code><a title="obj.super.Super.copy" href="#obj.super.Super.copy">copy</a></code></li>
 <li><code><a title="obj.super.Super.normc" href="#obj.super.Super.normc">normc</a></code></li>
 </ul>
 </li>

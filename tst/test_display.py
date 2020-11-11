@@ -50,5 +50,6 @@ def test_show(n=30,xmax=5,ymax=5,zmax=5,show=True):
      
     #Qgol2listcube(qgol)
     qgol.next()
+
     afficher_qgol(qgol,"PYTEST_CURRENT_TEST" not in environ)
 

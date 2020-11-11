@@ -41,10 +41,10 @@ def afficher_qgol(qgol,show=False,save='',scale=(0,0,0)):
         ax.set_ylim(scale[1])
         ax.set_zlim(scale[2])
     if show: return plt.show()
-    if len(save)>0:
+    if len(save) > 0:
         if not isinstance(save,str):
         	save = str(save)
-        filename = path.join("graph","gif",save + ".jpg")
+        filename = path.join("img","gif",save + ".jpg")
         makedirs(path.dirname(filename), exist_ok=True) #os function
         plt.savefig(filename)
         return (ax.get_xlim(),ax.get_ylim(),ax.get_zlim())

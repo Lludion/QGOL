@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.1" />
-<title>img.colors API documentation</title>
-<meta name="description" content="Module defining various colors used in texts." />
+<title>img.gif_generator API documentation</title>
+<meta name="description" content="Created on Wed Nov
+4 16:37:15 2020 …" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -19,38 +20,66 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>img.colors</code></h1>
+<h1 class="title">Module <code>img.gif_generator</code></h1>
 </header>
 <section id="section-intro">
-<p>Module defining various colors used in texts.</p>
+<p>Created on Wed Nov
+4 16:37:15 2020</p>
+<p>@author: jmcos</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34; Module defining various colors used in texts. &#34;&#34;&#34;
+<pre><code class="python"># -*- coding: utf-8 -*-
+&#34;&#34;&#34;
+Created on Wed Nov  4 16:37:15 2020
 
-class bcolors:
-        &#34;&#34;&#34; Module defining various colors used in texts. &#34;&#34;&#34;
-        HEADER = &#39;\033[95m&#39;
-        OKBLUE = &#39;\033[94m&#39;
-        OKCYAN = &#39;\033[96m&#39;
-        OKGREEN = &#39;\033[92m&#39;
-        WARNING = &#39;\033[93m&#39;
-        FAIL = &#39;\033[91m&#39;
-        ENDC = CEND = &#39;\033[0m&#39;
-        BOLD = &#39;\033[1m&#39;
-        UNDERLINE = &#39;\033[4m&#39;
+@author: jmcos
+&#34;&#34;&#34;
 
-def printbold(*args,**kw):
-        &#34;&#34;&#34; prints in bold &#34;&#34;&#34;
-        if &#39;end&#39; in kw:
-                end = &#39;&#39;
-        else:
-                end = &#39;\n&#39;
-        if None in args:
-                end = &#39;&#39;
-        args = [x for x in args if x is not None]
-        print(bcolors.BOLD,*args,bcolors.CEND,end=end)</code></pre>
+from qgol import *
+from obj import *
+from img.display import *
+from os import environ
+
+
+#Autoscale permet de fixer automatiquement une échelle adaptée
+#Si on ne précise ni la valeur de autoscale ni la valeur de scale 
+#l&#39;échelle est &#34;dynamique&#34;
+def generer_gif(qgol,nb_step,name,scale=(0,0,0),autoscale=False):
+    if autoscale:
+        copy = qgol.copy()
+        for i in range(nb_step):
+            copy.next()
+        scl=afficher_qgol(copy,show=False,save=name+&#34;copy&#34;)
+    else:
+        scl=scale
+    
+    if scale[0]==0:
+        for i in range(nb_step):
+            afficher_qgol(qgol,show=False,save=name+&#34;%d&#34; %i)
+            qgol.next()
+        
+    else:
+        for i in range(nb_step):
+            afficher_qgol(qgol,show=False,save=name+&#34;%d&#34; %i,scale=scl)
+            qgol.next()
+    return
+
+def test_main():
+        qgol = QGOL()
+        qgol.bc[0,0,0] = Cell(True)
+        qgol.bc[1,0,0] = Cell(True)
+        qgol.bc[0,1,0] = Cell(True)
+        qgol.bc[3,4,4] = Cell(True)
+        qgol.bc[3,5,5] = Cell(True)
+        qgol.bc[3,3,1] = Cell(True)
+
+                
+        generer_gif(qgol,10, &#34;test&#34;)
+
+if __name__ == &#39;__main__&#39;:
+        test_main()</code></pre>
 </details>
 </section>
 <section>
@@ -60,98 +89,61 @@ def printbold(*args,**kw):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="img.colors.printbold"><code class="name flex">
-<span>def <span class="ident">printbold</span></span>(<span>*args, **kw)</span>
+<dt id="img.gif_generator.generer_gif"><code class="name flex">
+<span>def <span class="ident">generer_gif</span></span>(<span>qgol, nb_step, name, scale=(0, 0, 0), autoscale=False)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>prints in bold</p></div>
+<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def printbold(*args,**kw):
-        &#34;&#34;&#34; prints in bold &#34;&#34;&#34;
-        if &#39;end&#39; in kw:
-                end = &#39;&#39;
-        else:
-                end = &#39;\n&#39;
-        if None in args:
-                end = &#39;&#39;
-        args = [x for x in args if x is not None]
-        print(bcolors.BOLD,*args,bcolors.CEND,end=end)</code></pre>
+<pre><code class="python">def generer_gif(qgol,nb_step,name,scale=(0,0,0),autoscale=False):
+    if autoscale:
+        copy = qgol.copy()
+        for i in range(nb_step):
+            copy.next()
+        scl=afficher_qgol(copy,show=False,save=name+&#34;copy&#34;)
+    else:
+        scl=scale
+    
+    if scale[0]==0:
+        for i in range(nb_step):
+            afficher_qgol(qgol,show=False,save=name+&#34;%d&#34; %i)
+            qgol.next()
+        
+    else:
+        for i in range(nb_step):
+            afficher_qgol(qgol,show=False,save=name+&#34;%d&#34; %i,scale=scl)
+            qgol.next()
+    return</code></pre>
+</details>
+</dd>
+<dt id="img.gif_generator.test_main"><code class="name flex">
+<span>def <span class="ident">test_main</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_main():
+        qgol = QGOL()
+        qgol.bc[0,0,0] = Cell(True)
+        qgol.bc[1,0,0] = Cell(True)
+        qgol.bc[0,1,0] = Cell(True)
+        qgol.bc[3,4,4] = Cell(True)
+        qgol.bc[3,5,5] = Cell(True)
+        qgol.bc[3,3,1] = Cell(True)
+
+                
+        generer_gif(qgol,10, &#34;test&#34;)</code></pre>
 </details>
 </dd>
 </dl>
 </section>
 <section>
-<h2 class="section-title" id="header-classes">Classes</h2>
-<dl>
-<dt id="img.colors.bcolors"><code class="flex name class">
-<span>class <span class="ident">bcolors</span></span>
-</code></dt>
-<dd>
-<div class="desc"><p>Module defining various colors used in texts.</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class bcolors:
-        &#34;&#34;&#34; Module defining various colors used in texts. &#34;&#34;&#34;
-        HEADER = &#39;\033[95m&#39;
-        OKBLUE = &#39;\033[94m&#39;
-        OKCYAN = &#39;\033[96m&#39;
-        OKGREEN = &#39;\033[92m&#39;
-        WARNING = &#39;\033[93m&#39;
-        FAIL = &#39;\033[91m&#39;
-        ENDC = CEND = &#39;\033[0m&#39;
-        BOLD = &#39;\033[1m&#39;
-        UNDERLINE = &#39;\033[4m&#39;</code></pre>
-</details>
-<h3>Class variables</h3>
-<dl>
-<dt id="img.colors.bcolors.BOLD"><code class="name">var <span class="ident">BOLD</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.CEND"><code class="name">var <span class="ident">CEND</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.ENDC"><code class="name">var <span class="ident">ENDC</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.FAIL"><code class="name">var <span class="ident">FAIL</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.HEADER"><code class="name">var <span class="ident">HEADER</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.OKBLUE"><code class="name">var <span class="ident">OKBLUE</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.OKCYAN"><code class="name">var <span class="ident">OKCYAN</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.OKGREEN"><code class="name">var <span class="ident">OKGREEN</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.UNDERLINE"><code class="name">var <span class="ident">UNDERLINE</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt id="img.colors.bcolors.WARNING"><code class="name">var <span class="ident">WARNING</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-</dl>
-</dd>
-</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -167,26 +159,8 @@ def printbold(*args,**kw):
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="img.colors.printbold" href="#img.colors.printbold">printbold</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-classes">Classes</a></h3>
-<ul>
-<li>
-<h4><code><a title="img.colors.bcolors" href="#img.colors.bcolors">bcolors</a></code></h4>
-<ul class="two-column">
-<li><code><a title="img.colors.bcolors.BOLD" href="#img.colors.bcolors.BOLD">BOLD</a></code></li>
-<li><code><a title="img.colors.bcolors.CEND" href="#img.colors.bcolors.CEND">CEND</a></code></li>
-<li><code><a title="img.colors.bcolors.ENDC" href="#img.colors.bcolors.ENDC">ENDC</a></code></li>
-<li><code><a title="img.colors.bcolors.FAIL" href="#img.colors.bcolors.FAIL">FAIL</a></code></li>
-<li><code><a title="img.colors.bcolors.HEADER" href="#img.colors.bcolors.HEADER">HEADER</a></code></li>
-<li><code><a title="img.colors.bcolors.OKBLUE" href="#img.colors.bcolors.OKBLUE">OKBLUE</a></code></li>
-<li><code><a title="img.colors.bcolors.OKCYAN" href="#img.colors.bcolors.OKCYAN">OKCYAN</a></code></li>
-<li><code><a title="img.colors.bcolors.OKGREEN" href="#img.colors.bcolors.OKGREEN">OKGREEN</a></code></li>
-<li><code><a title="img.colors.bcolors.UNDERLINE" href="#img.colors.bcolors.UNDERLINE">UNDERLINE</a></code></li>
-<li><code><a title="img.colors.bcolors.WARNING" href="#img.colors.bcolors.WARNING">WARNING</a></code></li>
-</ul>
-</li>
+<li><code><a title="img.gif_generator.generer_gif" href="#img.gif_generator.generer_gif">generer_gif</a></code></li>
+<li><code><a title="img.gif_generator.test_main" href="#img.gif_generator.test_main">test_main</a></code></li>
 </ul>
 </li>
 </ul>

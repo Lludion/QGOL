@@ -44,6 +44,10 @@ class Config:
                 &#34;&#34;&#34; returns a tuple of the activated locations &#34;&#34;&#34;
                 return tuple([k for k,v in self._c.items() if v])
 
+        def show_tuple(self,msk=[]):
+                &#34;&#34;&#34; returns a tuple of the locations that are both activated and marked &#34;&#34;&#34;
+                return tuple([k for k,v in self._c.items() if v and k not in msk])
+
         def conf(self,i1,i2,i3):
                 # unused
                 return self._c[i1,i2,i3]
@@ -81,7 +85,7 @@ class Config:
                 return len(self.tuple())
         
         def __repr__(self):
-                return str(self.tuple())
+                return str(self.show_tuple())
         
         def copy(self):
                 &#34;&#34;&#34; shallow copy &#34;&#34;&#34;
@@ -209,6 +213,10 @@ This is not a Quantum object.</p></div>
                 &#34;&#34;&#34; returns a tuple of the activated locations &#34;&#34;&#34;
                 return tuple([k for k,v in self._c.items() if v])
 
+        def show_tuple(self,msk=[]):
+                &#34;&#34;&#34; returns a tuple of the locations that are both activated and marked &#34;&#34;&#34;
+                return tuple([k for k,v in self._c.items() if v and k not in msk])
+
         def conf(self,i1,i2,i3):
                 # unused
                 return self._c[i1,i2,i3]
@@ -246,7 +254,7 @@ This is not a Quantum object.</p></div>
                 return len(self.tuple())
         
         def __repr__(self):
-                return str(self.tuple())
+                return str(self.show_tuple())
         
         def copy(self):
                 &#34;&#34;&#34; shallow copy &#34;&#34;&#34;
@@ -319,6 +327,20 @@ This is not a Quantum object.</p></div>
 </summary>
 <pre><code class="python">def quiescent(self,*args,**kwargs):
         return self.q</code></pre>
+</details>
+</dd>
+<dt id="obj.config.Config.show_tuple"><code class="name flex">
+<span>def <span class="ident">show_tuple</span></span>(<span>self, msk=[])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>returns a tuple of the locations that are both activated and marked</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_tuple(self,msk=[]):
+        &#34;&#34;&#34; returns a tuple of the locations that are both activated and marked &#34;&#34;&#34;
+        return tuple([k for k,v in self._c.items() if v and k not in msk])</code></pre>
 </details>
 </dd>
 <dt id="obj.config.Config.tuple"><code class="name flex">
@@ -410,6 +432,7 @@ This is not a Quantum object.</p></div>
 <ul class="hlist">
 <li><code><a title="obj.config.Config.cell_number" href="#obj.config.Config.cell_number">cell_number</a></code></li>
 <li><code><a title="obj.config.Config.copy" href="#obj.config.Config.copy">copy</a></code></li>
+<li><code><a title="obj.config.Config.show_tuple" href="#obj.config.Config.show_tuple">show_tuple</a></code></li>
 <li><code><a title="obj.config.Config.tuple" href="#obj.config.Config.tuple">tuple</a></code></li>
 </ul>
 </li>
@@ -438,11 +461,12 @@ This is not a Quantum object.</p></div>
 <ul>
 <li>
 <h4><code><a title="obj.config.Config" href="#obj.config.Config">Config</a></code></h4>
-<ul class="">
+<ul class="two-column">
 <li><code><a title="obj.config.Config.cell_number" href="#obj.config.Config.cell_number">cell_number</a></code></li>
 <li><code><a title="obj.config.Config.conf" href="#obj.config.Config.conf">conf</a></code></li>
 <li><code><a title="obj.config.Config.copy" href="#obj.config.Config.copy">copy</a></code></li>
 <li><code><a title="obj.config.Config.quiescent" href="#obj.config.Config.quiescent">quiescent</a></code></li>
+<li><code><a title="obj.config.Config.show_tuple" href="#obj.config.Config.show_tuple">show_tuple</a></code></li>
 <li><code><a title="obj.config.Config.tuple" href="#obj.config.Config.tuple">tuple</a></code></li>
 </ul>
 </li>

@@ -1,5 +1,8 @@
 """
 Generates this documentation, using pdoc
+
+IMPORTANT MESSAGE : IF YOU WISH TO ADD A NEW FOLDER TO THE PROJECT, WRITE ITS NAME HERE in main.modules DOWN BELOW.
+
 """
 import pdoc
 import os
@@ -18,6 +21,18 @@ def repdot(x):
 		else:
 			s += "/"
 	return s
+def cutdot(x):
+	""" cuts where there are dots"""
+	s = ""
+	li = []
+	for i in range(len(x)):
+		if x[i] != ".":
+			s += x[i]
+		else:
+			li.append(s)
+			s = ""
+	li.append(s)
+	return li
 
 
 def isdir(path):
@@ -46,7 +61,10 @@ def glof(dirName):
     return allFiles
 
 def main():
-	modules = ['qgol',"obj","log","img","tst","efficient","obj.base"]  # Public submodules are auto-imported
+	modules = ['qgol',"obj","log","img","tst","efficient","obj.base",'ope']  # Public submodules are auto-imported
+	for mod in modules:
+		if mod != 'qgol':
+			os.system('mkdir ' + os.path.join('doc',*cutdot(mod)))
 	context = pdoc.Context()
 
 	modules = [pdoc.Module(mod, context=context)
